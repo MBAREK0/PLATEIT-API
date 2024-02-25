@@ -30,16 +30,23 @@ PLATEIT is a web-based platform designed to revolutionize the way people discove
    - Explore trending dishes that have been ordered through the platform, and stay ahead of the culinary curve.
 
 ## Technologies Used
+![MySQL](https://img.shields.io/badge/-MySQL-blue?logo=mysql&logoColor=white) 
+![Vue.js 3](https://img.shields.io/badge/-Vue.js%203-4FC08D?logo=vue.js&logoColor=white)
+![Laravel](https://img.shields.io/badge/-Laravel%2010-FF2D20?logo=laravel&logoColor=white)
+![JWT](https://img.shields.io/badge/-JWT-000000?logo=json-web-tokens)
+![Broadcasting](https://img.shields.io/badge/-Broadcasting-FF6600?logo=laravel&logoColor=white)
+![RESTful API](https://img.shields.io/badge/-RESTful%20API-009688?logo=rest&logoColor=white)
+![Queue](https://img.shields.io/badge/-Queue-FF2D20?logo=laravel&logoColor=white)
 
 - **Programming Language:** PHP
-- **Database:** MySQL                  ![MySQL](https://img.shields.io/badge/-MySQL-blue?logo=mysql&logoColor=white)
-- **User Interface:** Vue.js 3         ![Vue.js 3](https://img.shields.io/badge/-Vue.js%203-4FC08D?logo=vue.js&logoColor=white)
-- **Backend Framework:** Laravel 10    ![Laravel](https://img.shields.io/badge/-Laravel%2010-FF2D20?logo=laravel&logoColor=white)
-- **Authentication:** JWT              ![JWT](https://img.shields.io/badge/-JWT-000000?logo=json-web-tokens)
-- **Real-time Updates:** Broadcasting  ![Broadcasting](https://img.shields.io/badge/-Broadcasting-FF6600?logo=laravel&logoColor=white)
-- **API Design:** RESTful API          ![RESTful API](https://img.shields.io/badge/-RESTful%20API-009688?logo=rest&logoColor=white)
-- **Queue:** Laravel Queue             ![Queue](https://img.shields.io/badge/-Queue-FF2D20?logo=laravel&logoColor=white)
-
+- **Database:** MySQL                  
+- **User Interface:** Vue.js 3         
+- **Backend Framework:** Laravel 10    
+- **Authentication:** JWT             
+- **Real-time Updates:** Broadcasting  
+- **API Design:** RESTful API        
+- **Queue:** Laravel Queue
+-          
 ## Contributors
 
 - [El Aadraoui M'barek](https://github.com/MBAREK0) - Project Lead & Developer
