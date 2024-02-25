@@ -32,13 +32,13 @@ PLATEIT is a web-based platform designed to revolutionize the way people discove
 ## Technologies Used
 
 - **Programming Language:** PHP
-- **Database:** MySQL ![MySQL](https://img.shields.io/badge/-MySQL-blue?logo=mysql&logoColor=white)
-- **User Interface:** Vue.js 3 ![Vue.js 3](https://img.shields.io/badge/-Vue.js%203-4FC08D?logo=vue.js&logoColor=white)
-- **Backend Framework:** Laravel 10 ![Laravel](https://img.shields.io/badge/-Laravel%2010-FF2D20?logo=laravel&logoColor=white)
-- **Authentication:** JWT ![JWT](https://img.shields.io/badge/-JWT-000000?logo=json-web-tokens)
-- **Real-time Updates:** Broadcasting ![Broadcasting](https://img.shields.io/badge/-Broadcasting-FF6600?logo=laravel&logoColor=white)
-- **API Design:** RESTful API ![RESTful API](https://img.shields.io/badge/-RESTful%20API-009688?logo=rest&logoColor=white)
-- **Queue:** Laravel Queue ![Queue](https://img.shields.io/badge/-Queue-FF2D20?logo=laravel&logoColor=white)
+- **Database:** MySQL                  ![MySQL](https://img.shields.io/badge/-MySQL-blue?logo=mysql&logoColor=white)
+- **User Interface:** Vue.js 3         ![Vue.js 3](https://img.shields.io/badge/-Vue.js%203-4FC08D?logo=vue.js&logoColor=white)
+- **Backend Framework:** Laravel 10    ![Laravel](https://img.shields.io/badge/-Laravel%2010-FF2D20?logo=laravel&logoColor=white)
+- **Authentication:** JWT              ![JWT](https://img.shields.io/badge/-JWT-000000?logo=json-web-tokens)
+- **Real-time Updates:** Broadcasting  ![Broadcasting](https://img.shields.io/badge/-Broadcasting-FF6600?logo=laravel&logoColor=white)
+- **API Design:** RESTful API          ![RESTful API](https://img.shields.io/badge/-RESTful%20API-009688?logo=rest&logoColor=white)
+- **Queue:** Laravel Queue             ![Queue](https://img.shields.io/badge/-Queue-FF2D20?logo=laravel&logoColor=white)
 
 ## Contributors
 
