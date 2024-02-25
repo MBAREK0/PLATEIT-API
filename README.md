@@ -1,3 +1,5 @@
+![PLATEIT](resources/logo.png)
+
 # PLATEIT 
 **FoodShare Platform**
 
