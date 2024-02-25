@@ -1,6 +1,5 @@
 ![PLATEIT](resources/logo.png)
 
-# PLATEIT 
 **FoodShare Platform**
 
 PLATEIT is a web-based platform designed to revolutionize the way people discover and share culinary experiences. Whether you're a foodie looking for your next gastronomic adventure or a restaurant eager to showcase your signature dishes, FoodShare has you covered.
