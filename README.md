@@ -46,7 +46,7 @@ PLATEIT is a web-based platform designed to revolutionize the way people discove
 - **Real-time Updates:** Broadcasting  
 - **API Design:** RESTful API        
 - **Queue:** Laravel Queue
--          
+     
 ## Contributors
 
 - [El Aadraoui M'barek](https://github.com/MBAREK0) - Project Lead & Developer
