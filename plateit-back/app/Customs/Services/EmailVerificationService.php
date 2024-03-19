@@ -3,9 +3,11 @@
 namespace App\Customs\Services;
 
 use App\Models\EmailVerificationToken;
+use App\Models\User;
 use App\Notifications\EmailVerificationNotification;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Notification;
+use PhpParser\Node\Expr\Cast\String_;
 
 class EmailVerificationService
 {
@@ -18,6 +20,92 @@ class EmailVerificationService
         Notification::send($user, new EmailVerificationNotification($this->generateVerificationLink($user->email)));
      }
 
+     /**
+      * Resend erification link to user
+      */
+      public function resendLink($email){
+        $user = User::where("email", $email)->first();
+        if($user){
+            $this->checkIfEmailVerified($user);
+            $this->sendVerificationLink($user);
+            return response()->json([
+                'status'=> 'success',
+                'message'=> 'Verification Link Sent successfully'
+            ]);
+        } else{
+            return response()->json([
+                'status' => 'failed',
+                'error' => 'User not found '
+            ]);
+        }
+      }
+
+     /**
+      *  Check if user already been verified
+      */
+      public function checkIfEmailVerified($user){
+         if($user->email_verified_at){
+            response()->json([
+                'status' => 'failed',
+                'message'=> 'Email Has Already Been Verified'
+            ])->send();
+            exit;
+         }
+      }
+      /**
+       * Verify the user email
+       */
+
+       public function verifyEmail(string $email ,string $token){
+        $user = User::where('email', $email)->first();
+        if(!$user){
+            response()->json([
+                'status' => 'failed',
+                'error'=> 'User Not Found '
+               ])->send();
+               exit;
+        }
+        $this->checkIfEmailVerified($user);
+        $verifyToken = $this->VerifyToken($email, $token);
+        if($user->markEmailAsVerified()){
+            $verifyToken->delete();
+            return response()->json([
+                'status'=> 'success',
+                'message'=> 'Email has been verified successfully'
+            ]);
+        }else{
+            return response()->json([
+                'status' => 'failed',
+                'error'=> 'Email verification failed, please try again later'
+               ]);
+        }
+       }
+
+     /**
+      * Verify Token
+      */
+      public function  VerifyToken(string $email, string $token){
+        $token = EmailVerificationToken::where("email", $email)
+                                       ->where('token',$token)->first();
+        if($token){
+            if($token->expired_at >= now()){
+                 return $token;
+            } else{
+                $token->delete();
+                response()->json([
+                    'status' => 'failed',
+                    'error'=> 'Token Is Expired '
+                   ])->send();
+                   exit;
+            }
+        }else{
+           response()->json([
+            'status' => 'failed',
+            'error'=> 'Invalid token'
+           ])->send();
+           exit;
+        }
+      }
     /**
      * Generate Verification link
      */
