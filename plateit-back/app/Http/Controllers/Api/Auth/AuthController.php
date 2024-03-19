@@ -119,6 +119,18 @@ class AuthController extends Controller
         return $this->service->resetPassword($request->password, $request->reset_token);
       }
 
+      /**
+       * loged out
+       */
+      public function logout()
+      {
+          auth()->logout();
+          return response()->json([
+            'status'=> 'success',
+            'message' => 'Successfully logged out',
+          ]);
+      }
+
 
 
 
