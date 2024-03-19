@@ -19,7 +19,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('auth/register',[AuthController::class,'register']);
-Route::post('auth/login',[AuthController::class,'login']);
-Route::post('auth/verify_user_email',[AuthController::class,'verifyUserEmail']);
-Route::post('auth/resend_email_verification_link',[AuthController::class,'resendEmailVerificationLink']);
+Route::prefix('auth')->group(function () {
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('verify_user_email', [AuthController::class, 'verifyUserEmail']);
+    Route::post('resend_email_verification_link', [AuthController::class, 'resendEmailVerificationLink']);
+    Route::post('forgetPassword', [AuthController::class, 'forgetPassword']);
+    Route::post('resetPassword', [AuthController::class, 'resetPassword']);
+});

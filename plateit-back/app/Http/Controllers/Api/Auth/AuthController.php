@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Customs\Services\EmailVerificationService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ForgetPassworRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\ResendEmailVerificationLinkRequest;
 use App\Http\Requests\VerifyEmailRequest;
+use App\Http\Requests\ResetPassworRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Jobs\SendVerificationEmailQueueJob;
@@ -38,7 +40,6 @@ class AuthController extends Controller
      /**
      * Register method
      */
-
     public function Register(RegisterRequest $request){
 
         $user = User::create([
@@ -64,7 +65,6 @@ class AuthController extends Controller
     /**
      * Return jwt access Token
      */
-
     public function responseWithTokrn($token,$user){
         return response()->json([
             'status'        => 'success',
@@ -86,7 +86,6 @@ class AuthController extends Controller
      * checking and possibly modifying it in the App\Customs\Services\EmailVerificationService
      * file, particularly on line 120.
      */
-
      public function verifyUserEmail(VerifyEmailRequest $request){
         return $this->service->verifyEmail($request->email, $request->token);
      }
@@ -99,10 +98,29 @@ class AuthController extends Controller
      * The email from the link need to be extracted and sent
      * to the 'auth/resend_email_verification_link' endpoint using a POST form.
      */
-
      public function resendEmailVerificationLink(ResendEmailVerificationLinkRequest $request){
         return $this->service->resendLink($request->email);
      }
+
+     /**
+     * Forget Password
+     *
+     * When a user forgets their password, a token should be generated and sent to the frontend.
+     * This token will be used along with the new password for resetting the password.
+     */
+      public function forgetPassword(ForgetPassworRequest $request){
+        return $this->service->forgetPassword($request->email);
+      }
+
+      /**
+       * Reset Password
+       */
+      public function resetPassword(ResetPassworRequest $request){
+        return $this->service->resetPassword($request->password, $request->reset_token);
+      }
+
+
+
 
 }
 

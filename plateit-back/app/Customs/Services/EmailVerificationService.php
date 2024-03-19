@@ -2,13 +2,13 @@
 
 namespace App\Customs\Services;
 
+use App\Jobs\ResetPasswordJob;
 use App\Models\EmailVerificationToken;
 use App\Models\User;
 use App\Notifications\EmailVerificationNotification;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Notification;
-use PhpParser\Node\Expr\Cast\String_;
-
+use Illuminate\Support\Facades\Hash;
 class EmailVerificationService
 {
 
@@ -126,4 +126,54 @@ class EmailVerificationService
          if($saveToken) return $url;
 
      }
+
+     /**
+      * forget Password
+      */
+
+      public function forgetPassword(string $email){
+        $data['email'] =  $email;
+        $data['subject'] = 'reset your password';
+        $data['view'] = 'mail.ResetPassword';
+        $data['content'] = '' ;
+        dispatch(new ResetPasswordJob($data));
+
+        $token = Hash::make(Str::random(60));
+
+        $user =User::where('email',$email)->first();
+
+        if ($user) {
+            $userId = $user->id;
+            User::where('id', $userId)->update(['remember_token' => $token]);
+            return response()->json([
+                'status'=> 'success',
+                'message'=> 'email sent successfully',
+                'reset_token' => $token
+            ]);
+
+        }
+            return response()->json([
+                'status'=> 'faild',
+                'error'=> 'User Not Found'
+            ]);
+      }
+            /**
+       * Reset Password
+       */
+      public function resetPassword($password,$reset_token){
+        $user = User::where('remember_token', request('reset_token'))->first();
+        if ($user) {
+            $user->password = Hash::make($password);
+            $user->save();
+            return response()->json([
+                'status'=> 'success',
+                'message' => 'Password updated successfully'
+            ]);
+        }
+        return response()->json([
+            'status'=> 'failed',
+            'error'=> 'User Not Found, Please try again later'
+        ]);
+      }
+
 }
