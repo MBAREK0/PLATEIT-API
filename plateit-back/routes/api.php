@@ -27,3 +27,9 @@ Route::prefix('auth')->group(function () {
     Route::post('forgetPassword', [AuthController::class, 'forgetPassword']);
     Route::post('resetPassword', [AuthController::class, 'resetPassword']);
 });
+
+Route::middleware(['check.token'])->group(function () {
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
+});
+

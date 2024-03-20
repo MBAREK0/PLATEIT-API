@@ -3,36 +3,42 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Customs\Services\EmailVerificationService;
+use App\Customs\Services\JwtTokenService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ForgetPassworRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\RefreshRequest;
 use App\Http\Requests\ResendEmailVerificationLinkRequest;
 use App\Http\Requests\VerifyEmailRequest;
 use App\Http\Requests\ResetPassworRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Jobs\SendVerificationEmailQueueJob;
+
+
 class AuthController extends Controller
 {
     private $service;
+    private $jwtService;
 
     public function __construct(){
         $this->service = new EmailVerificationService;
+        $this->jwtService = new JwtTokenService;
     }
 
     /**
      * Login method
      */
     public function login(LoginRequest $request){
-        $token = auth()->attempt($request->only("email","password"));
-        if($token){
-            return $this->responseWithTokrn($token,auth()->user());
+        $data =  $this->jwtService->validateCredentials( $request->email,$request->password );
+        if(!isset($data['error'])  ){
+            return $this->responseWithTokrn($data['token'],$data['user']);
         }else{
             return response()->json([
                 'status' => 'failed',
-                'error'  => 'Invalid credentials'
-            ],401);
+                'error'  => $data['error']
+            ], $data['http_code']);
         }
 
     }
@@ -51,7 +57,7 @@ class AuthController extends Controller
 
         if($user){
             dispatch(new SendVerificationEmailQueueJob($user));
-             $token = auth()->login($user);
+             $token = $this->jwtService->genarateToken($user->id);
              return $this->responseWithTokrn($token,$user);
         }else{
             return response()->json([
@@ -91,7 +97,7 @@ class AuthController extends Controller
      }
 
    /**
-     * Verify User Email
+     * resend Verify User Email
      *
      * When the user clicks the " verify Email" link in their email for resend the token ,
      * they should be redirected to the same  specific page in the frontend.
@@ -130,9 +136,14 @@ class AuthController extends Controller
             'message' => 'Successfully logged out',
           ]);
       }
-
-
-
-
+      /**
+       * refresh token
+       */
+      public function refresh(RefreshRequest $request)
+      {
+            $token = $this->jwtService->refresh($request->token);
+            $user = $this->jwtService->get_user($request->token);
+            return $this->responseWithTokrn($token,$user);
+      }
 }
 
