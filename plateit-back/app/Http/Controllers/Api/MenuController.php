@@ -86,7 +86,7 @@ class MenuController extends Controller
         }
 		$plate = restaurant_plate::findOrFail($id);
 		if($plate->delete()){
-			return response()->json(['status' => 'success', 'message' => 'Record deleted successfully!' ]);
+			return response()->json(['status' => 'success', 'message' => 'plate deleted successfully!' ]);
 		}
 	}
 
