@@ -32,6 +32,20 @@ class CheckToken
 
         $tokenData =  $jwtService->decode($token);
 
+        /**
+         * for testing
+         */
+        
+        // return response()->json([
+        //     'status' => 'failed',
+        //     'error' => $tokenData->data->role
+        // ], 401);
+
+        /**
+         * end testing
+         *
+         */
+
          $now_time = Carbon::now()->timestamp;
 
          if ($tokenData->exp < $now_time) {

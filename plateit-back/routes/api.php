@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\MenuController;
+use App\Http\Controllers\Api\RestaurantDetailsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+// ------------------------------  auth Routes ---
 
 Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register']);
@@ -33,3 +34,22 @@ Route::middleware(['check.token'])->group(function () {
     Route::post('refresh', [AuthController::class, 'refresh']);
 });
 
+// ------------------------------  Restaurants Routes ---
+
+Route::middleware(['check.token','OnlyRestaurants'])->prefix('restaurant')->group(function () {
+    Route::post('insert_details', [RestaurantDetailsController::class, 'insert_details']);
+    Route::get('get_details', [RestaurantDetailsController::class, 'get_details']);
+
+    //  u can use this route for update also just send the id with the request
+    Route::post('save_plate', [MenuController::class,'save_plate']);
+
+    //  send the id of plate with the request for get specify plate
+    Route::get('get_plate', [MenuController::class,'get_plate']);
+
+    Route::delete('delete', [MenuController::class,'delete']);
+    Route::delete('delete_menu', [MenuController::class,'delete_menu']);
+    Route::get('menu', [MenuController::class,'menu']);
+
+
+
+});

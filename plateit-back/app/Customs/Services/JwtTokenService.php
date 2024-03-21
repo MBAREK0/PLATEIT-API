@@ -14,13 +14,10 @@ class JwtTokenService
 {
     public function decode($token)
     {
+        $token = str_replace('Bearer ', '', $token);
         $secretKey = env('JWT_SECRET');
         $decoded = null;
-
         $decoded = JWT::decode($token,new Key($secretKey,'HS256'));
-
-
-        // Convert the decoded object to an array
         return  $decoded;
     }
 
@@ -37,9 +34,7 @@ class JwtTokenService
         $decodedToken->jti = Str::random(32);
         $decodedToken->iat = Carbon::now()->timestamp;
         $decodedToken->nbf = Carbon::now()->timestamp;
-
         $newToken = $this->encode((array)$decodedToken);
-
         return $newToken;
     }
     public function get_user($token){
@@ -70,12 +65,14 @@ class JwtTokenService
 
         $data['user']= $user;
         $data['token'] = $this->genarateToken($user->id);
+        $data['http_code'] = 200;
         return $data;
 
     }
 
     public function genarateToken($user_id){
 
+            $user = User::where('id', $user_id)->first();
         $secretKey = env('JWT_SECRET');
         $token = JWT::encode(
             array(
@@ -85,12 +82,17 @@ class JwtTokenService
              'exp' => time()+ 2 * 3600,
              'sub' => $user_id,
              'data' =>array(
-                 'user_id' => $user_id
+                 'user_id' => $user->id,
+                 'role' =>$user->role
              )
             ),
             $secretKey,
             'HS256'
         );
         return $token;
+    }
+    public function get_role($token){
+        $token_decoded = $this->decode($token);
+        return $token_decoded->data->role;
     }
 }

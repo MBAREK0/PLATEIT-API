@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('Points')->default('0');
             $table->string('ProfileImage')->nullable();
+            $table->string('bio')->nullable();
             $table->string('role');
             $table->rememberToken()->nullable();
             $table->timestamps();

@@ -36,14 +36,7 @@ class EmailVerificationNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-        ->subject('Verify Your Email Address')
-        ->line("Hello $notifiable->fullName,")
-        ->line('Welcome to PLATEIT! Before you start exploring our platform, please verify your email address.')
-        ->line('To verify your email, simply click the button below:')
-        ->action('Verify Email Address', $this->url)
-        ->line('If you did not create an account on PLATEIT, you can ignore this email.')
-        ->line('Thank you for joining PLATEIT and enjoy your experience!');
-
+          ->markdown('mail.email_verification', ['url' => $this->url , 'notifiable'=> $notifiable]);
     }
 
     /**

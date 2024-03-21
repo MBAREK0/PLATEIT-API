@@ -32,7 +32,7 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request){
         $data =  $this->jwtService->validateCredentials( $request->email,$request->password );
-        if(!isset($data['error'])  ){
+        if(!$data['error'] ){
             return $this->responseWithTokrn($data['token'],$data['user']);
         }else{
             return response()->json([
