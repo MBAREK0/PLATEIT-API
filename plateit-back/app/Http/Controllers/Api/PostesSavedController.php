@@ -29,6 +29,10 @@ class PostesSavedController extends Controller
 		if($validator->fails()){
 			return response()->json(['status' => 'failed', 'error' => $validator->errors() ]);
 		}else{
+            $check = Postes_saved::where('user_id', $user)->where('publication_id',$request->get('publication_id'));
+            if($check->count() > 0){
+             return response()->json(['status'=> 'failed', 'error' => 'post already saved' ]);
+            }
 
 				$Postes_saved = Postes_saved::create([
 					'publication_id' => $request->get('publication_id'),

@@ -33,7 +33,7 @@ class RestaurantDetailsController extends Controller
         return response()->json([
             'status'=> 'success',
             'message'=> 'Details Updated Successfully',
-            
+
         ],200);
 
     }

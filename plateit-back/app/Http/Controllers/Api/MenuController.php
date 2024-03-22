@@ -56,6 +56,11 @@ class MenuController extends Controller
 					'image' => $request->get('image'),
 				]);
 				if($plate){
+
+                    $check = restaurant_menu::where('plate_id', $plate->id)->where('restaurant_id',$user->id);
+                    if($check->count() > 0){
+                     return response()->json(['status'=> 'failed', 'error' => 'plate already exist in this menu' ]);
+                    }
                     $add_to_menu = restaurant_menu::create([
                         'plate_id'=> $plate->id,
                         'restaurant_id'=> $user->id,

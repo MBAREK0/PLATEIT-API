@@ -35,7 +35,7 @@ class CheckToken
         /**
          * for testing
          */
-        
+
         // return response()->json([
         //     'status' => 'failed',
         //     'error' => $tokenData->data->role

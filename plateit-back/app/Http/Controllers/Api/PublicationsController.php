@@ -4,17 +4,19 @@ namespace App\Http\Controllers\Api;
 
 use App\Customs\Services\JwtTokenService;
 use App\Models\publications;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
+use App\Jobs\SystemOfPointsJob;
 
 class PublicationsController extends Controller
 {
 
 
     private $JwtService;
+
     public function __construct(){
         $this->JwtService = new JwtTokenService;
+
     }
 
 	public function save_post(PostRequest $request){
@@ -47,8 +49,8 @@ class PublicationsController extends Controller
                     'user_id' => $user->id,
 				]);
 				if($Post){
+                    dispatch(new SystemOfPointsJob($user->id,'AddPostPoints'))->add_points();
                     return response()->json(['status' => 'success', 'message' => 'Post saved successfully!']);
-
 				}else{
                     return response()->json(['status' => 'faild', 'error' => 'error when saved the Post ']);
                 }
@@ -59,12 +61,16 @@ class PublicationsController extends Controller
 
 	public function delete( $PostID = '')
     {
+        $token = request()->header('Authorization');
+        $user = $this->JwtService->get_user($token);
         $id = request()->get('id');
         if($PostID){
             $id= $PostID;
         }
 		$Post = publications::findOrFail($id);
 		if($Post->delete()){
+            dispatch(new SystemOfPointsJob($user->id,'AddPostPoints'))->remove_points();
+
 			return response()->json(['status' => 'success', 'message' => 'Post deleted successfully!' ]);
 		}
 	}

@@ -12,6 +12,7 @@ use App\Http\Requests\RefreshRequest;
 use App\Http\Requests\ResendEmailVerificationLinkRequest;
 use App\Http\Requests\VerifyEmailRequest;
 use App\Http\Requests\ResetPassworRequest;
+use App\Jobs\DailyRewardsJob;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Jobs\SendVerificationEmailQueueJob;
@@ -32,8 +33,13 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request){
         $data =  $this->jwtService->validateCredentials( $request->email,$request->password );
+        $userIID = $this->jwtService->get_user($data['token'])->id;
+        # use it for daily rewards in home controller
+        dispatch(new DailyRewardsJob($userIID));
         if(!$data['error'] ){
+
             return $this->responseWithTokrn($data['token'],$data['user']);
+
         }else{
             return response()->json([
                 'status' => 'failed',

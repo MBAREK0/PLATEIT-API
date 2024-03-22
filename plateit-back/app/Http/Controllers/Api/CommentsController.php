@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Customs\Services\JwtTokenService;
+use App\Jobs\SystemOfPointsJob;
 use Illuminate\Support\Facades\DB;
 class commentsController extends Controller
 {
@@ -45,6 +46,8 @@ class commentsController extends Controller
                     'content' => $request->get('content')
 				]);
 				if($comments){
+                    dispatch(new SystemOfPointsJob($user,'CommentPoints'))->add_points();
+                    dispatch(new SystemOfPointsJob(null,'CommentPoints'))->get_author_id('publications',$request->get('publication_id'))->add_points();
 					return response()->json(['status' => 'success', 'message' => 'comments saved successfully!']);
 				}
 			}
@@ -52,9 +55,12 @@ class commentsController extends Controller
 	}
 
 	public function delete(){
+        $token = request()->header('Authorization');
+        $user = $this->JwtService->get_user($token)->id;
         $id = request('id') ;
 		$comment = comments::findOrFail($id);
 		if($comment->delete()){
+        dispatch(new SystemOfPointsJob($user,'CommentPoints'))->remove_points();
 			return response()->json(['status' => 'success', 'message' => 'comments deleted successfully!' ]);
 		}
 	}
