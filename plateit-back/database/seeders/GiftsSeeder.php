@@ -15,34 +15,40 @@ class GiftsSeeder extends Seeder
     {
         $giftssData = [
             [
-                'name' => 'gifts 1',
+                'name' => 'small_plate',
                 'description' => 'Description for gifts 1',
-                'PointsCost' => 100,
-                'image' => 'gifts1.jpg',
+                'PointsCost' => 1000,
+                'image' => 'small_plate.jpg',
             ],
             [
-                'name' => 'gifts 2',
+                'name' => 'medium_plate',
                 'description' => 'Description for gifts 2',
-                'PointsCost' => 150,
-                'image' => 'gifts2.jpg',
+                'PointsCost' => 2000,
+                'image' => 'medium_plate.jpg',
             ],
             [
-                'name' => 'gifts 3',
+                'name' => 'large_plate',
                 'description' => 'Description for gifts 3',
-                'PointsCost' => 200,
-                'image' => 'gifts3.jpg',
+                'PointsCost' => 5000,
+                'image' => 'large_plate.jpg',
             ],
             [
-                'name' => 'gifts 4',
+                'name' => 'small_plate_vip',
                 'description' => 'Description for gifts 4',
-                'PointsCost' => 250,
-                'image' => 'gifts4.jpg',
+                'PointsCost' => 20000,
+                'image' => 'small_plate_vip.jpg',
             ],
             [
-                'name' => 'gifts 5',
+                'name' => 'medium_plate_vip',
                 'description' => 'Description for gifts 5',
-                'PointsCost' => 300,
-                'image' => 'gifts5.jpg',
+                'PointsCost' => 50000,
+                'image' => 'medium_plate_vip.jpg',
+            ],
+            [
+                'name' => 'large_plate_vip',
+                'description' => 'Description for gifts 5',
+                'PointsCost' => 100000,
+                'image' => 'large_plate_vip.jpg',
             ],
         ];
 
