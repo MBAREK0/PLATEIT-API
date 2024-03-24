@@ -3,9 +3,11 @@
 namespace App\Customs\Services;
 
 use App\Jobs\SendTeckitJob;
+use App\Mail\GiftsMail;
 use App\Models\Claim_gifts;
 use App\Models\Gifts;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 class SestemOfGiftsService
 {
     public function index($user,$gift_id){
@@ -47,13 +49,24 @@ class SestemOfGiftsService
         $data['Ticket']= $gift->image;
         $data['date']= now();
         $data['Ticket_id']= $randomNumber;
+        $info = $data;
 
-        dispatch (new SendTeckitJob($data));
+        $email = new GiftsMail($data);
+        $job= Mail::to($data['email'])->send($email);
 
-         return response()->json([
-            'status'=> 'success',
-            'error'=> 'Gift Sended Successfully'
-        ]);
+        // $job = dispatch(new SendTeckitJob($data));
+        if ($job) {
+            return response()->json([
+                'status' => 'success',
+                'error' => 'Gift Scheduled for Sending'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'failed',
+                'error' => 'Failed to schedule the gift for sending'
+            ]);
+        }
+
         }else{
             return response()->json([
                 'status'=> 'failed',

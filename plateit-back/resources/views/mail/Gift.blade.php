@@ -81,27 +81,27 @@
 <h1>Congratulations on Your Ticket Purchase!</h1>
         <p class="start">
 
-            Dear {{$data['name']}},<br><br>
+            {{-- Dear {{$data['name']}},<br><br> --}}
 
             We are thrilled to inform you that your recent ticket purchase has been successfully processed. You have used your accumulated points wisely, and we're excited to see you at the event/experience.<br>
 
             Your ticket details are as follows:<br><br>
 
-            Name: {{$data['name']}}<br>
-            E-mail: {{$data['email']}}<br>
-            Ticket ID: {{$data['Ticket_id']}}<br>
-            Date: {{$data['date']}}<br><br>
+            {{-- Name: {{$data['name']}}<br> --}}
+            {{-- E-mail: {{$data['email']}}<br> --}}
+            {{-- Ticket ID: {{$data['Ticket_id']}}<br> --}}
+            {{-- Date: {{$data['date']}}<br><br> --}}
 
 
 </p>
 
     <div class="ticket-container">
-        <img class="ticket-image" src="{{ $message->embed(public_path('images/' . $data['Ticket'])) }}" alt="Embedded Image">
+        <img class="ticket-image" src="{{ $message->embed(public_path('images/medium_plate_vip.jpg')) }}" alt="Embedded Image">
 
         <!-- <img class="ticket-image" src="images/large_plate_vip.png" alt="Embedded Image"> -->
 
        <p class="for">
-        FOR : {{$data['name']}}
+        {{-- FOR : {{$data['name']}} --}}
        </p>
     </div>
     <p class="start">
