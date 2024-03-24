@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\GiftsController;
 use Illuminate\Support\Facades\Route;
-
+use App\Mail\GiftsMail;
+use Illuminate\Support\Facades\Mail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+

@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\PostesSavedController;
 use App\Http\Controllers\Api\PublicationsController;
 use App\Http\Controllers\Api\RestaurantDetailsController;
 use App\Http\Controllers\Api\FollowsController;
+use App\Http\Controllers\Api\GiftsController;
 use App\Http\Controllers\Api\PointsOfVisitsController;
 use Illuminate\Support\Facades\Route;
 
@@ -104,6 +105,7 @@ Route::middleware(['check.token'])->prefix('publication')->group(function () {
 
     //-------------------------------- System Points Routes -------------
     Route::post('visite_rewards_from_post', [PointsOfVisitsController::class,'index']); # restaurant_id | publication_id
+    Route::post('claim_gifts', [GiftsController::class,'index']); # restaurant_id | publication_id
 
 
 
