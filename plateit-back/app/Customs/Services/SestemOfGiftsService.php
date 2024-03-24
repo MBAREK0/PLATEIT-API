@@ -28,7 +28,7 @@ class SestemOfGiftsService
     }
     public function sendTeckit($user, $gift){
 
-      
+
        $randomNumber = mt_rand(100000000, 999999999);
 
        $claim= Claim_gifts::create([
@@ -38,12 +38,18 @@ class SestemOfGiftsService
             'status'=> 1,
         ]);
         if( $claim ){
+
+        $user->Points = (float)$user->Points - (float)$gift->PointsCost;
+        $user->save();
+
         $data['name']= $user->fullName;
         $data['email']= $user->email;
         $data['Ticket']= $gift->image;
         $data['date']= now();
         $data['Ticket_id']= $randomNumber;
-         dispatch (new SendTeckitJob($data));
+
+        dispatch (new SendTeckitJob($data));
+
          return response()->json([
             'status'=> 'success',
             'error'=> 'Gift Sended Successfully'
