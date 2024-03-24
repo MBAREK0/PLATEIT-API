@@ -87,21 +87,21 @@
 
             Your ticket details are as follows:<br><br>
 
-            {{-- Name: {{$data['name']}}<br> --}}
-            {{-- E-mail: {{$data['email']}}<br> --}}
-            {{-- Ticket ID: {{$data['Ticket_id']}}<br> --}}
-            {{-- Date: {{$data['date']}}<br><br> --}}
+            Name: {{$data['name']}}<br>
+            E-mail: {{$data['email']}}<br>
+            Ticket ID: {{$data['Ticket_id']}}<br>
+            Date: {{$data['date']}}<br><br>
 
 
 </p>
 
     <div class="ticket-container">
-        <img class="ticket-image" src="{{ $message->embed(public_path('images/medium_plate_vip.jpg')) }}" alt="Embedded Image">
+        <img class="ticket-image" src="{{ $message->embed(public_path('images/gifts/email_gifts/'.$data['Ticket'])) }}" alt="Embedded Image">
 
         <!-- <img class="ticket-image" src="images/large_plate_vip.png" alt="Embedded Image"> -->
 
        <p class="for">
-        {{-- FOR : {{$data['name']}} --}}
+        FOR : {{$data['name']}}
        </p>
     </div>
     <p class="start">

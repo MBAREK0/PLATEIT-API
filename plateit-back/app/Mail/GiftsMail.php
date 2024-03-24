@@ -22,7 +22,7 @@ class GiftsMail extends Mailable
      */
     public function build()
     {
-        $imagePath = public_path('images/medium_plate_vip.jpg');
+        $imagePath = public_path('images/gifts/email_gifts/'.$this->data['Ticket']);
 
         try {
             // Embed the image directly in the email body

@@ -49,12 +49,8 @@ class SestemOfGiftsService
         $data['Ticket']= $gift->image;
         $data['date']= now();
         $data['Ticket_id']= $randomNumber;
-        $info = $data;
 
-        $email = new GiftsMail($data);
-        $job= Mail::to($data['email'])->send($email);
-
-        // $job = dispatch(new SendTeckitJob($data));
+        $job = dispatch(new SendTeckitJob($data));
         if ($job) {
             return response()->json([
                 'status' => 'success',
