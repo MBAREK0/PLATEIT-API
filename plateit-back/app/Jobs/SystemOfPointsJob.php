@@ -18,7 +18,7 @@ class SystemOfPointsJob implements ShouldQueue
     protected $_type;
     protected $methodName;
 
-    /**
+    /** 
      * Create a new job instance.
      */
     public function __construct($_user, $_type)

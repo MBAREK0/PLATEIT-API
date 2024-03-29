@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('claim_gifts', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('user_id');
-            $table->bigInteger('gift_id');
-            $table->bigInteger('random_id');
-            $table->float('status')->default(true);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('claim_gifts')) {
+            Schema::create('claim_gifts', function (Blueprint $table) {
+                $table->id();
+                $table->bigInteger('user_id');
+                $table->bigInteger('gift_id');
+                $table->bigInteger('random_id');
+                $table->float('status')->default(true);
+                $table->timestamps();
+            });
+        }
     }
 
     /**

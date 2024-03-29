@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\RestaurantDetailsController;
 use App\Http\Controllers\Api\FollowsController;
 use App\Http\Controllers\Api\GiftsController;
 use App\Http\Controllers\Api\PointsOfVisitsController;
+use App\Http\Controllers\Api\RightSidebarController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,20 +36,6 @@ Route::prefix('auth')->group(function () {
     Route::post('resetPassword', [AuthController::class, 'resetPassword']);
 });
 
-Route::middleware(['check.token'])->group(function () {
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('refresh', [AuthController::class, 'refresh']);
-
-    //-------------------------------- Follow Routes -------------
-
-    Route::post('follow', [FollowsController::class,'follow']);
-    Route::delete('unfollow', [FollowsController::class,'unfollow']);
-    Route::get('count_followers', [FollowsController::class,'count_followers']); // restaurant_id
-
-    //-------------------------------- System Points Routes -------------
-    Route::post('visite_rewards_from_profile', [PointsOfVisitsController::class,'index']); # restaurant_id | publication_id with null
-
-});
 
 // ------------------------------  Restaurants Routes ------------------------------------
 
@@ -112,3 +99,27 @@ Route::middleware(['check.token'])->prefix('publication')->group(function () {
 
 });
 
+//-------------------------------- System Points Routes -------------
+
+Route::middleware(['check.token'])->group(function () {
+    //-------------------------------- auth Routes -------------
+
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
+
+    //-------------------------------- Follow Routes -------------
+
+    Route::post('follow', [FollowsController::class,'follow']);
+    Route::delete('unfollow', [FollowsController::class,'unfollow']);
+    Route::get('count_followers', [FollowsController::class,'count_followers']); // restaurant_id
+
+    //-------------------------------- System Points Routes -------------
+    Route::post('visite_rewards_from_profile', [PointsOfVisitsController::class,'index']); # restaurant_id | publication_id with null
+
+    //-------------------------------- Home Routes -------------
+
+    Route::get('trand_restaurants', [RightSidebarController::class,'trand_restaurants']);
+    Route::get('collaboration_restaurants', [RightSidebarController::class,'collaboration_restaurants']);
+
+
+});

@@ -8,6 +8,6 @@
 </head>
 <body>
 
-    {{ QrCode::generate('Make me into a QrCode!');}}
+
 </body>
 </html>
