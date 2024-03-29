@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\PublicationsController;
 use App\Http\Controllers\Api\RestaurantDetailsController;
 use App\Http\Controllers\Api\FollowsController;
 use App\Http\Controllers\Api\GiftsController;
+use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\PointsOfVisitsController;
 use App\Http\Controllers\Api\RightSidebarController;
 use Illuminate\Support\Facades\Route;
@@ -120,6 +121,10 @@ Route::middleware(['check.token'])->group(function () {
 
     Route::get('trand_restaurants', [RightSidebarController::class,'trand_restaurants']);
     Route::get('collaboration_restaurants', [RightSidebarController::class,'collaboration_restaurants']);
+
+    Route::get('all_posts', [HomeController::class,'index']);
+
+
 
 
 });
