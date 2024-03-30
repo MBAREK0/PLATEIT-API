@@ -1,11 +1,19 @@
-<template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+<template >
+  <nav  class="dark:bg-gray-500 dark:text-white ">
+    <router-link to="/" class="dark:text-white">Home</router-link> |
+    <router-link to="/about" class="dark:text-white">About</router-link>
+   <button @click="toggleDark()" class=" bg-slate-500 text-center text-cyan-300 p-3 m-3 " >darkmode</button>
   </nav>
   <router-view/>
 </template>
 
+<script setup>
+// setup the dark mode with vueuse
+import  { useDark , useToggle } from "@vueuse/core"
+const isDark = useDark();
+const toggleDark = useToggle(isDark)
+// --------------------- end the config of dark mode 
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
