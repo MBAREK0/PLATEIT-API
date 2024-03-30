@@ -1,4 +1,4 @@
-# plateit-front
+# vuejs-tailwind-app
 
 ## Project setup
 ```
