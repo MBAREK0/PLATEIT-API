@@ -9,13 +9,22 @@ module.exports = {
   theme: {
     extend: {
       colors:{
+        // body colors 
         main_color: '#E5E5E5',
         main_color_dark: '#4F4F4F',
         secondary_color: '#D9D9D9',
-        main_text_color: '#57565B',
+        secondary_color_dark: '#999',
         sidebar_color: '#708090',
+        sidebar_color_dark: '#333',
+        // text colors 
+        main_text_color: '#585050',
+        sidebar_text_color: '#fff',
+
+
         auth_png_color: '#333333',
-        btn_submit: 'rgb(63 96 128)'
+        // btn colors
+        btn_submit_hover: 'rgb(63 96 128)',
+        btn_primary_color: '#1A5DB4'
       }
     },
   },

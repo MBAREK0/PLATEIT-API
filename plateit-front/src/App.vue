@@ -1,11 +1,8 @@
 <template >
-  <!-- <nav  class="dark:bg-gray-500 dark:text-white ">
-    <router-link to="/" class="dark:text-white">Home</router-link> |
-    <router-link to="/about" class="dark:text-white">About</router-link>
-  </nav> -->
-  <button @click="toggleDark()" class=" bg-slate-500 text-center text-cyan-300 p-3 m-3 " >darkmode</button>
 
+  <!-- <button @click="toggleDark()" class=" bg-slate-500 text-center text-cyan-300 p-3 m-3 " >darkmode</button> -->
   <router-view/>
+
 </template>
 
 <script setup>
