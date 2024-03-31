@@ -1,9 +1,10 @@
 <template >
-  <nav  class="dark:bg-gray-500 dark:text-white ">
+  <!-- <nav  class="dark:bg-gray-500 dark:text-white ">
     <router-link to="/" class="dark:text-white">Home</router-link> |
     <router-link to="/about" class="dark:text-white">About</router-link>
-   <button @click="toggleDark()" class=" bg-slate-500 text-center text-cyan-300 p-3 m-3 " >darkmode</button>
-  </nav>
+  </nav> -->
+  <button @click="toggleDark()" class=" bg-slate-500 text-center text-cyan-300 p-3 m-3 " >darkmode</button>
+
   <router-view/>
 </template>
 
@@ -34,5 +35,10 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+/* my classes  */
+.align-self-start{
+align-self: flex-start;
 }
 </style>
