@@ -1,7 +1,12 @@
 <template>
     <MainLayout>
         <div class="home">
-        <h1>Welcome to Home Page</h1>
+        <div class="roboto flex justify-center gap-3">
+            <button class="border-none bg-none ">For you</button>
+            <button class="border-none bg-none ">Follow</button>
+            <button class="border-none bg-none ">Restaurant</button>
+         
+        </div>
        
     </div>
     </MainLayout>
@@ -14,17 +19,17 @@ export default {
     name: 'Home',
     data() {
         return {
-            // Add your data properties here
+            
         };
     },
     components:{
         MainLayout,
     },
     methods: {
-        // Add your methods here
+       
     },
     computed: {
-        // Add your computed properties here
+      
     },
 };
 </script>

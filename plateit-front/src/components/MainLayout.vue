@@ -5,11 +5,15 @@
         <div class="flex flex-col items-center">
           <img src="../assets/logo.png" alt="logo" class="mt-10 w-10/12">
         </div> 
+        <LeftSidebar/>
+
       </div>
       <div class="main-content 2xl:mx-72 xl:mx-72 lg:mx-64 md:ms-44 lg:mt-3 md:mt-3  ">
         <PhoneNav/>
         <div class=" mx-10 xl:mx-20 lg:mx-15 px-4">
-       <slot></slot>
+
+    
+          <slot></slot>
         </div> 
       </div>
       <div class="right-0 bg-sidebar_color dark:bg-sidebar_color_dark fixed top-0 bottom-0 hidden  lg:block w-1/5 text-sidebar_text_color"> 
@@ -23,10 +27,12 @@
   
   <script>
   import PhoneNav from './component/PhoneNav.vue'
+  import LeftSidebar from './component/LeftSide.vue'
   export default {
     name: 'MainLayout',
     components:{
       PhoneNav,
+      LeftSidebar
     }
   };
   </script>

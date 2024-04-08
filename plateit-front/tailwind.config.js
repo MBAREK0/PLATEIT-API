@@ -19,8 +19,7 @@ module.exports = {
         // text colors 
         main_text_color: '#585050',
         sidebar_text_color: '#fff',
-
-
+        
         auth_png_color: '#333333',
         // btn colors
         btn_submit_hover: 'rgb(63 96 128)',
