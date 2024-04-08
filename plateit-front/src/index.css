@@ -56,18 +56,12 @@ body::-webkit-scrollbar {
 }
 
 
-
-
-
-
-
 .mybtn{
     background-color: var(--btn-color);
     width: 63px;
     border: none;
     border-radius: 12px;
     color: #fff;
-
 }
 
 
@@ -78,15 +72,9 @@ body::-webkit-scrollbar {
 }
 
 
-
-
-
-
 .profile-pic{
     width: 2.3rem;
     height: 2.3rem;
     border-radius: 100%;
 
 }
-
-
