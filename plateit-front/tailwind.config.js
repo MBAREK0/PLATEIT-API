@@ -14,7 +14,7 @@ module.exports = {
         main_color_dark: '#4F4F4F',
         secondary_color: '#D9D9D9',
         secondary_color_dark: '#999',
-        sidebar_color: '#708090',
+        sidebar_color: '#415A77',
         sidebar_color_dark: '#333',
         // text colors 
         main_text_color: '#585050',

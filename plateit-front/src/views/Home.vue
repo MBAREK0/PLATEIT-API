@@ -1,13 +1,9 @@
 <template>
     <MainLayout>
-        <div class="home">
-        <div class="roboto flex justify-center gap-3">
-            <button class="border-none bg-none ">For you</button>
-            <button class="border-none bg-none ">Follow</button>
-            <button class="border-none bg-none ">Restaurant</button>
-         
-        </div>
-       
+    <div class="home">
+        <nav class="w-full m-0 p-0">
+            <smallNav class="pc"/>
+        </nav>
     </div>
     </MainLayout>
 
@@ -15,6 +11,7 @@
 
 <script>
 import  MainLayout  from "../components/MainLayout.vue";
+import  smallNav  from "../components/component/smallNav.vue";
 export default {
     name: 'Home',
     data() {
@@ -24,6 +21,7 @@ export default {
     },
     components:{
         MainLayout,
+        smallNav
     },
     methods: {
        
@@ -32,5 +30,13 @@ export default {
       
     },
 };
+
 </script>
 
+<style>
+@media (max-width:301px){
+    .font-size{
+        font-size: small;
+    }
+}
+</style>

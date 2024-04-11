@@ -78,3 +78,25 @@ body::-webkit-scrollbar {
     border-radius: 100%;
 
 }
+
+@media (min-width:768px){
+.phone{
+    display: none !important;
+    }
+}
+@media (max-width:768px){
+.pc{
+    display: none !important;
+    }
+}
+@media (min-width:768px) and (max-width:1024px) {
+.tablet{
+    display: block !important;
+    }
+}
+
+
+.Trend-Restaurant::-webkit-scrollbar {
+    display: none;
+    color: var(--body-text-color);
+}
