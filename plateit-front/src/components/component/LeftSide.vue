@@ -1,6 +1,6 @@
 <template>
     <div class="  flex flex-col gap-4  h-screen pl-3 pr-3 ">
-        <span class="material-icons text-2xl absolute top-3 right-3 phone" @click="store.toggleSidebar()">close</span>
+        <span class="material-icons text-2xl absolute top-3 right-3 phone " @click="store.toggleSidebar()">close</span>
         <div class="flex flex-col items-center">
           <img src="../../assets/logo.png" alt="logo" class="mt-10 w-10/12 2xl:block xl:block lg:block md:block hidden">
         </div> 
@@ -13,8 +13,12 @@
                 </div>
                 <!-- ------------------- -->
                 <div class=" flex gap-4 md:gap-2 sm:gap-1 items-center ">
-                    <span class="material-icons lg:text-2xl xl:text-2xl 2xl:text-2xl cursor-pointer">home</span>
-                    <p class="text-xl   hover:ms-3 translate-x-0 duration-75 cursor-pointer inter">Home</p>
+                    <router-link :to="{ name: 'home'}">
+                        <span class="material-icons lg:text-2xl xl:text-2xl 2xl:text-2xl cursor-pointer">home</span>
+                    </router-link>
+                    <router-link :to="{ name: 'home'}">
+                        <p class="text-xl   hover:ms-3 translate-x-0 duration-75 cursor-pointer inter">Home</p>
+                    </router-link>
                 </div>
                 <!-- ------------------- -->
                 <div class=" flex gap-4 md:gap-2 sm:gap-1 items-center ">
@@ -38,10 +42,16 @@
                     <p class="text-xl hover:ms-3 translate-x-0 duration-75 cursor-pointer inter">Save</p>
                 </div>
                 <!-- ------------------- -->
+               
                 <div class=" flex gap-4 md:gap-2 sm:gap-1 items-center ">
-                    <span class="material-icons lg:text-2xl xl:text-2xl 2xl:text-2xl p-0 m-0 cursor-pointer">person</span>
+                    <router-link :to="{ name: 'profile'}">
+                        <span class="material-icons lg:text-2xl xl:text-2xl 2xl:text-2xl p-0 m-0 cursor-pointer">person</span>
+                    </router-link>
+                    <router-link :to="{ name: 'profile'}">
                     <p class="text-xl hover:ms-3 translate-x-0 duration-75 cursor-pointer inter">Profile</p>
+                    </router-link>
                 </div>
+               
                 <!-- ------------------- -->
                 <div class=" flex gap-4 md:gap-2 sm:gap-1 items-center ">
                     <span class="material-icons lg:text-2xl xl:text-2xl 2xl:text-2xl p-0 m-0 cursor-pointer">info</span>

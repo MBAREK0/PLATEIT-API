@@ -17,7 +17,10 @@ export const MainStore = defineStore('MainStore', {
     },
     toggleTrendSidebar(){
       this.showTrendSidebar = !this.showTrendSidebar;
-    }
+    },
+    setLoading(value) {
+      this.loading = value;
+    },
     
   }
 })
