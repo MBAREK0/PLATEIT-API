@@ -24,7 +24,7 @@
         <nav class=" pt-8 pb-5 text-sidebar_text_color sm:h-20 h-10 p-0 flex justify-around items-center">
             <span class="material-icons text-4xl text-sidebar_color dark:text-sidebar_text_color" @click="store.toggleSidebar()">menu</span>
           <smallNav/>
-            <div class="relative w-1/3">
+            <div class="relative w-1/3" v-if="this.$route.name === 'home'">
                 <input type="text" class="border border-black-300 focus:border-black-300 outline-none rounded-lg py-1 px-3 w-full" placeholder="Search...">
                 <span class="material-icons absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-400 cursor-pointer">search</span>
             </div>

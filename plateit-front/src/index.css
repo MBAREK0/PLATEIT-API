@@ -105,16 +105,19 @@ body::-webkit-scrollbar {
     /* opacity: 70%; */
     /* z-index: 0; */
   }
-  @media (min-width:1626px){
+  @media (min-width:1536px){
     .main-content {
       margin-left: 21rem;
       margin-right: 21rem;
+      width: 58rem !important;
+
     }
   }
   @media (min-width:1729px){
     .main-content {
       margin-left: 23rem;
       margin-right: 23rem;
+      width: 58rem !important;
     }
   }
   .test{

@@ -1,11 +1,16 @@
 <template>
     <MainLayout>
-    <div class=" main-content 2xl:mx-84 xl:mx-80 lg:mx-64 md:ms-44 lg:mt-3 md:mt-3">
-        <nav class="w-full m-0 p-0">
-            <smallNav class="pc"/>
-        </nav>
-        <CreatePost class="m-0 p-0"/>
+<div class="w-full mt-3 flex lg:justify-center justify-center md:justify-end">
+    <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center lg:px-10 md:px-5 px-5" >
+        <div class=" w-full ">
+            <nav class="w-full m-0 p-0">
+                <smallNav class="pc"/>
+            </nav>
+            <CreatePost class="m-0 p-0"/>
+        </div>
     </div>
+</div>
+    
     </MainLayout>
 
 </template>
@@ -42,4 +47,8 @@ export default {
         font-size: small;
     }
 }
+.tablet-container{
+    width: 75% !important;
+}
+
 </style>

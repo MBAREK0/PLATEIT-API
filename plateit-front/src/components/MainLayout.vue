@@ -9,7 +9,7 @@
       <div class=" relative  h-screen ">
         <PhoneNav/>
         
-        <div class=" sm:mx-4 xs:mx-4 ">
+        <div >
           <div class="w-full h-screen flex  items-center justify-center" v-if="store.loading">
             <PreLoading class="w-full  flex  items-center justify-center"/>
           </div>
@@ -52,12 +52,7 @@
 
 <style scoped>
 
-@media (min-width: 769px) and (max-width: 900px) {
-  .left-sidebar {
-    width: 190px !important;
-    
-  }
-}
+
 .sidebar-slide-enter-active, .sidebar-slide-leave-active {
   transition: transform 0.3s ease;
 }

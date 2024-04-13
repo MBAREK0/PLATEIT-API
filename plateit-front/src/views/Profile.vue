@@ -1,12 +1,42 @@
 <template>
     <MainLayout>
-        <div class=" bg-green-800 w-full profil ">
-            <div class="home bg-green-500   xs:h-32 sm:h-32 ">
-        
-        
-    </div>
+
+        <div class="w-full  flex lg:justify-center justify-center md:justify-end">
+            <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center " >    
+                <div class="bg-sidebar_color dark:bg-sidebar_color_dark w-full h-10"></div>
+            </div>
         </div>
- 
+        
+        <div class="w-full  flex lg:justify-center justify-center md:justify-end">
+            <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center " >
+                <div class=" w-full ">
+                    <nav class="w-full m-0 p-0">
+                        <smallNav class="pc"/>
+                    </nav>
+                <div class="bg-yellow-800 w-full h-36"></div>
+                </div>
+            </div>
+        </div>
+        <div class="w-full  flex lg:justify-center justify-center md:justify-end">
+            <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center " >
+                <div class=" w-full ">
+                    <nav class="w-full m-0 p-0">
+                        <smallNav class="pc"/>
+                    </nav>
+                <div class="bg-green-800 w-full h-36"></div>
+                </div>
+            </div>
+        </div>
+        <div class="w-full mt-3 flex lg:justify-center justify-center md:justify-end">
+            <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center lg:px-10 md:px-5 px-5" >
+                <div class=" w-full ">
+                    <nav class="w-full m-0 p-0">
+                        <smallNav class="pc"/>
+                    </nav>
+                <div class="bg-red-800 w-full h-36"></div>
+                </div>
+            </div>
+        </div>
     </MainLayout>
 
 </template>
@@ -37,41 +67,3 @@ export default {
 
 </script>
 
-<style>
-@media (max-width:301px){
-    .font-size{
-        font-size: small;
-    }
-}
-@media (max-width: 640px) { 
-    .profil{
-
-    }
- }
-@media (min-width: 640px) {
-    .profil{
-        
-    }
-  }
-@media (min-width: 768px) {
-    .profil{
-        
-    }
-  }
-@media (min-width: 1024px) { 
-    .profil{
-        
-    }
- }
-@media (min-width: 1280px) {
-    .profil{
-        
-    }
-  }
-@media (min-width: 1536px) {
-    .profil{
-       margin-left: 26.8rem !important;
-       margin-right: 26.8rem !important;
-    }
-  }
-</style>
