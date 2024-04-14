@@ -1,6 +1,6 @@
 <template >
 
-  <!-- <button @click="toggleDark()" class=" bg-slate-500 text-center text-cyan-300 p-3 m-3 " >darkmode</button> -->
+  <button @click="toggleDark()" class=" bg-slate-500 text-center text-cyan-300 p-3 m-3 " >darkmode</button><!---->
   <router-view/>
 
 </template>

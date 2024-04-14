@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import SignIn from '../views/SignIn.vue'
 import SignUp from '../views/SignUp.vue'
 import Home from '../views/Home.vue'
-import profile from '../views/Profile.vue'
+import profile from '../views/R-Profile.vue'
 import { MainStore } from "../stores/MainStore";
 
 

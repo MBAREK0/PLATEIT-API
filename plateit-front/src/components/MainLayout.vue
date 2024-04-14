@@ -6,7 +6,7 @@
         <LeftSidebar/>
 
       </div>
-      <div class=" relative  h-screen ">
+      <div class=" relative    ">
         <PhoneNav/>
         
         <div >
@@ -14,7 +14,7 @@
             <PreLoading class="w-full  flex  items-center justify-center"/>
           </div>
           <slot v-else></slot>
-
+          
         </div> 
       </div>
       <div class=" test right-0 bg-sidebar_color dark:bg-sidebar_color_dark fixed top-0 bottom-0 hidden  lg:block w-1/5 text-sidebar_text_color"> 
@@ -22,7 +22,7 @@
         <RightSide/>
 
       </div>
-      <transition name="sidebar-slide" class=" sidebar right-0 top-0  bg-sidebar_color dark:bg-sidebar_color_dark   absolute  bottom-0  md:w-1/3 sm:w-full xs:w-full  text-sidebar_text_color " style="height: 100% !important;" > <RightSide  v-if="store.showTrendSidebar"  /></transition>
+      <transition name="sidebar-slide" class=" sidebar right-0 top-0  bg-sidebar_color dark:bg-sidebar_color_dark z-9999   absolute  bottom-0  md:w-1/3 sm:w-full xs:w-full  text-sidebar_text_color " style="height: 100% !important; z-index: 9999 !important;" > <RightSide  v-if="store.showTrendSidebar"  /></transition>
 
   </body>
   

@@ -5,6 +5,8 @@ export const MainStore = defineStore('MainStore', {
     loading: false,
     showSidebar:false,
     showTrendSidebar:false,
+    backdrop:false,
+    MenuModel:false
     
 
   }),
@@ -20,6 +22,10 @@ export const MainStore = defineStore('MainStore', {
     },
     setLoading(value) {
       this.loading = value;
+    },
+    toggleMenuModel(){
+      this.backdrop = !this.backdrop;
+      this.MenuModel = !this.MenuModel;
     },
     
   }

@@ -7,6 +7,8 @@
                 <smallNav class="pc"/>
             </nav>
             <CreatePost class="m-0 p-0"/>
+            
+            <div class="backdrop" v-if="store.backdrop"></div>
         </div>
     </div>
 </div>
@@ -19,24 +21,21 @@
 import  MainLayout  from "../components/MainLayout.vue";
 import  smallNav  from "../components/component/smallNav.vue";
 import  CreatePost  from "../components/component/CreatePost.vue";
+import { MainStore } from "../stores/MainStore";
 export default {
     name: 'Home',
-    data() {
-        return {
-            
-        };
-    },
+
     components:{
         MainLayout,
         smallNav,
-        CreatePost
+        CreatePost,
+        
     },
-    methods: {
-       
-    },
-    computed: {
-      
-    },
+    setup() {
+      const store = MainStore();
+      return {store}
+    }
+
 };
 
 </script>

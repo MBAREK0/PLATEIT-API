@@ -29,7 +29,7 @@
                 <span class="material-icons absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-400 cursor-pointer">search</span>
             </div>
         </nav>
-        <transition name="sidebar-slide" class=" sidebar left-0  bg-sidebar_color dark:bg-sidebar_color_dark   absolute sm:top-20 top-10 bottom-0  w-1/2  text-sidebar_text_color " > <LeftSidebar  v-if="store.showSidebar" class="border-t border-white border-opacity-50" /></transition>
+        <transition name="sidebar-slide" class=" sidebar left-0  bg-sidebar_color dark:bg-sidebar_color_dark   fixed sm:top-20 top-10 bottom-0  w-1/2  text-sidebar_text_color " style="z-index: 9999 !important;" > <LeftSidebar  v-if="store.showSidebar" class="border-t border-white border-opacity-50" /></transition>
       
   
     </div>
