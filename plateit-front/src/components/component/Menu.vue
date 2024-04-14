@@ -8,55 +8,55 @@
                         </span>
                     </button>
             </div>
-        <div class="owl-carousel custom-carousel owl-theme overflow-x-auto w-full " ref="carousel">
+        <div class="owl-carousel custom-carousel owl-theme overflow-x-auto w-full px-20 " ref="carousel">
           <div class="item active" style="background-image: url(https://th.bing.com/th/id/OIP.tcSxtD5KQEV0sD6NaEHfnAHaGl?rs=1&pid=ImgDetMain);">
             <div class="item-desc">
                 <div class="flex justify-between items-center">
-                  <h4 class="text-lg roboto">Dota 2</h4>
+                  <h4 class="text-lg roboto">Food Example</h4>
                   <h4 class="text-lg roboto"> 15 $</h4>
                 </div>
-                <p class="text-xs">Dota 2 is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
-                Ancients, which was a community-created mod for Blizzard Entertainment's Warcraft III.</p>
+                <p class="text-xs">Food Example is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
+                 </p>
             </div>
           </div>
           <div class="item active" style="background-image: url(https://th.bing.com/th/id/R.c8469790d5263afa81ab929649e96846?rik=vTAXoPP24rsM9Q&riu=http%3a%2f%2fimages6.fanpop.com%2fimage%2fphotos%2f43900000%2fBig-Mac-meal-mcdonalds-43949690-1024-1024.jpg&ehk=EA3WeD15eruw4qMY60s9JiM2zpy%2bU2RkjzHUC9Xjc4o%3d&risl=&pid=ImgRaw&r=0);">
             <div class="item-desc">
                 <div class="flex justify-between items-center">
-                  <h4 class="text-lg roboto">Dota 2</h4>
+                  <h4 class="text-lg roboto">Food Example</h4>
                   <h4 class="text-lg roboto"> 15 $</h4>
                 </div>
-                <p class="text-xs">Dota 2 is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
-                Ancients, which was a community-created mod for Blizzard Entertainment's Warcraft III.</p>
+                <p class="text-xs">Food Example is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
+                 </p>
             </div>
           </div>
           <div class="item active" style="background-image: url(https://th.bing.com/th/id/OIP.p6h7i0Olj6Rok08yY-JI7gHaFu?rs=1&pid=ImgDetMain);">
             <div class="item-desc">
                 <div class="flex justify-between items-center">
-                  <h4 class="text-lg roboto">Dota 2</h4>
+                  <h4 class="text-lg roboto">Food Example</h4>
                   <h4 class="text-lg roboto"> 15 $</h4>
                 </div>
-                <p class="text-xs">Dota 2 is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
-                Ancients, which was a community-created mod for Blizzard Entertainment's Warcraft III.</p>
+                <p class="text-xs">Food Example is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
+                 </p>
             </div>
           </div>
           <div class="item active" style="background-image: url(https://journalmetro.com/wp-content/uploads/2014/01/happymeal-newyogurt_.jpg?fit=920%2C920);">
             <div class="item-desc">
                 <div class="flex justify-between items-center">
-                  <h4 class="text-lg roboto">Dota 2</h4>
+                  <h4 class="text-lg roboto">Food Example</h4>
                   <h4 class="text-lg roboto"> 15 $</h4>
                 </div>
-                <p class="text-xs">Dota 2 is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
-                Ancients, which was a community-created mod for Blizzard Entertainment's Warcraft III.</p>
+                <p class="text-xs">Food Example is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
+                 </p>
             </div>
           </div>
           <div class="item active" style="background-image: url(https://www.fastfoodpost.com/wp-content/uploads/2022/02/Del-Taco-Introduces-New-Crispy-Jumbo-Shrimp-Stuffed-Quesadilla-Tacos-Brings-Back-Crispy-Jumbo-Shrimp-Burrito-And-Taco.jpg);">
             <div class="item-desc">
                 <div class="flex justify-between items-center">
-                  <h4 class="text-lg roboto">Dota 2</h4>
+                  <h4 class="text-lg roboto">Food Example</h4>
                   <h4 class="text-lg roboto"> 15 $</h4>
                 </div>
-                <p class="text-xs">Dota 2 is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
-                Ancients, which was a community-created mod for Blizzard Entertainment's Warcraft III.</p>
+                <p class="text-xs">Food Example is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
+                 </p>
             </div>
           </div>
 

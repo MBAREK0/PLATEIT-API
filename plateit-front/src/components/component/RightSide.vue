@@ -17,8 +17,8 @@
                     <p class="roboto"> Trend Restaurant </p>
                 </div>
 
-              <div class="w-full  overflow-y-scroll Trend-Restaurant ">
-                <div class="flex justify-center w-full items-start gap-2">
+              <div class="w-full  overflow-y-scroll Trend-Restaurant " >
+                <div class="flex justify-center w-full items-start gap-2" v-for="index in 16" :key="index">
                     <div class="acc w-full mb-3 justify-self-end flex items-center gap-2 md:gap-1  ">
                         <div>
                             <img src="../../assets/images/postexample.png" class="profile-pic" alt="profile">
@@ -48,15 +48,15 @@
                     </svg>
                     <p class="roboto"> Collaborations </p>
                 </div>
-
-                <div class="flex justify-center w-full items-start gap-2">
+                <div class="w-full  overflow-y-scroll Trend-Restaurant " >
+                <div class="flex justify-center w-full items-start gap-2" v-for="index in 16" :key="index">
                     <div class="acc w-full mb-3 justify-self-end flex items-center gap-2 md:gap-1  ">
                         <div>
-                            <img src="../../assets/images/giftexampl.jpg" class="profile-pic" alt="profile">
+                            <img src="../../assets/images/postexample.png" class="profile-pic" alt="profile">
                         </div>
                         <div class="lg:text-sm xl:text-md md:text-sm sm:text-xs text-start  inter flex flex-col justify-start items-start">
                             <p class="text-xs">Restaurant </p>
-                            <small class="opacity-75 text-xs">collaboration</small> 
+                            <small class="opacity-75">collaboration</small> 
                         </div>
                     </div>
 
@@ -67,6 +67,7 @@
                         </svg>
                     </div>
                 </div>
+              </div>  
                 
             </div>
  
@@ -110,6 +111,13 @@
 
 }
 
+.Trend-Restaurant::-webkit-scrollbar {
+  display: none !important;
+}
 
+.Trend-Restaurant {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
 
 </style>

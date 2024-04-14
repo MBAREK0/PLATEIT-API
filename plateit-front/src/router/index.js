@@ -3,6 +3,8 @@ import SignIn from '../views/SignIn.vue'
 import SignUp from '../views/SignUp.vue'
 import Home from '../views/Home.vue'
 import profile from '../views/R-Profile.vue'
+import marketplace from '../views/MarketPlace.vue'
+import about from '../views/About.vue'
 import { MainStore } from "../stores/MainStore";
 
 
@@ -16,6 +18,16 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: profile
+  },
+  {
+    path: '/marketplace',
+    name: 'marketplace',
+    component: marketplace
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: about
   },
   {
     path: '/sign-in',

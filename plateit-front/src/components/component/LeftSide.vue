@@ -1,8 +1,10 @@
 <template>
     <div class="  flex flex-col gap-4  h-screen pl-3 pr-3 ">
         <span class="material-icons text-2xl absolute top-3 right-3 phone " @click="store.toggleSidebar()">close</span>
-        <div class="flex flex-col items-center">
-          <img src="../../assets/logo.png" alt="logo" class="mt-10 w-10/12 2xl:block xl:block lg:block md:block hidden">
+        <div >
+            <router-link :to="{ name: 'home'}" class="flex flex-col items-center">
+                <img src="../../assets/logo.png" alt="logo" class="mt-10 w-10/12 2xl:block xl:block lg:block md:block hidden">
+            </router-link>
         </div> 
         <div class="flex flex-col gap-4 justify-between w-full h-full">
                 <div class="flex flex-col gap-4 justify-start mt-12">
@@ -27,11 +29,15 @@
                 </div>
                 <!-- ------------------- -->
                 <div class=" flex gap-4 md:gap-2 sm:gap-1 items-center cursor-pointer">
-                    <svg class=" points-icon   w-5 h-5 md:w-5 md:h-5 sm:w-4 sm:h-4 xs:w-4 xs:h-4  " viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M22.5 45C34.9264 45 45 34.9264 45 22.5C45 10.0736 34.9264 0 22.5 0C10.0736 0 0 10.0736 0 22.5C0 34.9264 10.0736 45 22.5 45Z" fill="#1A5DB4"/>
-                        <path d="M33.75 21.8841C33.75 28.1039 28.9322 30.2189 24.8766 30.2189V31.8403H28.0055V34.0369H24.878V36.5625H19.9842V34.0369H16.9931V31.8403H19.9786V30.1978C18.6806 30.1978 11.25 29.8898 11.25 21.4327V11.25H16.1086V21.8222C16.1086 26.2364 19.9983 26.1956 19.9983 26.1956V11.25H24.878V26.1956C24.878 26.1956 28.8914 26.4206 28.8914 21.7617V11.25H33.75V21.8841Z" fill="white"/>
-                    </svg>
-                    <p class="text-xl hover:ms-3 translate-x-0 duration-75 cursor-pointer roboto">1250</p>
+                    <router-link :to="{ name: 'marketplace'}">
+                        <svg class=" points-icon   w-5 h-5 md:w-5 md:h-5 sm:w-4 sm:h-4 xs:w-4 xs:h-4  " viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22.5 45C34.9264 45 45 34.9264 45 22.5C45 10.0736 34.9264 0 22.5 0C10.0736 0 0 10.0736 0 22.5C0 34.9264 10.0736 45 22.5 45Z" fill="#1A5DB4"/>
+                            <path d="M33.75 21.8841C33.75 28.1039 28.9322 30.2189 24.8766 30.2189V31.8403H28.0055V34.0369H24.878V36.5625H19.9842V34.0369H16.9931V31.8403H19.9786V30.1978C18.6806 30.1978 11.25 29.8898 11.25 21.4327V11.25H16.1086V21.8222C16.1086 26.2364 19.9983 26.1956 19.9983 26.1956V11.25H24.878V26.1956C24.878 26.1956 28.8914 26.4206 28.8914 21.7617V11.25H33.75V21.8841Z" fill="white"/>
+                        </svg>
+                    </router-link>
+                    <router-link :to="{ name: 'marketplace'}">
+                        <p class="text-xl hover:ms-3 translate-x-0 duration-75 cursor-pointer roboto">1250</p>
+                    </router-link>
                 </div>
                 <!-- ------------------- -->
                 <div class=" flex gap-4 md:gap-2 sm:gap-1 items-center cursor-pointer">
@@ -52,10 +58,14 @@
                     </router-link>
                 </div>
                
-                <!-- ------------------- -->
+                <!-- ------------------- --> 
                 <div class=" flex gap-4 md:gap-2 sm:gap-1 items-center ">
+                    <router-link :to="{ name: 'about'}">
                     <span class="material-icons lg:text-2xl xl:text-2xl 2xl:text-2xl p-0 m-0 cursor-pointer">info</span>
+                    </router-link>
+                    <router-link :to="{ name: 'about'}">
                     <p class="text-xl hover:ms-3 translate-x-0 duration-75 cursor-pointer inter">About Us</p>
+                    </router-link>
                 </div>
                 <!-- ------------------- -->
                 <div class=" flex gap-4 md:gap-2 sm:gap-1 items-center ">

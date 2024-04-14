@@ -28,7 +28,7 @@ export default {
     components:{
         MainLayout,
         smallNav,
-        CreatePost,
+        CreatePost
         
     },
     setup() {

@@ -1,7 +1,10 @@
 <template>
     <div class="2xl:hidden xl:hidden lg:hidden md:hidden phone">
         <nav class=" bg-sidebar_color dark:bg-sidebar_color_dark text-sidebar_text_color sm:h-20 h-10 p-0 flex justify-between items-center">
-            <img src="../../assets/logo.png" alt="logo" class=" w-1/4 ms-3  ">
+          <router-link :to="{ name: 'home'}" >
+              <img src="../../assets/logo.png" alt="logo" class=" w-1/4 ms-3  ">
+          </router-link>
+          
             <div class="flex justify-between items-center me-3 gap-2 ">
               <!-- ------------------- -->
               <div class=" flex gap-1  items-center cursor-pointer">
