@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('phone_numbre')->nullable();
             $table->string('web_site')->nullable();
+            $table->string('image')->nullable();
+            $table->string('image_cover')->nullable();
             $table->timestamps();
         });
     }
