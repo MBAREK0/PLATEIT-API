@@ -1,7 +1,8 @@
 <template>
 
     <section class="game-section  relative">
-        <div class="btn-conteiner absolute left-5 top-1/2 " @click="scrollLeft">
+     
+        <div class="btn-conteiner absolute left-5 top-1/2 hidden md:block " @click="scrollLeft">
                     <button class="btn-content" >
                         <span class="icon-arrow">
                             <i class="material-icons">chevron_left</i>
@@ -61,7 +62,7 @@
           </div>
 
         </div>
-        <div class="btn-conteiner absolute  right-5 top-1/2" @click="scrollRight">
+        <div class="btn-conteiner absolute  right-5 top-1/2 hidden md:block " @click="scrollRight">
                     <button class="btn-content" >
                         <span class="icon-arrow">
                             <i class="material-icons">chevron_right</i>

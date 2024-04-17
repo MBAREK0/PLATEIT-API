@@ -1,6 +1,5 @@
 <template >
 
-  <!-- <button @click="toggleDark()" class=" bg-slate-500 text-center text-cyan-300 p-3 m-3 " >darkmode</button> -->
   <router-view/>
 
 </template>
@@ -21,21 +20,4 @@ const toggleDark = useToggle(isDark)
   color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-
-/* my classes  */
-.align-self-start{
-align-self: flex-start;
-}
 </style>

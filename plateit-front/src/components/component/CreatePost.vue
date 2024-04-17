@@ -8,7 +8,7 @@
                 <img src="../../assets/images/auth.jpg" class="profile-pic" alt="profile">
             </div>
             <div class=" text-start  inter w-full">
-                <input type="text " class="bg-transparent outline-none  w-full dark:text-white placeholder-white-important " placeholder="What do you think">
+                <input type="text " class="bg-transparent outline-none  w-full dark:text-white placeholder-white-important " placeholder="New Plate...">
             </div>
         </div>
         <div class=" w-full  flex items-center justify-between gap-2 md:gap-1  pl-3 pr-3  ">
@@ -27,7 +27,7 @@
             </div>
            </div>
            <div class="w-20 lg:w-28 xs:w-16">
-            <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  lg:h-10 md:h-8 rounded-lg text-lg  w-10/12 ">Post</button>
+            <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  lg:h-10 md:h-8 rounded-lg text-lg  w-10/12 " @click="store.togglePostModel()">Post</button>
 
            </div>
            
@@ -37,9 +37,14 @@
 </template>
 
 <script>
+  import { MainStore } from "../../stores/MainStore";
+
 export default {
     name: 'CreatePost',
-   
+    setup() {
+      const store = MainStore();
+      return {store}
+    }
 }
 </script>
 

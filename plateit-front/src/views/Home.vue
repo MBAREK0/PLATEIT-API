@@ -6,8 +6,11 @@
             <nav class="w-full m-0 p-0">
                 <smallNav class="pc"/>
             </nav>
-            <CreatePost class="m-0 p-0"/>
-            
+            <CreatePost class="m-0 mb-14 p-0"/>
+            <div class="w-full justify-center flex "v-for="index in 6" :key="index">
+                <post/>
+            </div>
+            <PostForm class="model" v-if="store.PostModel"/>
             <div class="backdrop" v-if="store.backdrop"></div>
         </div>
     </div>
@@ -19,8 +22,10 @@
 
 <script>
 import  MainLayout  from "../components/MainLayout.vue";
+import PostForm from "../components/component/forms/PostForm.vue";
 import  smallNav  from "../components/component/smallNav.vue";
 import  CreatePost  from "../components/component/CreatePost.vue";
+import  post  from "../components/component/Post.vue";
 import { MainStore } from "../stores/MainStore";
 export default {
     name: 'Home',
@@ -28,7 +33,9 @@ export default {
     components:{
         MainLayout,
         smallNav,
-        CreatePost
+        CreatePost,
+        post,
+        PostForm
         
     },
     setup() {

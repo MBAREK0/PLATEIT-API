@@ -106,7 +106,8 @@ body {
 }
 .dark .placeholder-white-important::placeholder {
     color: white !important;
-    /* opacity: 70%; */
+
+    opacity: 70%;
     /* z-index: 0; */
   }
   @media (min-width:1536px){
@@ -154,6 +155,7 @@ body {
   }
 }
   .test{
+    animation: none;
     /* background-color: transparent !important; 
     border: 1px solid red !important;*/
   }

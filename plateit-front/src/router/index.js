@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 import profile from '../views/R-Profile.vue'
 import marketplace from '../views/MarketPlace.vue'
 import about from '../views/About.vue'
+import save from '../views/Save.vue'
 import { MainStore } from "../stores/MainStore";
 
 
@@ -28,6 +29,11 @@ const routes = [
     path: '/about',
     name: 'about',
     component: about
+  },
+  {
+    path: '/save',
+    name: 'save',
+    component: save
   },
   {
     path: '/sign-in',

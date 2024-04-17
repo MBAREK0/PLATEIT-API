@@ -2,11 +2,14 @@ import { defineStore } from 'pinia'
 
 export const MainStore = defineStore('MainStore', {
   state: () => ({
-    loading: false,
+    preloading: false,
     showSidebar:false,
     showTrendSidebar:false,
     backdrop:false,
-    MenuModel:false
+    MenuModel:false,
+    PostModel:false,
+    searching:false,
+    ProfileInfoModel:false
     
 
   }),
@@ -21,12 +24,16 @@ export const MainStore = defineStore('MainStore', {
       this.showTrendSidebar = !this.showTrendSidebar;
     },
     setLoading(value) {
-      this.loading = value;
+      this.preloading = value;
     },
     toggleMenuModel(){
       this.backdrop = !this.backdrop;
       this.MenuModel = !this.MenuModel;
     },
+    togglePostModel(){
+      this.backdrop = !this.backdrop;
+      this.PostModel = !this.PostModel;
+    }
     
   }
 })

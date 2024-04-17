@@ -12,6 +12,7 @@
         <nav v-else class=" sm:text-2xl font-size text-main_text_color dark:text-sidebar_text_color m-0 p-0 relative w-full">
             <span class="material-icons text-4xl text-sidebar_color dark:text-sidebar_text_color hidden  absolute right-0 tablet " @click="store.toggleTrendSidebar()">menu</span>
         </nav>
+        
 </template>
 
 <script>

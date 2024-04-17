@@ -62,7 +62,7 @@
             <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center lg:px-10 md:px-5 px-5" >
                 <div class=" w-full  ">
                 <div class=" w-full flex justify-between mb-2 gap-4 items-center ">
-                    <p class="text-start text-xs md:text-sm  ">Menu </p>
+                    <p class=" text-xs md:text-sm  ">Menu </p>
                     <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  rounded-xl text-sm font-bold   pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1" @click="store.toggleMenuModel()">new plate</button>
                 </div>
                     
@@ -73,7 +73,7 @@
         </div> 
         <div class="w-full  flex lg:justify-center justify-center md:justify-end">
             <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center " >
-                <div class=" w-full ">   
+                <div class=" w-full  ">   
                         <Menu/>                
                 </div>
             </div>
@@ -88,10 +88,11 @@
                         <hr class="border-t-1 border-main_text_color dark:border-white">
                        </div>
                        <PlateForm class="model" v-if="store.MenuModel"/>
+                       <EditeProfileForm class="model" v-if="store.ProfileInfoModel"/>
                         <div class="backdrop" v-if="store.backdrop"></div>
-                       <div>
-                        <!-- posts -->
-                       </div>
+                        <div class="w-full justify-center flex "v-for="index in 6" :key="index">
+                            <post/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -107,8 +108,11 @@ import  smallNav  from "../components/component/smallNav.vue";
 import  CreatePost  from "../components/component/CreatePost.vue";
 import prePage from "../components/component/PrePage.vue";
 import PlateForm from "../components/component/forms/PlateForm.vue";
+import EditeProfileForm from "../components/component/forms/EditeProfileForm.vue";
 import { MainStore } from "../stores/MainStore";
 import Menu  from "../components/component/Menu.vue";
+import  post  from "../components/component/Post.vue";
+
 
 
 
@@ -120,7 +124,7 @@ export default {
         };
     },
     components:{
-        MainLayout, smallNav, CreatePost ,prePage,PlateForm,Menu
+        MainLayout, smallNav, CreatePost ,prePage,PlateForm,Menu,post,EditeProfileForm
     },
     setup() {
       const store = MainStore();
