@@ -154,8 +154,40 @@ body {
     transform: translate(-35%, -50%);
   }
 }
+
+.v-toast__item--error{
+  background-color: #9732a6 ;
+  color: #fff;
+ 
+}
+.v-toast__item .v-toast__text{
+  padding: 10px !important;
+}
+.v-toast__item {
+  opacity: 1;
+  min-height: 1em !important;
+  width: fit-content !important;
+ 
+  
+}
   .test{
     animation: none;
     /* background-color: transparent !important; 
     border: 1px solid red !important;*/
+  }
+  .v-toast {
+    position: fixed;
+    display: flex;
+    top: 0 !important;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2em;
+      padding-top: 2em;
+      padding-right: 1em !important;
+      padding-bottom: 1em !important;
+      padding-left: 2em;
+    overflow: hidden;
+    z-index: 10090 !important;
+    pointer-events: none;
   }

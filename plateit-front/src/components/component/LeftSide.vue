@@ -85,11 +85,11 @@
                     </div>
                 </div>
                 <div>
-                    <span class="material-icons cursor-pointer" @click="SidemoreIsActive=!SidemoreIsActive">more_vert</span>
+                    <span class="material-icons cursor-pointer" @click="store.SidemoreIsActive=!store.SidemoreIsActive">more_vert</span>
                 </div>
             </div>  
         </div>
-       <SidSmallModel v-if="SidemoreIsActive"/>
+       <SidSmallModel v-if="store.SidemoreIsActive"/>
     </div>
 
 </template>
@@ -100,7 +100,7 @@ import SidSmallModel from './SidSmallModel.vue'
   export default {
     data() {
         return {
-            SidemoreIsActive: false
+            
         }
     },
     components: {

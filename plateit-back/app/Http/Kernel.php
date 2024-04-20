@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'check.token' => \App\Http\Middleware\CheckToken::class,
         'OnlyRestaurants' => \App\Http\Middleware\OnlyRestaurants::class,
+        
     ];
 }

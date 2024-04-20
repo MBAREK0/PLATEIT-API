@@ -52,4 +52,3 @@ PLATEIT is a web-based platform designed to revolutionize the way people discove
 
 - [El Aadraoui M'barek](https://github.com/MBAREK0) - Project Lead & Developer
 
-

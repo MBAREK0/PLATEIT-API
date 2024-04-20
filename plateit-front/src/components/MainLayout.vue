@@ -6,14 +6,14 @@
         <LeftSidebar/>
 
       </div>
-      <div class=" relative    ">
+      <div class=" relative " >
         <PhoneNav/>
         
         <div >
           <div class="w-full h-screen flex  items-center justify-center" v-if="store.preloading">
             <PreLoading class="w-full  flex  items-center justify-center"/>
           </div>
-          <slot v-else ></slot>
+          <slot v-else  ></slot>
           
         </div> 
       </div>

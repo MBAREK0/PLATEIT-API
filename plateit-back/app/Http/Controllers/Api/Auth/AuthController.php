@@ -16,7 +16,9 @@ use App\Jobs\DailyRewardsJob;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Jobs\SendVerificationEmailQueueJob;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
 {
@@ -52,8 +54,19 @@ class AuthController extends Controller
      /**
      * Register method
      */
-    public function Register(RegisterRequest $request){
+    public function Register(Request $request){
 
+
+        $validator = Validator::make($request->all(), [
+            'fullName' => ['required', 'string', 'min:2'],
+            'email' => ['required', 'string', 'email:filter', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required', 'string', Rule::in(['user', 'restaurant'])], // Enum validation for role
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
         $user = User::create([
             "fullName"  => $request->fullName,
             "email"     => $request->email,

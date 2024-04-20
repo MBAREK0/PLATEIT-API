@@ -19,7 +19,7 @@ class CheckToken
     public function handle(Request $request, Closure $next): Response
     {
         $jwtService = new JwtTokenService;
-
+        
         if (!$request->hasHeader('Authorization')) {
             return response()->json([
                 'status' => 'failed',
