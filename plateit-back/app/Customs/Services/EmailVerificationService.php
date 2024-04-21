@@ -48,7 +48,7 @@ class EmailVerificationService
             response()->json([
                 'status' => 'failed',
                 'message'=> 'Email Has Already Been Verified'
-            ])->send();
+            ],400)->send();
             exit;
          }
       }
@@ -117,7 +117,7 @@ class EmailVerificationService
          if ($checkIfTokenExists)$checkIfTokenExists->delete();
 
          $token = Str::uuid();
-         $url = config('app.url'). "?token=" . $token . "&email=" . $email ;
+         $url = config('app.vue_url') . "?token=" . $token . "&email=" . $email ;
          $saveToken = EmailVerificationToken::create([
             "email"=> $email,
             "token"=> $token,

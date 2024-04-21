@@ -1,10 +1,11 @@
 <template>
-
-    <main class=" bg-main_color dark:bg-gradient-to-r from-auth_png_color via-auth_png_color to-main_color_dark w-full md:w-full h-screen flex">
-    
+    <div class="w-full h-screen flex  items-center justify-center bg-main_color dark:bg-gradient-to-r from-auth_png_color via-auth_png_color to-main_color_dark" v-if="store.preloading">
+        <PreLoading class="w-full  flex  items-center justify-center"/>
+    </div>
+    <main class=" bg-main_color dark:bg-gradient-to-r from-auth_png_color via-auth_png_color to-main_color_dark w-full md:w-full h-screen flex" v-else>
         <!-- Primary Column with Picture -->
         <div class="w-1/2 hidden md:flex lg:flex h-full justify-center bg-auth_png_color  items-center">
-          <img src="../assets/images/auth-logo.png" alt="Image" class="">
+          <img src="../../assets/images/auth-logo.png" alt="Image" class="">
         </div>
         <!-- Login Form Column -->
         <div class="w-full lg:w-1/2 md:w-1/2 2xl:w-1/2  bg-transparent p-8 flex justify-center flex-col  items-center ">
@@ -107,7 +108,10 @@ const register = () => {
     if(response.status === 200){
     const token = response.data.access_token;
     localStorage.setItem('access_token', token);
-    localStorage.setItem('role', response.data.role);
+     localStorage.setItem('IsLogin', true);
+     localStorage.setItem('role', response.data.user.role);
+     localStorage.setItem('email', response.data.user.email);
+     localStorage.setItem('email_verified_at', response.data.user.email_verified_at);
     router.push({ name: 'home' });
     }
     

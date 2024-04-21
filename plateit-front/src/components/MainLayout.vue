@@ -10,9 +10,16 @@
         <PhoneNav/>
         
         <div >
+        
+          <div class="w-full mt-3 flex lg:justify-center justify-center md:justify-end" v-if="!User_Store.verified">
+             <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center lg:px-10 md:px-5 px-5" >
+               <SendVirificationEmail/> 
+             </div>
+         </div>
           <div class="w-full h-screen flex  items-center justify-center" v-if="store.preloading">
             <PreLoading class="w-full  flex  items-center justify-center"/>
           </div>
+          
           <slot v-else  ></slot>
           
         </div> 
@@ -34,6 +41,9 @@
   import PreLoading  from './component/PreLoading.vue'
   import RightSide from './component/RightSide.vue'
   import { MainStore } from "../stores/MainStore";
+  import { UserStore } from "../stores/UserStore";
+  import SendVirificationEmail from "./component/SendVirificationEmail.vue"
+
 
   export default {
     name: 'MainLayout',
@@ -41,11 +51,13 @@
       PhoneNav,
       LeftSidebar,
       RightSide,
-      PreLoading
+      PreLoading,
+      SendVirificationEmail
     },
     setup() {
       const store = MainStore();
-      return {store}
+      const User_Store = UserStore();
+      return {store,User_Store}
     }
   };
   </script>

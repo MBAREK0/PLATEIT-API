@@ -33,13 +33,25 @@ class AuthController extends Controller
     /**
      * Login method
      */
-    public function login(LoginRequest $request){
+    public function login(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'email' => ['required', 'string', 'email:filter'],
+            'password' => ['required','string'],
+
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
         $data =  $this->jwtService->validateCredentials( $request->email,$request->password );
-        $userIID = $this->jwtService->get_user($data['token'])->id;
-        # use it for daily rewards in home controller
-        dispatch(new DailyRewardsJob($userIID));
+
         if(!$data['error'] ){
 
+            $userIID = $this->jwtService->get_user($data['token'])->id;
+            # use it for daily rewards in home controller
+            dispatch(new DailyRewardsJob($userIID));
             return $this->responseWithTokrn($data['token'],$data['user']);
 
         }else{
@@ -149,11 +161,17 @@ class AuthController extends Controller
        */
       public function logout()
       {
-          auth()->logout();
-          return response()->json([
-            'status'=> 'success',
-            'message' => 'Successfully logged out',
-          ]);
+          if(auth()->logout()){
+            return response()->json([
+                'status'=> 'success',
+                'message' => 'Successfully logged out',
+            ]);
+        }else{
+            return response()->json([
+                'status'=> 'failed',
+                'message' => 'Failed to log out',
+            ]);
+        }
       }
       /**
        * refresh token

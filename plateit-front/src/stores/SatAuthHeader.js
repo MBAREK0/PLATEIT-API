@@ -12,6 +12,7 @@ const setAuthHeader = (token) => {
             Authorization : `Bearer ${token}`
          } 
          store.setRole();
+         store.setEmailVerifiedAt();
 
     }else{
         delete axios.defaults.headers.Authorization ;

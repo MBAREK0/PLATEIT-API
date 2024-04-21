@@ -1,6 +1,7 @@
 <template>
     <MainLayout>
         <prePage :page="page"/>
+        
     <div class="w-full mt-3 flex lg:justify-center justify-center md:justify-end">
         <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center lg:px-10 md:px-5 px-5" >
             <div class=" w-full  flex flex-col items-center   ">
@@ -11,6 +12,7 @@
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil quia tempora eligendi. Officiis corporis minus saepe, dicta cupiditate exercitationem aliquid eaque quo? Eum dolore ut, odio tempore a deserunt enim!
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil quia tempora eligendi. Officiis corporis minus saepe, dicta cupiditate exercitationem aliquid eaque quo? Eum dolore ut, odio tempore a deserunt enim!
                     </p>
+                   
                 </div>
                 <img src="../assets/images/about-2.jpg" class="mt-6" alt="about2">
                 <div class="text-start mt-6 mb-6">
@@ -42,7 +44,8 @@ export default {
     components:{
         MainLayout,
         gift,
-        prePage
+        prePage,
+        
         
     },
     setup() {

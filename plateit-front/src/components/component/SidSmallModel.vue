@@ -8,7 +8,7 @@
 
                 </div>
                 <hr>
-                <div class="flex gap-2 items-center px-2 py-1 text-main_text_color hover:text-sidebar_text_color hover:dark:bg-main_color_dark hover:bg-sidebar_color  rounded-b-lg cursor-pointer">
+                <div class="flex gap-2 items-center px-2 py-1 text-main_text_color hover:text-sidebar_text_color hover:dark:bg-main_color_dark hover:bg-sidebar_color  rounded-b-lg cursor-pointer" @click="logout">
                     <span class="material-icons r">logout</span>
                     <p class="text-sm " >logout</p>
                 </div>
@@ -16,9 +16,18 @@
         </div>
 </template>
 <script setup>
-// setup the dark mode with vueuse
+import { UserStore } from "@/stores/UserStore";
+import { useRouter } from 'vue-router';
+
+
 import  { useDark , useToggle } from "@vueuse/core"
 const isDark = useDark();
 const toggleDark = useToggle(isDark)
-// --------------------- end the config of dark mode 
+const Store = UserStore()
+const router = useRouter();
+
+const logout = () => {
+    localStorage.clear();
+    router.push({ name: 'SignIn' });
+}
 </script>
