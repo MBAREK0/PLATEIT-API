@@ -12,6 +12,7 @@ export const MainStore = defineStore('MainStore', {
     searching:false,
     ProfileInfoModel:false,
     SidemoreIsActive:false,
+    user:[],
 
     
 
@@ -36,6 +37,9 @@ export const MainStore = defineStore('MainStore', {
     togglePostModel(){
       this.backdrop = !this.backdrop;
       this.PostModel = !this.PostModel;
+    },
+    setUserData(){
+      this.user = JSON.parse(localStorage.getItem('user'));
     }
     
   }

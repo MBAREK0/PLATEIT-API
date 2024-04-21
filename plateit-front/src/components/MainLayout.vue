@@ -11,7 +11,7 @@
         
         <div >
         
-          <div class="w-full mt-3 flex lg:justify-center justify-center md:justify-end" v-if="!User_Store.verified">
+          <div class="w-full mt-3 flex lg:justify-center justify-center md:justify-end" v-if="!isVerified" >
              <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center lg:px-10 md:px-5 px-5" >
                <SendVirificationEmail/> 
              </div>
@@ -35,32 +35,27 @@
   
   </template>
   
-  <script>
-  import PhoneNav from './component/PhoneNav.vue'
-  import LeftSidebar from './component/LeftSide.vue'
-  import PreLoading  from './component/PreLoading.vue'
-  import RightSide from './component/RightSide.vue'
+ 
+  <script setup>
+  import { ref, onMounted } from 'vue';
+  import PhoneNav from './component/PhoneNav.vue';
+  import LeftSidebar from './component/LeftSide.vue';
+  import PreLoading from './component/PreLoading.vue';
+  import RightSide from './component/RightSide.vue';
   import { MainStore } from "../stores/MainStore";
   import { UserStore } from "../stores/UserStore";
-  import SendVirificationEmail from "./component/SendVirificationEmail.vue"
+  import SendVirificationEmail from './component/SendVirificationEmail.vue';
 
 
-  export default {
-    name: 'MainLayout',
-    components:{
-      PhoneNav,
-      LeftSidebar,
-      RightSide,
-      PreLoading,
-      SendVirificationEmail
-    },
-    setup() {
-      const store = MainStore();
-      const User_Store = UserStore();
-      return {store,User_Store}
-    }
-  };
-  </script>
+  const store = MainStore();
+  const User_Store = UserStore();
+  const isVerified = ref(store.user.email_verified_at) ;
+  
+ 
+
+
+  
+</script>
 
 <style scoped>
 

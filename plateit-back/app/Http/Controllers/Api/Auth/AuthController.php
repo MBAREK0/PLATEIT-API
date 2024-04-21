@@ -86,6 +86,8 @@ class AuthController extends Controller
             "role"      => $request->role
         ]);
 
+        $user = User::where('email', $request->email)->first();
+
         if($user){
             dispatch(new SendVerificationEmailQueueJob($user));
              $token = $this->jwtService->genarateToken($user->id);
@@ -153,6 +155,7 @@ class AuthController extends Controller
        * Reset Password
        */
       public function resetPassword(ResetPassworRequest $request){
+
         return $this->service->resetPassword($request->password, $request->reset_token);
       }
 
@@ -181,6 +184,20 @@ class AuthController extends Controller
             $token = $this->jwtService->refresh($request->token);
             $user = $this->jwtService->get_user($request->token);
             return $this->responseWithTokrn($token,$user);
+      }
+      public function me(Request $request){
+        $token = request()->header('Authorization');
+        $user = $this->jwtService->get_user($token);
+        if(!$user){
+            return response()->json([
+                'status' => 'failed',
+                'error' => 'User Not Found !'
+            ], 404);
+        }
+        return response()->json([
+            'status' => 'success',
+            'user' => $user
+        ]);
       }
 }
 

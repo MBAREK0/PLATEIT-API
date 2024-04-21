@@ -1,9 +1,13 @@
 import { defineStore } from 'pinia'
+import axios from 'axios'
+import { MainStore } from './MainStore.js'
+
 
 export const UserStore = defineStore('UserStore', {
   state: () => ({
-    role: '',
-    verified: ''
+    user:[],
+    store : MainStore(),
+    
     
 
   }),
@@ -11,12 +15,8 @@ export const UserStore = defineStore('UserStore', {
 
   },
   actions: {
-    setRole(router) {
-      this.role = localStorage.getItem('role') || null;
-    },
-    setEmailVerifiedAt() {
-      this.verified = localStorage.getItem('email_verified_at') || null;
-    }
+
+   
 
   }
 })

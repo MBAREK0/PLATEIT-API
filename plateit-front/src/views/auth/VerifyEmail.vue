@@ -10,11 +10,13 @@
   import { useRoute } from 'vue-router';
   import axios from 'axios';
   import { MainStore } from '@/stores/MainStore';
+  import { UserStore } from '@/stores/UserStore';
   import { useToast } from 'vue-toast-notification';
- import 'vue-toast-notification/dist/theme-sugar.css';
+  import 'vue-toast-notification/dist/theme-sugar.css';
   
   const route = useRoute();
   const store = MainStore();
+  const user_store = UserStore();
   
   // Access query parameters using $route.query
   const email = ref(route.query.email);
@@ -31,6 +33,7 @@
      if(response.status === 200){
      const message = response.data.message;
      showSuccesToast(message);
+    
      }
    })
    .catch((error) => {

@@ -71,6 +71,7 @@
  
  <script setup>
 import { MainStore } from '@/stores/MainStore';
+import { UserStore } from '@/stores/UserStore';
 import PreLoading  from '@/components/component/PreLoading.vue'
 import axios from 'axios';
 import { ref } from 'vue';
@@ -80,6 +81,7 @@ import 'vue-toast-notification/dist/theme-sugar.css'; // Import the desired them
 
 const IsLoading = ref(false);
 const store = MainStore();
+const user_store = UserStore();
 const router = useRouter();
 const $toast = useToast();
 const showPassword = ref(false);
@@ -108,10 +110,10 @@ const register = () => {
     if(response.status === 200){
     const token = response.data.access_token;
     localStorage.setItem('access_token', token);
-     localStorage.setItem('IsLogin', true);
-     localStorage.setItem('role', response.data.user.role);
-     localStorage.setItem('email', response.data.user.email);
-     localStorage.setItem('email_verified_at', response.data.user.email_verified_at);
+    localStorage.setItem('IsLogin', true);
+    // user_store.user = response.data.user;
+    localStorage.setItem('user', JSON.stringify(response.data.user));
+    store.setUserData()
     router.push({ name: 'home' });
     }
     

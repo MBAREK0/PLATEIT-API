@@ -23,7 +23,10 @@
                     <div class=" w-full  flex justify-between items-start pt-3 md:px-11 px-5 flex-wrap ">      
                         <div>
                             <div class="flex items-center gap-2 md:gap-4 ">
+                               <div class="flex items-center gap-1">
                                 <h1 class="font-bold">Mcdonalds</h1>
+                                <span class="material-icons dark:text-white text-btn_primary_color text-sm" >verified</span>
+                               </div>
                             <!-- <button class="bg-btn_primary_color hover:bg-btn_submit_hover  rounded-xl text-sm font-bold pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1 ">follow</button>-->
                                 <button class="bg-secondary_color dark:bg-secondary_color_dark hover:bg-btn_submit_hover text-main_text_color dark:text-white hover:text-white rounded-xl text-sm font-bold  pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1 ">unfollow</button>
                                 <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  rounded-xl text-sm font-bold   pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1">visit</button>

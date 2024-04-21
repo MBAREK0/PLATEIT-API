@@ -35,6 +35,7 @@ Route::prefix('auth')->group(function () {
     Route::post('resend_email_verification_link', [AuthController::class, 'resendEmailVerificationLink']);
     Route::post('forgetPassword', [AuthController::class, 'forgetPassword']);
     Route::post('resetPassword', [AuthController::class, 'resetPassword']);
+    Route::get('me', [AuthController::class, 'me']);
 });
 
 

@@ -161,7 +161,7 @@ class EmailVerificationService
        * Reset Password
        */
       public function resetPassword($password,$reset_token){
-        $user = User::where('remember_token', request('reset_token'))->first();
+        $user = User::where('remember_token',$reset_token)->first();
         if ($user) {
             $user->password = Hash::make($password);
             $user->save();

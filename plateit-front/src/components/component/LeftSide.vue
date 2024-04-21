@@ -81,7 +81,7 @@
                         <img src="../../assets/images/auth.jpg" class="profile-pic" alt="profile">
                     </div>
                     <div class="lg:text-sm xl:text-md md:text-sm sm:text-xs text-start  inter">
-                        <p>M'BAREK EL AADRAOUI</p> 
+                        <p v-text="store.user.fullName"></p> 
                     </div>
                 </div>
                 <div>

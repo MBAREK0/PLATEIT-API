@@ -7,12 +7,11 @@ const setAuthHeader = (token) => {
         "Content-Type": "application/json",
         "Accept": "application/json"
      } 
+
     if (token) {
         axios.defaults.headers={
             Authorization : `Bearer ${token}`
-         } 
-         store.setRole();
-         store.setEmailVerifiedAt();
+         }
 
     }else{
         delete axios.defaults.headers.Authorization ;

@@ -19,10 +19,9 @@ import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
 const route = useRoute();
-const store = MainStore();
 var sending =ref(false);
-const email =  localStorage.getItem('email');
-
+const store = MainStore();
+const email = store.user.email;
 const $toast = useToast();
 
   
@@ -34,7 +33,7 @@ const SendVerifyEmail = () => {
  .then((response) => {
    if(response.status === 200){
    const message = response.data.message;
-   showSuccesToast(message + 'please check your email inbox or spam folder for the verification link');
+   showSuccesToast(message + ' please check your email inbox or spam folder for the verification link');
    }
  })
  .catch((error) => {
