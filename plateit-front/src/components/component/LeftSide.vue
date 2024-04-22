@@ -51,7 +51,7 @@
                     </div>
                 </router-link>
                 <!-- ------------------- -->
-                <router-link :to="{ name: 'profile'}" @click="store.searching=false">
+                <router-link :to="{ name: 'profile',query: { user_id:store.user.id  }}" @click="store.searching=false">
                 <div class=" flex gap-4 md:gap-2 sm:gap-1 items-center  px-2 hover:bg-gray-400 hover:bg-opacity-50 rounded-lg" :class="{ 'px-2 bg-gray-400 bg-opacity-50 rounded-lg': $route.name === 'profile' && store.searching==false }">
                     <span class="material-icons lg:text-2xl xl:text-2xl 2xl:text-2xl p-0 m-0 cursor-pointer">person</span>
                     <p class="text-xl   translate-x-0 duration-75 cursor-pointer inter">Profile</p>
@@ -81,22 +81,23 @@
                         <img src="../../assets/images/auth.jpg" class="profile-pic" alt="profile">
                     </div>
                     <div class="lg:text-sm xl:text-md md:text-sm sm:text-xs text-start  inter">
-                        <p v-text="store.user.fullName"></p> 
+                        <p v-text="store.user.fullName ? store.user.fullName.toUpperCase() : '' "></p> 
                     </div>
                 </div>
                 <div>
-                    <span class="material-icons cursor-pointer" @click="store.SidemoreIsActive=!store.SidemoreIsActive">more_vert</span>
+                    <span class="material-icons cursor-pointer" @click="store.toggleSidemoreIsActive()" >more_vert</span>
                 </div>
             </div>  
         </div>
-       <SidSmallModel v-if="store.SidemoreIsActive"/>
+       <SidSmallModel v-if="store.SidemoreIsActive" style="z-index: 901;"/>
+       <div class="Hiddenbackdrop" @click="store.toggleAllSmallModels()"  v-if="store.Hiddenbackdrop"></div>
     </div>
 
 </template>
 
 <script>
   import { MainStore } from "../../stores/MainStore";
-import SidSmallModel from './SidSmallModel.vue'
+  import SidSmallModel from './SidSmallModel.vue'
   export default {
     data() {
         return {
@@ -108,6 +109,7 @@ import SidSmallModel from './SidSmallModel.vue'
     },
     setup() {
       const store = MainStore();
+      console.log('Received ID from left:', store.user.id );
       return {store}
     }
   };

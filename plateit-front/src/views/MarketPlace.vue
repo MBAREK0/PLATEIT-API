@@ -33,7 +33,7 @@
                     </div>
                 </div>
  
-                <div class="backdrop" v-if="store.backdrop"></div>
+                <div class="backdrop" @click="store.toggleAllModels()"  v-if="store.backdrop"></div>
             </div>
         </div>
     </div>

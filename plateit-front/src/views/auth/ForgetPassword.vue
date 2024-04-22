@@ -58,7 +58,7 @@
     const message = response.data.message;
     const reset_token = response.data.reset_token;
     localStorage.setItem('resetToken', reset_token);
-     showSuccesToast(message);
+    store.showSuccesToast(message);
 
 
      }
@@ -68,7 +68,7 @@
        const validationErrors = error.response.data.errors;
        displayValidationErrors(validationErrors);
      } else {
-      showErrorToast('An unexpected error occurred. Please try again later.');
+      store.showErrorToast('An unexpected error occurred. Please try again later.');
        console.error('Error:', error.message);
      }
    });
@@ -81,22 +81,11 @@
        const errorMessage = errors[field][0];
        console.error(`${field}: ${errorMessage}`);
        validationError.value = errorMessage;
-       showErrorToast(errorMessage); // Show error toast with the validation message
+       store.showErrorToast(errorMessage); // Show error toast with the validation message
      }
    }
  };
  
- const showErrorToast = (errorMessage) => {
-   $toast.error(errorMessage, {
-     position: 'bottom-right',
-     duration: 3000,
-   });
- };
- const showSuccesToast = (errorMessage) => {
-   $toast.success(errorMessage, {
-     position: 'bottom-right',
-     duration: 3000,
-   });
- };
+
  </script>
  

@@ -11,7 +11,7 @@
                     <div class="w-full justify-center flex "v-for="index in 6" :key="index">
                         <post class="lg:hidden xl:block"/>
                     </div>
-                    <div class="backdrop" v-if="store.backdrop"></div>
+                    
                 </div>
             </div>
         </div>

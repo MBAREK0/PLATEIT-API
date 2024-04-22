@@ -11,16 +11,12 @@
         
         <div >
         
-          <div class="w-full mt-3 flex lg:justify-center justify-center md:justify-end" v-if="!isVerified" >
-             <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center lg:px-10 md:px-5 px-5" >
-               <SendVirificationEmail/> 
-             </div>
-         </div>
+
           <div class="w-full h-screen flex  items-center justify-center" v-if="store.preloading">
             <PreLoading class="w-full  flex  items-center justify-center"/>
           </div>
           
-          <slot v-else  ></slot>
+          <slot v-else ></slot>
           
         </div> 
       </div>
@@ -37,24 +33,14 @@
   
  
   <script setup>
-  import { ref, onMounted } from 'vue';
   import PhoneNav from './component/PhoneNav.vue';
   import LeftSidebar from './component/LeftSide.vue';
   import PreLoading from './component/PreLoading.vue';
   import RightSide from './component/RightSide.vue';
   import { MainStore } from "../stores/MainStore";
-  import { UserStore } from "../stores/UserStore";
-  import SendVirificationEmail from './component/SendVirificationEmail.vue';
-
 
   const store = MainStore();
-  const User_Store = UserStore();
-  const isVerified = ref(store.user.email_verified_at) ;
-  
- 
 
-
-  
 </script>
 
 <style scoped>
