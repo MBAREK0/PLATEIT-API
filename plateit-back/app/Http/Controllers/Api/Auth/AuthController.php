@@ -66,19 +66,19 @@ class AuthController extends Controller
      /**
      * Register method
      */
-    public function Register(Request $request){
+    public function Register(RegisterRequest $request){
 
 
-        $validator = Validator::make($request->all(), [
-            'fullName' => ['required', 'string', 'min:2'],
-            'email' => ['required', 'string', 'email:filter', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['required', 'string', Rule::in(['user', 'restaurant'])], // Enum validation for role
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'fullName' => ['required', 'string', 'min:2'],
+        //     'email' => ['required', 'string', 'email:filter', 'unique:users'],
+        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
+        //     'role' => ['required', 'string', Rule::in(['user', 'restaurant'])], // Enum validation for role
+        // ]);
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
+        // if ($validator->fails()) {
+        //     return response()->json(['errors' => $validator->errors()], 422);
+        // }
         $user = User::create([
             "fullName"  => $request->fullName,
             "email"     => $request->email,
@@ -185,9 +185,9 @@ class AuthController extends Controller
             $user = $this->jwtService->get_user($request->token);
             return $this->responseWithTokrn($token,$user);
       }
-      public function me(Request $request){
-        $token = request()->header('Authorization');
-        $user = $this->jwtService->get_user($token);
+      public function me(){
+        $user_id = request()->input('user_id');
+        $user =  User::find($user_id);
         if(!$user){
             return response()->json([
                 'status' => 'failed',

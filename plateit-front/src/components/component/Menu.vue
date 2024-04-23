@@ -1,68 +1,28 @@
 <template>
 
-    <section class="game-section  relative">
+    <section class="game-section  relative" >
      
-        <div class="btn-conteiner absolute left-5 top-1/2 hidden md:block " @click="scrollLeft">
+        <div class="btn-conteiner absolute left-5 top-1/2 hidden md:block " @click="scrollLeft" v-if="menu">
                     <button class="btn-content" >
                         <span class="icon-arrow">
                             <i class="material-icons">chevron_left</i>
                         </span>
                     </button>
-            </div>
+        </div>
         <div class="owl-carousel custom-carousel owl-theme overflow-x-auto w-full px-20 " ref="carousel">
-          <div class="item active" style="background-image: url(https://th.bing.com/th/id/OIP.tcSxtD5KQEV0sD6NaEHfnAHaGl?rs=1&pid=ImgDetMain);">
-            <div class="item-desc">
+          <div class="item active" :style="{ backgroundImage: 'url(http://localhost:8000' + plate.image + ')' }" v-for="plate in menu" :key="plate.id">
+            <div class="item-desc w-full">
                 <div class="flex justify-between items-center">
-                  <h4 class="text-lg roboto">Food Example</h4>
-                  <h4 class="text-lg roboto"> 15 $</h4>
+                  <h4 class="text-lg roboto">{{ plate.name }}</h4>
+                  <h4 class="text-lg roboto"> {{ plate.price }} $</h4>
                 </div>
-                <p class="text-xs">Food Example is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
-                 </p>
+                <p class="text-xs w-full mt-3">{{ plate.description }}</p>
             </div>
           </div>
-          <div class="item active" style="background-image: url(https://th.bing.com/th/id/R.c8469790d5263afa81ab929649e96846?rik=vTAXoPP24rsM9Q&riu=http%3a%2f%2fimages6.fanpop.com%2fimage%2fphotos%2f43900000%2fBig-Mac-meal-mcdonalds-43949690-1024-1024.jpg&ehk=EA3WeD15eruw4qMY60s9JiM2zpy%2bU2RkjzHUC9Xjc4o%3d&risl=&pid=ImgRaw&r=0);">
-            <div class="item-desc">
-                <div class="flex justify-between items-center">
-                  <h4 class="text-lg roboto">Food Example</h4>
-                  <h4 class="text-lg roboto"> 15 $</h4>
-                </div>
-                <p class="text-xs">Food Example is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
-                 </p>
-            </div>
-          </div>
-          <div class="item active" style="background-image: url(https://th.bing.com/th/id/OIP.p6h7i0Olj6Rok08yY-JI7gHaFu?rs=1&pid=ImgDetMain);">
-            <div class="item-desc">
-                <div class="flex justify-between items-center">
-                  <h4 class="text-lg roboto">Food Example</h4>
-                  <h4 class="text-lg roboto"> 15 $</h4>
-                </div>
-                <p class="text-xs">Food Example is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
-                 </p>
-            </div>
-          </div>
-          <div class="item active" style="background-image: url(https://journalmetro.com/wp-content/uploads/2014/01/happymeal-newyogurt_.jpg?fit=920%2C920);">
-            <div class="item-desc">
-                <div class="flex justify-between items-center">
-                  <h4 class="text-lg roboto">Food Example</h4>
-                  <h4 class="text-lg roboto"> 15 $</h4>
-                </div>
-                <p class="text-xs">Food Example is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
-                 </p>
-            </div>
-          </div>
-          <div class="item active" style="background-image: url(https://www.fastfoodpost.com/wp-content/uploads/2022/02/Del-Taco-Introduces-New-Crispy-Jumbo-Shrimp-Stuffed-Quesadilla-Tacos-Brings-Back-Crispy-Jumbo-Shrimp-Burrito-And-Taco.jpg);">
-            <div class="item-desc">
-                <div class="flex justify-between items-center">
-                  <h4 class="text-lg roboto">Food Example</h4>
-                  <h4 class="text-lg roboto"> 15 $</h4>
-                </div>
-                <p class="text-xs">Food Example is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
-                 </p>
-            </div>
-          </div>
+        
 
         </div>
-        <div class="btn-conteiner absolute  right-5 top-1/2 hidden md:block " @click="scrollRight">
+        <div class="btn-conteiner absolute  right-5 top-1/2 hidden md:block " @click="scrollRight" v-if="menu">
                     <button class="btn-content" >
                         <span class="icon-arrow">
                             <i class="material-icons">chevron_right</i>
@@ -75,9 +35,22 @@
 
 
 <script>
+import axios from "axios";
 export default {
+  props: {
+    userId: {
+      type: String,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      menu: [],
+    };
+  },
   mounted() {
     this.$refs.carousel.addEventListener('scroll', this.handleScroll);
+    this.GetRestaurantMenu();
     
   },
   beforeDestroy() {
@@ -157,8 +130,27 @@ export default {
 
             window.requestAnimationFrame(step);
     },
+    GetRestaurantMenu  ()  {
+    
+   axios.get( 'http://127.0.0.1:8000/api/restaurant/menu', {
+    params :{
+        user_id: this.userId
+    }
+})
+   .then((response) => {
+     if(response.status === 200){
+        this.menu = response.data.data;
+
+     }
+   })
+   .catch((error) => {
+       console.error('Error:', error.message);
+   });
+ 
+ },
 
   },
+
   
 };
 </script>

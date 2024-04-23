@@ -8,9 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PlateRequest;
 use App\Models\restaurant_menu;
 use App\Models\restaurant_plate;
-use GuzzleHttp\Psr7\Request;
-use PhpParser\Node\Expr\Cast\String_;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 class MenuController extends Controller
 {
 
@@ -21,27 +21,45 @@ class MenuController extends Controller
     }
 
 	public function menu(){
-        $token = request()->header('Authorization');
-        $user = $this->JwtService->get_user($token)->id;
+        $user_id = request()->get('user_id');
 
 		$menu =  restaurant_plate::query()
         ->join('restaurant_menu', 'restaurant_plates.id', '=', 'restaurant_menu.plate_id')
         ->join('users', 'restaurant_menu.restaurant_id', '=', 'users.id')
         ->select('restaurant_plates.*')
-        ->where('users.id', $user)
+        ->where('users.id', $user_id)
         ->get();
 
         return response()->json(['status' => 'success', 'data' => $menu ]);
 	}
 
-	public function save_plate(PlateRequest $request){
+	public function save_plate(Request $request){
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string'],
+            'description' => ['required','string'],
+            'price' => ['required','string'],
+            'image' => ['required', 'image'],
+
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+            $imagePath = null;
+
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('public/images/plates');
+                $imageUrl = Storage::url($imagePath);
+            }
+
 
 			if(!empty($request->id)){
 				$plate = restaurant_plate::where('id', $request->id)->update([
 					'name' => $request->name,
-					'description' => $request->get('description'),
-					'price' => $request->get('price'),
-					'image' => $request->get('image'),
+					'description' => $request->description,
+					'price' => $request->price,
+					'image' =>  $imageUrl
 				]);
 				if($plate){
 					return response()->json(['status' => 'success', 'message' => 'plate updated successfully!']);
@@ -53,7 +71,7 @@ class MenuController extends Controller
 					'name' => $request->get('name'),
 					'description' => $request->get('description'),
 					'price' => $request->get('price'),
-					'image' => $request->get('image'),
+					'image' => $imageUrl,
 				]);
 				if($plate){
 

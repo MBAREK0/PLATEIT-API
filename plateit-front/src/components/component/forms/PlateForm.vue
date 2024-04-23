@@ -1,6 +1,6 @@
 <template>
     <div class="fixed z-999">
-        <div class="mt-4 flex flex-col bg-secondary_color dark:bg-secondary_color_dark rounded-lg p-4 shadow-sm">
+        <div class="mt-4 flex flex-col bg-secondary_color dark:bg-secondary_color_dark rounded-lg p-4 shadow-sm " style="max-height: 40rem !important ; overflow-y: scroll;">
 
             <h2 class=" text-main_text_color   font-bold text-2xl">Add New Plate</h2>
 
@@ -27,13 +27,13 @@
             </div>
             
 
-            <div class="mt-4 flex justify-between ">
+            <div class="mt-4 flex justify-between items-center ">
                 <div class="mt-4 flex flex-row space-x-2 text-start ms-2">
                 <div class="flex-1">
                     <div class="messageBox">
                         <div class="fileUploadWrapper">
                             <label for="file">
-                                <img src="../../../assets/icons/pic-icon .svg" alt="pic"> 
+                                <img src="../../../assets/icons/pic-icon .svg" class="hover:h-10 hover:w-7 cursor-pointer transition-transform duration-300" alt="pic">
                             </label>
                             <input type="file" id="file" name="file" class="hidden"   @change="handleFileChange" />
                         </div>
@@ -101,8 +101,15 @@ const handleSubmit = () => {
             }
            
         });
+        store.toggleMenuModel()
 };
 
 
 
 </script>
+<style scoped>
+.transition-transform {
+  transition: transform 0.3s ease;
+}
+
+</style>

@@ -9,6 +9,8 @@ use App\Notifications\EmailVerificationNotification;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Hash;
+
+
 class EmailVerificationService
 {
 
@@ -31,12 +33,12 @@ class EmailVerificationService
             return response()->json([
                 'status'=> 'success',
                 'message'=> 'Verification Link Sent successfully'
-            ]);
+            ],200);
         } else{
             return response()->json([
                 'status' => 'failed',
                 'error' => 'User not found '
-            ]);
+            ],404);
         }
       }
 
@@ -62,7 +64,7 @@ class EmailVerificationService
             response()->json([
                 'status' => 'failed',
                 'error'=> 'User Not Found '
-               ])->send();
+            ],404)->send();
                exit;
         }
         $this->checkIfEmailVerified($user);
@@ -72,12 +74,12 @@ class EmailVerificationService
             return response()->json([
                 'status'=> 'success',
                 'message'=> 'Email has been verified successfully'
-            ]);
+            ],200);
         }else{
             return response()->json([
                 'status' => 'failed',
                 'error'=> 'Email verification failed, please try again later'
-               ]);
+               ],400);
         }
        }
 
@@ -95,14 +97,14 @@ class EmailVerificationService
                 response()->json([
                     'status' => 'failed',
                     'error'=> 'Token Is Expired '
-                   ])->send();
+                ],401)->send();
                    exit;
             }
         }else{
            response()->json([
             'status' => 'failed',
             'error'=> 'Invalid token'
-           ])->send();
+           ],401)->send();
            exit;
         }
       }
@@ -132,6 +134,8 @@ class EmailVerificationService
       */
 
       public function forgetPassword(string $email){
+
+
         $data['email'] =  $email;
         $data['subject'] = 'reset your password';
         $data['view'] = 'mail.ResetPassword';
@@ -147,15 +151,15 @@ class EmailVerificationService
             User::where('id', $userId)->update(['remember_token' => $token]);
             return response()->json([
                 'status'=> 'success',
-                'message'=> 'email sent successfully',
+                'message'=> 'email sent successfully 1',
                 'reset_token' => $token
-            ]);
+            ],200);
 
         }
             return response()->json([
                 'status'=> 'faild',
                 'error'=> 'User Not Found'
-            ]);
+            ],404);
       }
             /**
        * Reset Password
@@ -168,12 +172,12 @@ class EmailVerificationService
             return response()->json([
                 'status'=> 'success',
                 'message' => 'Password updated successfully'
-            ]);
+            ],200);
         }
         return response()->json([
             'status'=> 'failed',
             'error'=> 'User Not Found, Please try again later'
-        ]);
+        ],404);
       }
 
 }

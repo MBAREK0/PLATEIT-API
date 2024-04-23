@@ -85,7 +85,7 @@
         <div class="w-full  flex lg:justify-center justify-center md:justify-end" v-if="store.user.role === 'restaurant'">
             <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center " >
                 <div class=" w-full  ">   
-                        <Menu/>                
+                        <Menu :userId="userId" />                
                 </div>
             </div>
         </div>

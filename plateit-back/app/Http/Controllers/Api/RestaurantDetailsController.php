@@ -40,6 +40,7 @@ class RestaurantDetailsController extends Controller
         public function get_details(Request $Request){
 
            $restaurant_id = $Request->restaurant_id;
+
            $restaurant_details = Restaurant_details::where('restaurant_id', $restaurant_id)->first();
            if( !$restaurant_details ){
             return response()->json([
