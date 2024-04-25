@@ -15,7 +15,7 @@
                 </div>
                 <div class=" flex gap-4 md:gap-2 sm:gap-1 items-center  relative " v-else>
                     <span class="material-icons lg:text-2xl xl:text-2xl absolute  2xl:text-2xl cursor-pointer transition " :class="{ 'left-2': !store.searching, 'right-2': store.searching }">search</span>
-                    <input class="text-sm py-2    text-white  inter w-full  bg-gray-400   bg-opacity-50 rounded-lg   outline-none border-none pl-9 pr-15" placeholder="Explore" />
+                    <input class="text-sm py-2    text-white  inter w-full  bg-gray-400   bg-opacity-50 rounded-lg   outline-none border-none pl-9 pr-15" placeholder="Explore" v-model="amine" />
                 </div>
                 <!-- ------------------- -->
 
@@ -101,7 +101,7 @@
   export default {
     data() {
         return {
-            
+            amine:''
         }
     },
     components: {
@@ -109,7 +109,6 @@
     },
     setup() {
       const store = MainStore();
-      console.log('Received ID from left:', store.user.id );
       return {store}
     }
   };

@@ -37,9 +37,8 @@ class MenuController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string'],
             'description' => ['required','string'],
-            'price' => ['required','string'],
-            'image' => ['required', 'image'],
-
+            'price' => ['required','numeric'],
+            'image' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -52,9 +51,13 @@ class MenuController extends Controller
                 $imagePath = $request->file('image')->store('public/images/plates');
                 $imageUrl = Storage::url($imagePath);
             }
+            if (is_string($request->get('image'))) {
+                $imageUrl ='/storage/images/plates/' . basename($request->get('image'));
+            }
 
 
 			if(!empty($request->id)){
+
 				$plate = restaurant_plate::where('id', $request->id)->update([
 					'name' => $request->name,
 					'description' => $request->description,
@@ -62,7 +65,8 @@ class MenuController extends Controller
 					'image' =>  $imageUrl
 				]);
 				if($plate){
-					return response()->json(['status' => 'success', 'message' => 'plate updated successfully!']);
+                    $plate = restaurant_plate::findOrFail($request->id);
+					return response()->json(['status' => 'success', 'message' => 'plate updated successfully!' ,'plate' => $plate]);
 				}
 			}else{
                 $token = $request->header('Authorization');
@@ -84,7 +88,7 @@ class MenuController extends Controller
                         'restaurant_id'=> $user->id,
                     ]);
                     if($add_to_menu){
-                        return response()->json(['status' => 'success', 'message' => 'plate saved successfully!']);
+                        return response()->json(['status' => 'success', 'message' => 'plate saved successfully!', 'plate' => $plate]);
                     }else{
                         $this->delete($plate->id);
                         return response()->json(['status' => 'faild', 'error' => 'error when saved the restaurant and plate in the menu']);
@@ -109,7 +113,7 @@ class MenuController extends Controller
         }
 		$plate = restaurant_plate::findOrFail($id);
 		if($plate->delete()){
-			return response()->json(['status' => 'success', 'message' => 'plate deleted successfully!' ]);
+			return response()->json(['status' => 'success', 'message' => 'plate deleted successfully!', 'id' => $plate->id ]);
 		}
 	}
 

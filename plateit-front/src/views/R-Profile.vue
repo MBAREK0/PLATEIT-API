@@ -1,8 +1,11 @@
 <template>
     <MainLayout>
-
-    <div>
-
+      
+    <div class="w-full h-screen flex  items-center justify-center" v-if="store.dataPreloading">
+        <PreLoading class="w-full  flex  items-center justify-center"/>
+    </div>
+    
+    <section v-else>
         <prePage :page="page"/>
         
         <div class="w-full  flex lg:justify-center justify-center md:justify-end">
@@ -10,7 +13,6 @@
                 <div class=" w-full ">     
                     <div class="h-36 xs:h-46 sm:h-56 overflow-hidden w-full  ">
                         <img :src="image_cover" class="w-full" :alt="`${fullName} cover profile`">
-
                     </div>
                     <div class="flex justify-start px-5  -mt-16">
                         <img class="h-32 w-32 bg-white p-1 rounded-full z-5  " :src="ProfileImage" :alt="`${fullName} profile`" />
@@ -76,20 +78,22 @@
                     <p class=" text-xs md:text-sm  ">Menu </p>
                     <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  rounded-xl text-sm font-bold   pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1" @click="store.toggleMenuModel()">new plate</button>
                 </div>
-                    
-
                     <hr class="border-t-1 border-main_text_color dark:border-white">
                 </div>
             </div>
         </div> 
-        <div class="w-full  flex lg:justify-center justify-center md:justify-end" v-if="store.user.role === 'restaurant'">
+       
+        <div class="w-full  flex lg:justify-center justify-center md:justify-end" v-if="store.user.role === 'restaurant' " >
             <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center " >
                 <div class=" w-full  ">   
-                        <Menu :userId="userId" />                
+                    <Menu :userId="userId"  />                
                 </div>
             </div>
         </div>
 
+            
+     
+     
         <div class="w-full mt-3 flex lg:justify-center justify-center md:justify-end">
             <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center lg:px-10 md:px-5 px-5" >
                 <div class=" w-full ">
@@ -110,25 +114,29 @@
                 </div>
             </div>
         </div> 
-    </div>
+    </section>
     </MainLayout>
 
 </template>
 
 <script setup>
-import { ref,onMounted } from 'vue';
+import { ref,onMounted, watch } from 'vue';
+import PreLoading from "../components/component/PreLoading.vue";
 import  MainLayout  from "../components/MainLayout.vue";
 import prePage from "../components/component/PrePage.vue";
 import PlateForm from "../components/component/forms/PlateForm.vue";
 import EditeProfileForm from "../components/component/forms/EditeProfileForm.vue";
 import { MainStore } from "../stores/MainStore";
+import { UserStore } from "../stores/UserStore";
 import Menu  from "../components/component/Menu.vue";
 import  post  from "../components/component/Post.vue";
 import { useRoute } from 'vue-router';
 import axios from "axios";
 
+const page = ref('Profile');
 const route = useRoute();
 const store = MainStore();
+const u_store = UserStore();
 const  userId = route.query.user_id;
 const fullName = ref(null);
 const email_verified_at = ref(null);
@@ -150,7 +158,7 @@ const params = {
 };
 
 const GetUserData = () => {
-    store.preloading = true;
+    store.setDataPreloading(true);
    axios.get(store.laravelApi + 'auth/me', {params})
    .then((response) => {
      if(response.status === 200){
@@ -161,16 +169,17 @@ const GetUserData = () => {
      ProfileImage.value = user.ProfileImage;
      image_cover.value = user.image_cover;
      bio.value = user.bio;
-
+     store.setDataPreloading(false);
      }
    })
    .catch((error) => {
        console.error('Error:', error.message);
    });
-   store.preloading = false;
+
+   
  };
  const GetRestaurantData = () => {
-    store.preloading = true;
+    
    axios.get(store.laravelApi + 'restaurant/get_details', {
     params :{
         restaurant_id: userId
@@ -184,24 +193,29 @@ const GetUserData = () => {
      phone_numbre.value = details.phone_numbre;
      web_site.value = details.web_site;
      category.value = details.category;
-     console.log('Restaurant details:', details);
+     u_store.GetRestaurantMenu(userId); 
+
 
      }
    })
    .catch((error) => {
        console.error('Error:', error.message);
    });
-   store.preloading = false;
+  
  };
 onMounted(() => {
+    
     GetUserData();
     if (store.user.role === 'restaurant') {
         GetRestaurantData();
-    } 
-      
+    }
+    
+
     
 });
+ 
 
+    
 
   
 

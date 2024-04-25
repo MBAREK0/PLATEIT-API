@@ -52,11 +52,13 @@
 
 <script setup>
 import { MainStore } from "../../../stores/MainStore";
+import { UserStore } from "../../../stores/UserStore";
 import { ref } from "vue";
 import axios from "axios";
 
 
 const store = MainStore();
+const u_store = UserStore();
 const plateName = ref('');
 const price = ref('');
 const description = ref('');
@@ -90,6 +92,7 @@ const handleSubmit = () => {
     axios.post(store.laravelApi + 'restaurant/save_plate', formData)
         .then(response => {
             store.showSuccesToast(response.data.message)
+            u_store.$state.menu.push(response.data.plate)
             console.log('Plate added successfully:', response.data);
         })
         .catch(error => {

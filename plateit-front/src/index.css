@@ -133,7 +133,7 @@ body {
     height: 100%;
     background-color: transparent; /* Semi-transparent black */
     
-    z-index: 900 !important; /* Ensure it's below the modal */
+    z-index: 198 !important; /* Ensure it's below the modal */
   }
   .backdrop {
     position: fixed;

@@ -14,7 +14,7 @@ module.exports = {
         main_color_dark: '#4F4F4F',
         secondary_color: '#D9D9D9',
         secondary_color_dark: '#999',
-        sidebar_color: '#708090',
+        sidebar_color: '#767477',
         sidebar_color_dark: '#333',
         // text colors 
         main_text_color: '#585050',
@@ -23,7 +23,7 @@ module.exports = {
         auth_png_color: '#333333',
         // btn colors
         btn_submit_hover: 'rgb(63 96 128)',
-        btn_primary_color: '#1A5DB4'
+        btn_primary_color: '#3C2CE0',
       }
     },
   },

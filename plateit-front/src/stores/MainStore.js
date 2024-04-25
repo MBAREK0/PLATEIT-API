@@ -6,6 +6,8 @@ export const MainStore = defineStore('MainStore', {
   state: () => ({
     laravelApi: 'http://127.0.0.1:8000/api/',
     preloading: false,
+    dataPreloading: true,
+    miniDataPreloading: true,
     showSidebar:false,
     showTrendSidebar:false,
     backdrop:false,
@@ -78,7 +80,13 @@ export const MainStore = defineStore('MainStore', {
           this.showErrorToast(errorMessage); 
         }
       }
-    }
+    } ,
+    setDataPreloading(value) {
+      this.dataPreloading = value;
+    },
+    setMiniDataPreloading(value) {
+      this.miniDataPreloading = value;
+    },
     
   }
 })
