@@ -76,7 +76,7 @@
                 <div class=" w-full  ">
                 <div class=" w-full flex justify-between mb-2 gap-4 items-center ">
                     <p class=" text-xs md:text-sm  ">Menu </p>
-                    <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  rounded-xl text-sm font-bold   pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1" @click="store.toggleMenuModel()">new plate</button>
+                    <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  rounded-xl text-sm font-bold   pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1" @click="store.toggleMenuModel()" v-if="userId == store.$state.user.id">new plate</button>
                 </div>
                     <hr class="border-t-1 border-main_text_color dark:border-white">
                 </div>
@@ -91,9 +91,6 @@
             </div>
         </div>
 
-            
-     
-     
         <div class="w-full mt-3 flex lg:justify-center justify-center md:justify-end">
             <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center lg:px-10 md:px-5 px-5" >
                 <div class=" w-full ">
@@ -104,7 +101,7 @@
                        </div>
                        <PlateForm class="model" v-if="store.MenuModel && store.user.role === 'restaurant'"/>
                        <EditeProfileForm class="model" v-if="store.ProfileInfoModel"/>
-                       <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  rounded-xl text-sm font-bold   pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1" @click="store.ProfileInfoModel =! store.ProfileInfoModel">Edit Profile</button>
+                       <!-- <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  rounded-xl text-sm font-bold   pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1" @click="store.ProfileInfoModel =! store.ProfileInfoModel">Edit Profile</button> -->
 
                         <div class="backdrop" @click="store.toggleAllModels()"  v-if="store.backdrop"></div>
                         <div class="w-full justify-center flex "v-for="index in 6" :key="index">
@@ -151,6 +148,9 @@ const web_site = ref(null);
 const category = ref(null);
 
 
+   
+
+
 
 const params = {
     user_id: userId
@@ -159,7 +159,7 @@ const params = {
 
 const GetUserData = () => {
     store.setDataPreloading(true);
-   axios.get(store.laravelApi + 'auth/me', {params})
+   axios.get(store.laravelApi + 'auth/user', {params})
    .then((response) => {
      if(response.status === 200){
      const user = response.data.user;
@@ -193,7 +193,7 @@ const GetUserData = () => {
      phone_numbre.value = details.phone_numbre;
      web_site.value = details.web_site;
      category.value = details.category;
-     u_store.GetRestaurantMenu(userId); 
+     
 
 
      }
@@ -204,16 +204,16 @@ const GetUserData = () => {
   
  };
 onMounted(() => {
-    
+    u_store.GetRestaurantMenu(userId); 
     GetUserData();
     if (store.user.role === 'restaurant') {
         GetRestaurantData();
+       
     }
     
 
     
 });
- 
 
     
 

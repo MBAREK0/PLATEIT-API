@@ -1,9 +1,10 @@
 <template>
+  
   <div class="w-full  flex  items-center justify-center"  v-if="store.miniDataPreloading">
     <div class="loader"></div>
   </div>
   <div v-else>
-    <section class="game-section  relative" v-if="u_store.$state.menu">
+    <section class="game-section  relative" v-if="u_store.$state.menu.length > 0">
     
         <div class="btn-conteiner absolute left-5 top-1/2 hidden md:block " @click="scrollLeft" >
           <button class="btn-content" >
@@ -16,19 +17,21 @@
         <div class="owl-carousel custom-carousel owl-theme overflow-x-auto w-full px-20  " ref="carousel"  @scroll="handleScroll()">
   
           <div class="item active relative" :style="{ backgroundImage: 'url(http://localhost:8000' + plate.image + ')' }" v-for="(plate, index) in u_store.$state.menu" :key="plate.id">
-            <span class="material-icons text-gray-400 cursor-pointer absolute top-4 right-3"  @click="togleMore(index)" style="z-index: 200 !important;">more_vert</span>
-            <div class=" absolute  z-999  shadow-lg top-4 right-3" style="z-index: 200 !important; width: 10rem;"  v-if="activeModalIndex === index" >
-              <div class="mt-4 flex flex-col bg-secondary_color dark:bg-secondary_color_dark rounded-lg  shadow-sm">
-                      <div class="flex gap-2 items-center px-2 py-1 text-main_text_color hover:text-sidebar_text_color hover:bg-main_color_dark cursor-pointer"  @click="togleUpdateMenu(plate)">
-                          <span class="material-icons">edit</span>
-                          <p class="text-sm">Edit</p>
+            <div v-if="userId == store.$state.user.id">
+              <span class="material-icons text-gray-400 cursor-pointer absolute top-4 right-3"  @click="togleMore(index)" style="z-index: 200 !important;">more_vert</span>
+              <div class=" absolute  z-999  shadow-lg top-4 right-3" style="z-index: 200 !important; width: 10rem;"  v-if="activeModalIndex === index" >
+                <div class="mt-4 flex flex-col bg-secondary_color dark:bg-secondary_color_dark rounded-lg  shadow-sm">
+                        <div class="flex gap-2 items-center px-2 py-1 text-main_text_color hover:text-sidebar_text_color hover:bg-main_color_dark cursor-pointer"  @click="togleUpdateMenu(plate)">
+                            <span class="material-icons">edit</span>
+                            <p class="text-sm">Edit</p>
 
-                      </div>
-                      <hr>
-                      <div class="flex gap-2 items-center px-2 py-1 text-main_text_color hover:text-sidebar_text_color hover:bg-main_color_dark cursor-pointer" @click="handleDeleteSubmit(plate.id)">
-                          <span class="material-icons">delete</span>
-                          <p class="text-sm" >Delete</p>
-                      </div>
+                        </div>
+                        <hr>
+                        <div class="flex gap-2 items-center px-2 py-1 text-main_text_color hover:text-sidebar_text_color hover:bg-main_color_dark cursor-pointer" @click="handleDeleteSubmit(plate.id)">
+                            <span class="material-icons">delete</span>
+                            <p class="text-sm" >Delete</p>
+                        </div>
+                </div>
               </div>
             </div>
             <div class="item-desc w-full">
@@ -100,8 +103,8 @@
                 </div>
                 </div>
                 <div class=" flex justify-between gap-5">
-                    <button class="bg-secondary_color border border-sidebar_color_dark hover:bg-btn_submit_hover hover:text-white text-main_text_color  lg:h-8 md:h-8 rounded-lg text-lg  w-24 " @click="togleUpdateMenu()">cansel</button>
-                    <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  lg:h-8 md:h-8 rounded-lg text-lg  w-24 " @click="handleUpdateSubmit()" >update Plate</button>
+                    <button class="bg-secondary_color border border-sidebar_color_dark hover:bg-btn_submit_hover hover:text-white text-main_text_color  lg:h-8 md:h-8 rounded-lg text-xs  w-24 " @click="togleUpdateMenu()">cansel</button>
+                    <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  lg:h-8 md:h-8 rounded-lg text-xs  w-24 " @click="handleUpdateSubmit()" >update Plate</button>
                 </div>
             </div>
         </div>
@@ -130,12 +133,10 @@ export default {
       activeModalIndex: null,
     };
   },
-  mounted() {
-    const m_store = UserStore();
-    if(m_store.$state.men){
-     console.log('motherfucker')
-      // this.$refs.carousel.addEventListener('scroll', this.handleScroll);
-    }
+  beforeCreate() {
+    // const u_store = UserStore();
+    // u_store.GetRestaurantMenu(this.userId); 
+ 
     
     
   },

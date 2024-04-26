@@ -52,7 +52,8 @@
  import { ref } from 'vue';
  import { useRouter } from 'vue-router';
  import { useToast } from 'vue-toast-notification';
- import 'vue-toast-notification/dist/theme-sugar.css'; // Import the desired theme
+ import 'vue-toast-notification/dist/theme-sugar.css';
+ import SatAuthHeader from  '@/stores/SatAuthHeader'
  
  const IsLoading = ref(false);
  const store = MainStore();
@@ -82,6 +83,7 @@
      localStorage.setItem('IsLogin', true);
      localStorage.setItem('user', JSON.stringify(response.data.user));
      store.setUserData()
+     SatAuthHeader(token)
      router.push({ name: 'home' });
 
      }

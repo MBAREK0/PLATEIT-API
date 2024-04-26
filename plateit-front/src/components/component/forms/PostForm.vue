@@ -25,7 +25,7 @@
                         <option value="restaurant4">restaurant4</option>
                     </select>
                </div>
-               <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white   rounded-lg text-sm py-1  w-1/4 " @click="NoRestaurant=!NoRestaurant">Add One</button>
+               <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white   rounded-lg text-xs py-2  w-1/4 " @click="NoRestaurant=!NoRestaurant">Add One</button>
             </div>
             <div class="mt-4 flex flex-row space-x-2 text-start" v-if="NoRestaurant">
                 <div class="flex-1">
@@ -35,7 +35,7 @@
 
                 <div class="flex-1 text-start">
                 <label class="text-main_text_color  " for="symbols">Resturant Link </label>
-                <input placeholder="http//:" class="w-full bg-white rounded-md border-gray-300 text-main_text_color   px-2 py-1" id="symbols" v-model="Resturant_Name" type="text">
+                <input placeholder="http://" class="w-full bg-white rounded-md border-gray-300 text-main_text_color   px-2 py-1" id="symbols" type="text">
                 </div>
             </div>
 
@@ -61,8 +61,8 @@
                 </div>
                 </div>
                 <div class=" flex justify-between gap-5">
-                    <button class="bg-secondary_color border border-sidebar_color_dark hover:bg-btn_submit_hover hover:text-white text-main_text_color  lg:h-8 md:h-8 rounded-lg text-lg  w-24 " @click="store.togglePostModel()">cansel</button>
-                <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  lg:h-8 md:h-8 rounded-lg text-lg  w-24 " @click="store.togglePostModel()">Post</button>
+                    <button class="bg-secondary_color border border-sidebar_color_dark hover:bg-btn_submit_hover hover:text-white text-main_text_color  lg:h-8 md:h-8 rounded-lg text-xs  w-24 " @click="store.togglePostModel()">cansel</button>
+                <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  lg:h-8 md:h-8 rounded-lg text-xs  w-24 " @click="store.togglePostModel()">Post</button>
 
                 </div>
             </div>

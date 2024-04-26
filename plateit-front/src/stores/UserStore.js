@@ -7,7 +7,7 @@ export const UserStore = defineStore('UserStore', {
   state: () => ({
     user:[],
     store : MainStore(),
-    menu:false,
+    menu:[],
     demo:'hzhello'
 
     

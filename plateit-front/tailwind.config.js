@@ -23,7 +23,7 @@ module.exports = {
         auth_png_color: '#333333',
         // btn colors
         btn_submit_hover: 'rgb(63 96 128)',
-        btn_primary_color: '#3C2CE0',
+        btn_primary_color: '#1A5DB4',
       }
     },
   },

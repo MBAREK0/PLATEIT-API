@@ -185,7 +185,7 @@ class AuthController extends Controller
             $user = $this->jwtService->get_user($request->token);
             return $this->responseWithTokrn($token,$user);
       }
-      public function me(){
+      public function user(){
         $user_id = request()->input('user_id');
         $user =  User::find($user_id);
         if(!$user){

@@ -17,13 +17,12 @@ const app = createApp(App)
 app.use(pinia)
 app.use(ToastPlugin);
 const MainStoreInstance = MainStore()
-MainStoreInstance.setUserData()
-console.log('user set successfyly <==main.js/=>',MainStoreInstance.user) 
 
 if(localStorage.getItem('access_token')){
     console.log('access token found <==main.js/=>',localStorage.getItem('access_token'))
     SatAuthHeader(localStorage.getItem('access_token'))
-   
+
+    
 }
 
 

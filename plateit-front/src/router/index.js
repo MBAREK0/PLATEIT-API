@@ -100,7 +100,7 @@ router.afterEach(() => {
   const store = MainStore();
   setTimeout(() => {
     store.setLoading(false); 
-  }, 300); 
+  }, 0); 
 });
 
 export default router

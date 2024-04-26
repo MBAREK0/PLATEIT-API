@@ -97,6 +97,8 @@ class MenuController extends Controller
                     return response()->json(['status' => 'faild', 'error' => 'error when saved the plate ']);
                 }
 			}
+
+            
 		}
 
 	public function get_plate(){
