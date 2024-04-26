@@ -26,7 +26,7 @@
                 <div class=" w-full ">
                     <div class=" w-full  flex justify-between items-start pt-3 md:px-11 px-5 flex-wrap ">      
                         <div>
-                            <div class="flex items-center gap-2 md:gap-4 ">
+                            <div class="flex items-center gap-2 md:gap-4 relative">
                                <div class="flex items-center gap-1">
                                 <h1 class="font-bold" v-text="fullName ? fullName.toUpperCase() : ''"></h1>
                                 <span class="material-icons dark:text-white text-btn_primary_color text-sm" v-if="email_verified_at" >verified</span>
@@ -34,17 +34,30 @@
                             <!-- <button v-if="store.user.role === 'restaurant'" class="bg-btn_primary_color hover:bg-btn_submit_hover  rounded-xl text-sm font-bold pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1 ">follow</button>-->
                                 <button v-if="store.user.role === 'restaurant'" class="bg-secondary_color dark:bg-secondary_color_dark hover:bg-btn_submit_hover text-main_text_color dark:text-white hover:text-white rounded-xl text-sm font-bold  pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1 ">unfollow</button>
                                 <a :href="web_site" target="_blank" v-if="store.user.role === 'restaurant' && web_site " class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  rounded-xl text-sm font-bold   pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1">visit</a>
+                                <div v-if="userId == store.$state.user.id">
+                                    <span class="material-icons text-gray-400 cursor-pointer" @click="store.toggleEditInfo()" style="z-index: 200 !important;">more_vert</span>
+                                    <div class=" absolute  z-999  shadow-lg top-4 right-3" style="z-index: 200 !important; width: 15rem;" v-if="store.EditInfo"  >
+                                        <div class="mt-4 flex flex-col bg-secondary_color dark:bg-secondary_color_dark rounded-lg  shadow-sm">
+                                            <div class="flex gap-2 items-center px-2 py-1 text-main_text_color hover:text-sidebar_text_color hover:bg-main_color_dark cursor-pointer"  @click="togleUpdateMenu(plate)">
+                                                    <span class="material-icons">edit</span>
+                                                    <p class="text-sm">Edit Mon Profile</p>
+                                                </div>
+                                                <hr>
+                                                <div class="flex gap-2 items-center px-2 py-1 text-sidebar_text_color bg-red-600 hover:bg-main_color_dark cursor-pointer" @click="handleDeleteSubmit(plate.id)"  v-if="store.user.role === 'restaurant'">
+                                                    <span class="material-icons">delete</span>
+                                                    <p class="text-sm" >Delete All menu</p>
+                                                </div>
+                                
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="Hiddenbackdrop" @click="store.toggleAllSmallModels()"  v-if="store.Hiddenbackdrop"></div>
                             </div>
                                 <!-- adress of restaurant -->
                             <div class="w-full ">
                                 <div class=" w-full text-start break-words">
                                     <P class="text-SM mt-2 " v-text="category"></P>
-                                   <div class="flex items-center justify-start gap-2 mt-3">
-                                    <p class="text-xs"  v-if="address"> <span class="font-bold" >Address : </span>: {{ address ? address : '' }}</p>
-                                    <p class="text-xs" v-if="phone_numbre"> <span class="font-bold"  >Phone Numbre : </span>: {{ phone_numbre ? phone_numbre : '' }}</p>
                                     
-                                    
-                                   </div>
                                 </div>
                             </div>
                         </div>
@@ -64,6 +77,12 @@
                         <!-- bio of restaurant -->
                         <div class="w-full ">
                             <div class=" w-full text-start break-words">
+                                <div class="flex items-center justify-start gap-2 mt-3">
+                                    <p class="text-xs"  v-if="address"> <span class="font-bold" >Address : </span>: {{ address ? address : '' }}</p>
+                                    <p class="text-xs" v-if="phone_numbre"> <span class="font-bold"  >Phone Numbre : </span>: {{ phone_numbre ? phone_numbre : '' }}</p>
+                                    
+                                    
+                                   </div>
                                 <small class="text-xs   "v-text="bio"></small>
                             </div>
                         </div>
@@ -127,11 +146,13 @@ import { MainStore } from "../stores/MainStore";
 import { UserStore } from "../stores/UserStore";
 import Menu  from "../components/component/Menu.vue";
 import  post  from "../components/component/Post.vue";
-import { useRoute } from 'vue-router';
+import { useRoute , useRouter } from 'vue-router';
 import axios from "axios";
 
 const page = ref('Profile');
 const route = useRoute();
+const router = useRouter();
+const toggleEditInfo = ref(false);
 const store = MainStore();
 const u_store = UserStore();
 const  userId = route.query.user_id;
@@ -173,6 +194,10 @@ const GetUserData = () => {
      }
    })
    .catch((error) => {
+   if(error.response.status === 404){
+    
+       console.error('Error:', 'User not found');
+   }
        console.error('Error:', error.message);
    });
 

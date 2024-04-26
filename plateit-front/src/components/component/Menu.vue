@@ -57,7 +57,7 @@
             Restaurant does not have a menu yet
     </div>
   </div>
-  <div class="Hiddenbackdrop bg-black" @click="togleMore()" v-if="Hiddenbackdrop" ></div>
+  <div class="Hiddenbackdrop " @click="togleMore()" v-if="Hiddenbackdrop" ></div>
   <!-- edit form  -->
   <div class="Hiddenbackdrop flex justify-center items-center" style="z-index: 900 !important;" v-if="showUpdateModal" >
     <div class="lg:w-1/2 w-10/12"  >
@@ -85,7 +85,7 @@
 
             <div class="mt-4 text-start">
                 <img :src="imagePreview" alt="Selected Image" v-if="imagePreview">
-                <img :src="'http://localhost:8000' + image" alt="Selected Image" v-if="image" >
+                <img :src="'http://localhost:8000' + image" alt=" Image" v-if="image" >
             </div>
             
 

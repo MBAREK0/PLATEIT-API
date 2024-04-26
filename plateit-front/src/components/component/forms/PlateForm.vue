@@ -1,6 +1,6 @@
 <template>
-    <div class="fixed z-999">
-        <div class="mt-4 flex flex-col bg-secondary_color dark:bg-secondary_color_dark rounded-lg p-4 shadow-sm " style="max-height: 40rem !important ; overflow-y: scroll;">
+    <div class="fixed  z-999">
+        <div class="p_form mt-4 flex flex-col bg-secondary_color dark:bg-secondary_color_dark rounded-lg p-4 shadow-sm " style="max-height: 40rem !important ; overflow-y: scroll;">
 
             <h2 class=" text-main_text_color   font-bold text-2xl">Add New Plate</h2>
 
@@ -20,7 +20,11 @@
             <div class="mt-4 text-start">
                 <label class="text-main_text_color  " for="description">Description</label>
                 <textarea v-model="description" placeholder="Describe your plate" class="w-full bg-white rounded-md border-gray-300 text-main_text_color   px-2 py-1" id="description"></textarea>
+                <div class="flex justify-end items-center">
+                    <p class="text-main_text_color">{{ description.length }}/250</p>
+                </div>
             </div>
+            
 
             <div class="mt-4 text-start">
                 <img :src="imagePreview" alt="Selected Image" v-if="imagePreview">
@@ -115,4 +119,12 @@ const handleSubmit = () => {
   transition: transform 0.3s ease;
 }
 
+.p_form::-webkit-scrollbar {
+    display: none !important;
+   
+}
+.p_form {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* Internet Explorer 10+ */
+}
 </style>

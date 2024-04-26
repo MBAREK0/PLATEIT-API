@@ -13,6 +13,7 @@ export const MainStore = defineStore('MainStore', {
     backdrop:false,
     Hiddenbackdrop:false,
     MenuModel:false,
+    EditInfo:false,
     PostModel:false,
     searching:false,
     ProfileInfoModel:false,
@@ -60,6 +61,7 @@ export const MainStore = defineStore('MainStore', {
     toggleAllSmallModels(){
       this.Hiddenbackdrop = false;
       this.SidemoreIsActive = false;
+      this.EditInfo = false;
     }, showSuccesToast (errorMessage) {
       $toast.success(errorMessage, {
         position: 'bottom-right',
@@ -87,6 +89,10 @@ export const MainStore = defineStore('MainStore', {
     setMiniDataPreloading(value) {
       this.miniDataPreloading = value;
     },
+    toggleEditInfo(){
+      this.EditInfo = !this.EditInfo;
+      this.Hiddenbackdrop = !this.Hiddenbackdrop;
+    }
     
   }
 })

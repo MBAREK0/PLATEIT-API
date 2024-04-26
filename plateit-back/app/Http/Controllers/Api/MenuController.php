@@ -36,7 +36,7 @@ class MenuController extends Controller
 	public function save_plate(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string'],
-            'description' => ['required','string'],
+            'description' => ['required','string','max:251'],
             'price' => ['required','numeric'],
             'image' => ['required'],
         ]);
@@ -52,7 +52,13 @@ class MenuController extends Controller
                 $imageUrl = Storage::url($imagePath);
             }
             if (is_string($request->get('image'))) {
-                $imageUrl ='/storage/images/plates/' . basename($request->get('image'));
+                $baseName =basename($request->get('image'));
+                if( $request->get('image') == 'null' || $request->get('image') == '/storage/images/default-plate.jpg'){
+                    $baseName = 'default-plate.jpg';
+                    $imageUrl ='/storage/images/' . $baseName;
+                }else{
+                    $imageUrl ='/storage/images/plates/default-plate.jpg' . $baseName;
+                }
             }
 
 
@@ -98,7 +104,7 @@ class MenuController extends Controller
                 }
 			}
 
-            
+
 		}
 
 	public function get_plate(){

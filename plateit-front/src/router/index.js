@@ -71,7 +71,7 @@ const routes = [
   },
   {
     // Catch-all route for 404 errors
-    path: '/:catchAll(.*)',
+    path: '/:catchAll(.*)/:id',
     component: notFound,
     meta: { requiresLogin: 'able' }
   }
