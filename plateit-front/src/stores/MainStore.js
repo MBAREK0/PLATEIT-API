@@ -92,6 +92,10 @@ export const MainStore = defineStore('MainStore', {
     toggleEditInfo(){
       this.EditInfo = !this.EditInfo;
       this.Hiddenbackdrop = !this.Hiddenbackdrop;
+    },
+    toggleEditProfileModel () {
+      this.backdrop = !this.backdrop;
+      this.ProfileInfoModel = !this.ProfileInfoModel;
     }
     
   }

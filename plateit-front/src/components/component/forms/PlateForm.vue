@@ -33,16 +33,16 @@
 
             <div class="mt-4 flex justify-between items-center ">
                 <div class="mt-4 flex flex-row space-x-2 text-start ms-2">
-                <div class="flex-1">
-                    <div class="messageBox">
-                        <div class="fileUploadWrapper">
-                            <label for="file">
-                                <img src="../../../assets/icons/pic-icon .svg" class="hover:h-10 hover:w-7 cursor-pointer transition-transform duration-300" alt="pic">
-                            </label>
-                            <input type="file" id="file" name="file" class="hidden"   @change="handleFileChange" />
+                    <div class="flex-1">
+                        <div class="messageBox">
+                            <div class="fileUploadWrapper">
+                                <label for="file">
+                                    <img src="../../../assets/icons/pic-icon .svg" class="hover:h-10 hover:w-7 cursor-pointer transition-transform duration-300" alt="pic">
+                                </label>
+                                <input type="file" id="file" name="file" class="hidden"   @change="handleFileChange" />
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
                 <div class=" flex justify-between gap-5">
                     <button class="bg-secondary_color border border-sidebar_color_dark hover:bg-btn_submit_hover hover:text-white text-main_text_color  lg:h-8 md:h-8 rounded-lg text-lg  w-24 " @click="store.toggleMenuModel()">cansel</button>

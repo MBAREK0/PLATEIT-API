@@ -36,6 +36,7 @@ Route::prefix('auth')->group(function () {
     Route::post('forgetPassword', [AuthController::class, 'forgetPassword']);
     Route::post('resetPassword', [AuthController::class, 'resetPassword']);
     Route::get('user', [AuthController::class, 'user']);
+    Route::post('insert_details', [RestaurantDetailsController::class, 'insert_details']);
 });
 
 
@@ -46,7 +47,6 @@ Route::middleware(['check.token','OnlyRestaurants'])->prefix('restaurant')->grou
     /**
      * create or update Routes
      */
-    Route::post('insert_details', [RestaurantDetailsController::class, 'insert_details']);
     //  u can use this route for update also just send the id with the request
     Route::post('save_plate', [MenuController::class,'save_plate']);
 

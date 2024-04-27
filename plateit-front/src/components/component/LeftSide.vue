@@ -89,7 +89,7 @@
                 </div>
             </div>  
         </div>
-       <SidSmallModel v-if="store.SidemoreIsActive" style="z-index: 901;"/>
+       <SidSmallModel v-if="store.SidemoreIsActive" class="corsur-pointer" style="z-index: 9999 !important;"/>
        <div class="Hiddenbackdrop" @click="store.toggleAllSmallModels()"  v-if="store.Hiddenbackdrop"></div>
     </div>
 

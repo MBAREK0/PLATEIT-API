@@ -8,7 +8,7 @@ export const UserStore = defineStore('UserStore', {
     user:[],
     store : MainStore(),
     menu:[],
-    demo:'hzhello'
+    profileData:[],
 
     
 

@@ -16,14 +16,7 @@ class RestaurantDetailsRequest extends FormRequest
     }
     public function authorize(): bool
     {
-        $token = $this->header('Authorization');
-
-        $role =  $this->jwtService->get_role($token);
-        if($role == 'restaurant'){
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     /**
@@ -37,6 +30,7 @@ class RestaurantDetailsRequest extends FormRequest
             'address'=> ['string'],
             'phone_numbre'=> ['string'],
             'web_site'=> ['string'],
+            'bio'=> ['string','max:250'],
 
         ];
     }

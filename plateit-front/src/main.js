@@ -5,17 +5,20 @@ import './index.css'
 import { createPinia } from 'pinia'
 import SatAuthHeader from '@/stores/SatAuthHeader';
 import ToastPlugin from 'vue-toast-notification';
-import { MainStore } from './stores/MainStore'
+import { MainStore } from './stores/MainStore';
+import vSelect from 'vue-select';
 // Import one of the available themes
 //import 'vue-toast-notification/dist/theme-default.css';
 import 'vue-toast-notification/dist/theme-bootstrap.css';
+import 'vue-select/dist/vue-select.css';
 
-const pinia = createPinia()
 const app = createApp(App)
+const pinia = createPinia()
 
 
 app.use(pinia)
 app.use(ToastPlugin);
+app.component('v-select', vSelect);
 const MainStoreInstance = MainStore()
 
 if(localStorage.getItem('access_token')){
