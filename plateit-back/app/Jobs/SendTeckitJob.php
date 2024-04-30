@@ -32,7 +32,8 @@ class SendTeckitJob implements ShouldQueue
 
         $info = $this->data;
         $email = new GiftsMail($info);
-        Mail::to( $info['email'])->send($email);
+         Mail::to( $info['email'])->send($email);
+         
 
     }
 }

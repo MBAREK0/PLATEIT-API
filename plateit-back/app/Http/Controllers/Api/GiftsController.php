@@ -29,9 +29,20 @@ class GiftsController extends Controller
         $token = request()->header('Authorization');
         $user = $this->JwtService->get_user($token);
 
+        if($user->role === 'restaurant'){
+            return response()->json([
+                'status' => 'failed',
+                'error' => 'You are not allowed to get gifts'
+            ], 401);
+
+        }
+
+
        return  $this->GiftService->index($user, $request->input('gift_id'));
 
 
-
+    }
+    public function get_gifts(){
+        return $this->GiftService->get_gifts();
     }
 }

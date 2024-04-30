@@ -31,9 +31,9 @@
                                 <h1 class="font-bold" v-text="u_store.profileData.info.fullName ? u_store.profileData.info.fullName.toUpperCase() : ''"></h1>
                                 <span class="material-icons dark:text-white text-btn_primary_color text-sm" v-if="email_verified_at" >verified</span>
                             </div>
-                            <!-- <button v-if="store.user.role === 'restaurant' && !userId == store.$state.user.id" class="bg-btn_primary_color hover:bg-btn_submit_hover  rounded-xl text-sm font-bold pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1 ">follow</button>-->
-                            <button v-if="store.user.role === 'restaurant' && !userId == store.$state.user.id" class="bg-secondary_color dark:bg-secondary_color_dark hover:bg-btn_submit_hover text-main_text_color dark:text-white hover:text-white rounded-xl text-sm font-bold  pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1 ">unfollow</button>
-                                <a :href="u_store.profileData.details.web_site" target="_blank" v-if="store.user.role === 'restaurant' && web_site " class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  rounded-xl text-sm font-bold   pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1">visit</a>
+                            <button  v-if="haveFollow()" class="bg-btn_primary_color hover:bg-btn_submit_hover  rounded-xl text-sm font-bold pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1 ">follow</button>
+                            <!-- <button v-if="haveFollow()" class="bg-secondary_color dark:bg-secondary_color_dark hover:bg-btn_submit_hover text-main_text_color dark:text-white hover:text-white rounded-xl text-sm font-bold  pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1 ">unfollow</button> -->
+                                <a :href="u_store.profileData.details.web_site" target="_blank" v-if="u_store.profileData.info.role === 'restaurant' && web_site " class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  rounded-xl text-sm font-bold   pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1">visit</a>
                                 <div v-if="userId == store.$state.user.id">
                                     <span class="material-icons text-gray-400 cursor-pointer" @click="store.toggleEditInfo()" style="z-index: 200 !important;">more_vert</span>
                                     <div class=" absolute  z-999  shadow-lg top-4 right-3" style="z-index: 200 !important; width: 15rem;" v-if="store.EditInfo"  >
@@ -89,7 +89,7 @@
                 </div>
             </div>
         </div>
-        <div class="w-full mt-3 flex lg:justify-center justify-center md:justify-end mb-10" v-if="store.user.role === 'restaurant'">
+        <div class="w-full mt-3 flex lg:justify-center justify-center md:justify-end mb-10" v-if="u_store.profileData.info.role === 'restaurant'">
             <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center lg:px-10 md:px-5 px-5" >
                 <div class=" w-full  ">
                     <div class=" w-full flex justify-between mb-2 gap-4 items-center ">
@@ -101,7 +101,7 @@
             </div>
         </div>         
    
-        <div class="w-full  flex lg:justify-center justify-center md:justify-end" v-if="store.user.role === 'restaurant' " >
+        <div class="w-full  flex lg:justify-center justify-center md:justify-end" v-if="u_store.profileData.info.role === 'restaurant' " >
             <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center " >
                 <div class=" w-full  ">   
                     <Menu :userId="userId"  />                
@@ -206,9 +206,16 @@ const GetUserData = (uid) => {
 
    
  };
+
+const haveFollow = () => {
+ 
+   return  u_store.profileData.info.role  === 'restaurant' && parseInt(userId.value) !== parseInt(store.user.id)
+
+}
+
  const GetRestaurantData = (uid) => {
     
-   axios.get(store.laravelApi + 'restaurant/get_details', {
+   axios.get(store.laravelApi + 'get_details', {
     params :{
         restaurant_id: uid
     }

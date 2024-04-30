@@ -138,7 +138,7 @@ class AuthController extends Controller
      * to the 'auth/resend_email_verification_link' endpoint using a POST form.
      */
      public function resendEmailVerificationLink(ResendEmailVerificationLinkRequest $request){
-        
+
         return $this->service->resendLink($request->email);
      }
 
@@ -187,12 +187,12 @@ class AuthController extends Controller
             return $this->responseWithTokrn($token,$user);
       }
       public function user(){
-        $user_id = request()->input('user_id');
+        $user_id = request()->get('user_id');
         $user =  User::find($user_id);
         if(!$user){
             return response()->json([
                 'status' => 'failed',
-                'error' => 'User Not Found !'
+                'error' =>  $user_id
             ], 404);
         }
         return response()->json([

@@ -22,7 +22,7 @@ class SestemOfGiftsService
             }else{
                 return response()->json([
                     'status' => 'failed',
-                    'message' => 'Your accumulated points are less than the required points for this gift.'
+                    'error' => 'Your accumulated points are less than the required points for this gift.'
                 ]);
 
             }
@@ -54,20 +54,27 @@ class SestemOfGiftsService
         if ($job) {
             return response()->json([
                 'status' => 'success',
-                'error' => 'Gift Scheduled for Sending'
+                'messge' => 'Gift Scheduled for Sending please check your email after minuts.'
             ]);
         } else {
             return response()->json([
                 'status' => 'failed',
-                'error' => 'Failed to schedule the gift for sending'
+                'error' => 'Failed to schedule the gift for sending please check your email after 24 hours.'
             ]);
         }
 
         }else{
             return response()->json([
                 'status'=> 'failed',
-                'error'=> 'error when inserting Claim_gifts'
+                'error'=> 'error when tring to  Claim the gift please try again later.'
             ]);
         }
+    }
+    public function get_gifts(){
+        $gifts = Gifts::all();
+        return response()->json([
+            'status'=> 'success',
+            'data'=> $gifts
+        ]);
     }
 }

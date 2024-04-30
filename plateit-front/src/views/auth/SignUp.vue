@@ -112,8 +112,8 @@ const register = () => {
     const token = response.data.access_token;
     localStorage.setItem('access_token', token);
     localStorage.setItem('IsLogin', true);
-    // user_store.user = response.data.user;
-    localStorage.setItem('user', JSON.stringify(response.data.user));
+    localStorage.setItem('isVerified', response.data.user.email_verified_at);
+    localStorage.setItem('user_id', JSON.stringify(response.data.user.id));
     store.setUserData()
     SatAuthHeader(token)
     router.push({ name: 'home' });

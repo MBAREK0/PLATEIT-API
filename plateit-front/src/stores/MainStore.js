@@ -1,6 +1,9 @@
 import { defineStore } from 'pinia'
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
+import axios from 'axios'
+import { store } from 'pinia'
+
 const $toast = useToast();
 export const MainStore = defineStore('MainStore', {
   state: () => ({
@@ -18,7 +21,9 @@ export const MainStore = defineStore('MainStore', {
     searching:false,
     ProfileInfoModel:false,
     SidemoreIsActive:false,
+    SidebarHiddenbackdrop:false,
     user:[],
+    store : MainStore(),
       
 
     
@@ -30,6 +35,7 @@ export const MainStore = defineStore('MainStore', {
   actions: {
   toggleSidebar() {
       this.showSidebar = !this.showSidebar;
+      this.SidebarHiddenbackdrop = !this.SidebarHiddenbackdrop;
     },
     toggleTrendSidebar(){
       this.showTrendSidebar = !this.showTrendSidebar;
@@ -46,7 +52,25 @@ export const MainStore = defineStore('MainStore', {
       this.PostModel = !this.PostModel;
     },
     setUserData(){
-      this.user = JSON.parse(localStorage.getItem('user'));
+      const userData = JSON.parse(localStorage.getItem('user_id'));
+      axios.get(this.store.laravelApi + 'auth/user', {
+        params :{
+            user_id: userData
+        }
+       })
+       .then((response) => {
+         if(response && response.status === 200){
+          this.user = response.data.user;
+    
+         }
+       })
+       .catch((error) => {
+       if(error.response && error.response.status === 404){
+        
+           console.error('Error:', 'User not found');
+       }
+           console.error('Error:', error.message);
+       });
     },
     toggleSidemoreIsActive(){
       this.Hiddenbackdrop = !this.Hiddenbackdrop;
@@ -62,7 +86,14 @@ export const MainStore = defineStore('MainStore', {
       this.Hiddenbackdrop = false;
       this.SidemoreIsActive = false;
       this.EditInfo = false;
-    }, showSuccesToast (errorMessage) {
+   
+    }, 
+    closeSidebar(){
+      this.showSidebar = false;
+      this.SidebarHiddenbackdrop = false;
+    }
+    ,
+    showSuccesToast (errorMessage) {
       $toast.success(errorMessage, {
         position: 'bottom-right',
         duration: 3000,

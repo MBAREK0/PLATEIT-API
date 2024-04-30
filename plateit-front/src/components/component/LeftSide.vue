@@ -1,6 +1,6 @@
 <template>
     <div class="  flex flex-col gap-4  h-screen pl-3 pr-3   "  >
-        <span class="material-icons text-2xl absolute top-3 right-3 phone " @click="store.toggleSidebar()">close</span>
+        <span class="material-icons text-2xl absolute top-3 right-3 phone cursor-pointer " @click="store.toggleSidebar()">close</span>
         <div >
             <router-link :to="{ name: 'home'}" class="flex flex-col items-center" @click="store.searching=false">
                 <img src="../../assets/logo.png" alt="logo" class="mt-10 w-10/12 2xl:block xl:block lg:block md:block hidden">
@@ -19,7 +19,7 @@
                 </div>
                 <!-- ------------------- -->
                 <router-link :to="{ name: 'home'}" @click="store.searching=false">
-                    <div class=" flex gap-4 md:gap-2 sm:gap-1 items-center  px-2 hover:bg-gray-400 hover:bg-opacity-50 rounded-lg" :class="{ 'px-2 bg-gray-400 bg-opacity-50 rounded-lg': $route.name === 'home' && store.searching==false }">
+                    <div class=" flex gap-4 md:gap-2 sm:gap-1 items-center  px-2 hover:bg-gray-400 hover:bg-opacity-50 rounded-lg" :class="{ 'px-2 bg-gray-400 bg-opacity-50 rounded-lg': $route.name === 'home'  }">
                             <span class="material-icons lg:text-2xl xl:text-2xl 2xl:text-2xl cursor-pointer">home</span>
                             <p class="text-xl     translate-x-0 duration-75 cursor-pointer inter">Home</p>
                     </div>
@@ -136,7 +136,12 @@ const searchposts = () => {
  }
     P_store.GetPosts(search.value);
 }
-
+watch(search, (newValue, oldValue) => {
+    if(route.name !== 'home')
+    router.push({ name: 'home' });
+ 
+    P_store.GetPosts(newValue);
+});
 </script>
 
 <style scoped>

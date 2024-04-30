@@ -1,6 +1,6 @@
 <template>
     <div class="fixed w-1/2 z-999">
-        <div class="mt-4  flex flex-col bg-secondary_color dark:bg-secondary_color_dark rounded-lg p-4 shadow-sm">
+        <div class="mt-4 p_form flex flex-col bg-secondary_color dark:bg-secondary_color_dark rounded-lg p-4 shadow-sm" style="max-height: 40rem !important ; overflow-y: scroll;">
 
             
 

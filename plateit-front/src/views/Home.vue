@@ -3,14 +3,16 @@
 
 
         <section  >
+            
             <div class="w-full mt-3 flex lg:justify-center justify-center md:justify-end" v-if="!isVerified" >
                 <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center lg:px-10 md:px-5 px-5" >
+                   
                 <SendVirificationEmail/> 
                 </div>
             </div>
             <div class="w-full mt-3 flex lg:justify-center justify-center md:justify-end">
                 <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center lg:px-10 md:px-5 px-5" >
-                    <div class=" w-full ">
+                    <div class=" w-full pb-10 ">
                         <nav class="w-full m-0 p-0">
                             <smallNav class="pc"/>
                         </nav>
@@ -47,7 +49,7 @@ import SendVirificationEmail from '../components/component/SendVirificationEmail
 
 const store = MainStore();
 const P_store = PostStore();
-const isVerified = ref(store.user.email_verified_at) ;
+const isVerified = ref(localStorage.getItem('isVerified'));
 const posts = ref([]);
 onMounted( () => {
     P_store.GetPosts();
@@ -60,7 +62,7 @@ watch(() => P_store.posts, (newValue, oldValue) => {
 
 </script>
 
-<style>
+<style scoped>
 @media (max-width:301px){
     .font-size{
         font-size: small;

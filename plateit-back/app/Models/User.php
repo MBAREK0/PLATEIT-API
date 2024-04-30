@@ -26,6 +26,8 @@ class User extends Authenticatable  implements JWTSubject
         "role"
     ];
 
+    // protected $table = 'users';
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -63,5 +65,5 @@ class User extends Authenticatable  implements JWTSubject
     {
         return [];
     }
-    
+
 }

@@ -51,9 +51,9 @@ class PublicationsController extends Controller
 
 
         if(!empty($request->restaurant_id)){
-
-            $restaurant_Name = User::find($request->restaurant_id)->first()->fullName ?? null;
+            $restaurant_Name = User::where('id',request()->get('restaurant_id'))->first()->fullName ?? null ;
             $restaurant_link = Restaurant_details::where('restaurant_id',$request->restaurant_id)->first()->web_site ?? null;
+  
         }else{
 
 

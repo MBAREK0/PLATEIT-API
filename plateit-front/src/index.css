@@ -201,3 +201,11 @@ body {
     z-index: 10090 !important;
     pointer-events: none;
   }
+  .p_form::-webkit-scrollbar {
+    display: none !important;
+   
+}
+.p_form {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* Internet Explorer 10+ */
+}

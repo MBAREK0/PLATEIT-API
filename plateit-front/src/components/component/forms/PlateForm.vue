@@ -119,12 +119,5 @@ const handleSubmit = () => {
   transition: transform 0.3s ease;
 }
 
-.p_form::-webkit-scrollbar {
-    display: none !important;
-   
-}
-.p_form {
-  scrollbar-width: none !important; /* Firefox */
-  -ms-overflow-style: none !important; /* Internet Explorer 10+ */
-}
+
 </style>

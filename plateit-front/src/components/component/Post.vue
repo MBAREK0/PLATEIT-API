@@ -14,7 +14,10 @@
                         </div>
                     </div>
                     <div class="flex justify-start gap-3 items-center">
-                        <p class="p-0 m-0 text-sm " v-if="props.post.restaurant_Name"><span class="text-xs">@</span>{{ props.post.restaurant_Name }}</p>
+                        <p class="p-0 m-0 text-sm  flex justify-start items-start" v-if="props.post.restaurant_Name">
+                            <span class="text-xs">@</span>
+                            <span>{{ props.post.restaurant_Name }}</span>
+                        </p>
                         <!-- <div class=" flex gap-1 items-center ">
                             <p class="text-sm roboto">1250</p>
                             <img src="../../assets/icons/rest-points.svg" class=" w-3 h-3   " alt="points">

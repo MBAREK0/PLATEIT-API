@@ -19,7 +19,7 @@ export const UserStore = defineStore('UserStore', {
   actions: {
     GetRestaurantMenu(id)  {
       
-      axios.get( 'http://127.0.0.1:8000/api/restaurant/menu', {
+      axios.get( 'http://127.0.0.1:8000/api/menu', {
        params :{
            user_id: id
        }

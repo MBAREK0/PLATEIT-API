@@ -52,8 +52,6 @@ Route::middleware(['check.token','OnlyRestaurants'])->prefix('restaurant')->grou
      * get Routes
      */
     Route::get('get_plate', [MenuController::class,'get_plate']);
-    Route::get('menu', [MenuController::class,'menu']);
-    Route::get('get_details', [RestaurantDetailsController::class, 'get_details']);
 
     /**
      * delete Routes
@@ -92,7 +90,8 @@ Route::middleware(['check.token'])->prefix('publication')->group(function () {
 
     //-------------------------------- System Points Routes -------------
     Route::post('visite_rewards_from_post', [PointsOfVisitsController::class,'index']); # restaurant_id | publication_id
-    Route::post('claim_gifts', [GiftsController::class,'index']); # restaurant_id | publication_id
+
+
 
 
 
@@ -131,4 +130,11 @@ Route::middleware(['check.token'])->group(function () {
 
     Route::post('insert_details', [RestaurantDetailsController::class, 'insert_details']);
 
+    Route::post('claim_gifts', [GiftsController::class,'index']);
+    Route::get('get_gifts', [GiftsController::class,'get_gifts']);
+
+
+    Route::get('menu', [MenuController::class,'menu']);
+    Route::get('get_details', [RestaurantDetailsController::class, 'get_details']);
 });
+

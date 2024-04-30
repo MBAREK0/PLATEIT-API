@@ -1,6 +1,6 @@
 <template>
     <div class="  flex flex-col gap-4  h-screen pl-3 pr-3 ">
-        <span class="material-icons text-2xl absolute top-2 right-2 phone tablet" @click="store.toggleTrendSidebar()">close</span>
+        <span class="material-icons text-2xl absolute top-2 right-2 phone tablet cursor-pointer" @click="store.toggleTrendSidebar()">close</span>
         <div class="flex flex-col items-center ">
             <div class="relative w-10/12 mt-10 ">
                 <input type="text" class="border border-black-300 focus:border-black-300 outline-none rounded-lg py-1 px-3 w-full" placeholder="Search..." v-model="search">
@@ -19,7 +19,7 @@
 
               <div class="w-full  overflow-y-scroll Trend-Restaurant " >
                   <div v-if="restaurants && restaurants.length >0">
-                    <router-link :to="{ name: 'profile',query: { user_id:restaurant.id  }}" v-for="restaurant in restaurants" :key="restaurant.id">
+                    <router-link :to="{ name: 'profile',query: { user_id:restaurant.id  }}" v-for="restaurant in restaurants" :key="restaurant.id"  @click="store.showTrendSidebar = false">
                         <div class="flex justify-center w-full items-start gap-2" >
                             <div class="acc w-full mb-3 justify-self-end flex items-center gap-2 md:gap-1  ">
                                 <div>
@@ -59,9 +59,9 @@
                     </svg>
                     <p class="roboto"> Collaborations </p>
                 </div>
-                <div class="w-full  overflow-y-scroll Trend-Restaurant " >
-                    <div v-if="collaborations && collaborations.length >0">
-                        <router-link :to="{ name: 'profile',query: { user_id:restaurant.id  }}" v-for="restaurant in collaborations" :key="restaurant.id">
+                <div class="w-full  overflow-y-scroll Trend-Restaurant  " style="margin-bottom: 7rem;" >
+                  <div v-if="collaborations && collaborations.length >0">
+                    <router-link :to="{ name: 'profile',query: { user_id:restaurant.id  }}" v-for="restaurant in collaborations" :key="restaurant.id"  @click="store.showTrendSidebar = false">
                         <div class="flex justify-center w-full items-start gap-2" >
                             <div class="acc w-full mb-3 justify-self-end flex items-center gap-2 md:gap-1  ">
                                 <div>
@@ -84,12 +84,11 @@
                                 </svg>
                             </div>
                         </div>
-                        </router-link>
-                    </div>
-                    <div v-else class="w-full flex justify-center items-center">
-                        <p class="roboto text-center">No Collaborations</p>
-                    </div>
-
+                    </router-link>
+                </div>
+                <div v-else class="w-full flex justify-center items-center">
+                    <p class="roboto text-center">No restaurants</p>
+                </div>
               </div>  
                 
             </div>
@@ -100,7 +99,7 @@
 </template>
 
 <script setup>
-  import { onMounted } from "vue";
+  import { onMounted, watch } from "vue";
 import { MainStore } from "../../stores/MainStore";
 import axios from 'axios';
 import { ref } from "vue";
@@ -130,6 +129,10 @@ import { ref } from "vue";
            console.error(error);
        });
 }
+watch(search, (newValue, oldValue) => {
+    get_trand_restaurants_data(newValue);
+    get_collaboration_restaurants_data(newValue);
+});
  
 
    onMounted(()=>{
@@ -171,8 +174,8 @@ import { ref } from "vue";
 }
 
 .Trend-Restaurant {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
 }
 
 </style>

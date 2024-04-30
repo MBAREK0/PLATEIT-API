@@ -2,11 +2,22 @@
    
       <div class="card md:w-56 md:h-32 sm:w-74 sm:h-44  ">
         <div class="card-front w-full h-full">
-          <img src="../../assets/images/gift.jpg" class="w-full h-full" alt="location">
+          <img :src="'http://localhost:8000/images/gifts/email_gifts/' + gift.image" class="w-full h-full" alt="location">
         </div>
       </div>
     
 </template>
+<script setup>
+defineProps(
+  {
+    gift:{
+      type: Object,
+      required:true,
+      
+    }
+  }
+)
+</script>
   
 <style scoped>
 .card {

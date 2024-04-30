@@ -176,8 +176,10 @@ defineComponent({
                     u_store.profileData.details.category_id = response.data.category_id;
                     u_store.profileData.details.category = response.data.category_name;
                     u_store.profileData.info.ProfileImage = response.data.ProfileImage;
+                    store.user.ProfileImage = response.data.ProfileImage;
                     u_store.profileData.info.image_cover = response.data.image_cover;
                     u_store.profileData.info.fullName = response.data.fullName;
+                    store.user.fullName = response.data.fullName;
                     u_store.profileData.info.bio = response.data.bio;
                     u_store.profileData.details.address = response.data.address;
                     u_store.profileData.details.phone_numbre = response.data.phone_numbre;
@@ -201,7 +203,7 @@ defineComponent({
         };
       
 </script>
-<style>
+<style scoped>
 @import "vue-select/dist/vue-select.css";
 
 </style>
