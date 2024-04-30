@@ -72,7 +72,7 @@ class JwtTokenService
 
     public function genarateToken($user_id){
 
-            $user = User::where('id', $user_id)->first();
+
         $secretKey = env('JWT_SECRET');
         $token = JWT::encode(
             array(
@@ -80,11 +80,7 @@ class JwtTokenService
              'iat' => time(),
              'nbf' => time(),
              'exp' => time()+ 2 * 3600,
-             'sub' => $user_id,
-             'data' =>array(
-                 'user_id' => $user->id,
-                 'role' =>$user->role
-             )
+             'sub' => $user_id
             ),
             $secretKey,
             'HS256'
@@ -93,6 +89,8 @@ class JwtTokenService
     }
     public function get_role($token){
         $token_decoded = $this->decode($token);
-        return $token_decoded->data->role;
+        $u_id = $token_decoded->sub;
+        $user = User::where('id', $u_id)->first();
+        return  $user->role;
     }
 }

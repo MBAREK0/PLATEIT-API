@@ -36,9 +36,7 @@ Route::prefix('auth')->group(function () {
     Route::post('forgetPassword', [AuthController::class, 'forgetPassword']);
     Route::post('resetPassword', [AuthController::class, 'resetPassword']);
     Route::get('user', [AuthController::class, 'user']);
-    Route::post('insert_details', [RestaurantDetailsController::class, 'insert_details']);
 });
-
 
 // ------------------------------  Restaurants Routes ------------------------------------
 
@@ -122,10 +120,15 @@ Route::middleware(['check.token'])->group(function () {
 
     Route::get('trand_restaurants', [RightSidebarController::class,'trand_restaurants']);
     Route::get('collaboration_restaurants', [RightSidebarController::class,'collaboration_restaurants']);
+    Route::get('get_saved_posts', [PostesSavedController::class,'get_saved_posts']);
+    Route::get('get_all_restaurants', [PublicationsController::class,'get_all_restaurants']);
 
     Route::get('all_posts', [HomeController::class,'index']);
+    Route::get('profile_posts', [HomeController::class,'profile_posts']);
 
 
+    //-------------------------------- update profile for users and restaurants  -------------
 
+    Route::post('insert_details', [RestaurantDetailsController::class, 'insert_details']);
 
 });

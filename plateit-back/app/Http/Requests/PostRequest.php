@@ -22,11 +22,11 @@ class PostRequest extends FormRequest
     public function rules(): array
     {
         return [
-           'plate_name' => ['string'],
+           'plate_name' => ['required','string'],
            'restaurant_Name'=> ['string'],
-           'image'=> ['string'],
+           'image'=> ['image'],
            'restaurant_link'=> ['string'],
-           'description' =>  ['required','string'],
+           'description' =>  ['string'],
         ];
     }
 }

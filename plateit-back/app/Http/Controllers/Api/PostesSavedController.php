@@ -52,6 +52,22 @@ class PostesSavedController extends Controller
             }
         }
 
+        public function get_saved_posts(){
+            $key = request("key");
+            $publications =  DB::table('publications as P')
+            ->join('users as U', 'P.user_id', '=', 'U.id')
+            ->join('postes_saved as PS', 'P.id', '=', 'PS.publication_id')
+            ->where('U.fullName', 'like', '%' . $key . '%')
+            ->orWhere('P.plate_name', 'like', '%' . $key . '%')
+            ->orWhere('P.restaurant_Name', 'like', '%' . $key . '%')
+            ->select('P.*', 'U.fullName as author', 'U.Points as author_points', 'U.id as author_id','U.ProfileImage','U.Points as author_points')
+            ->orderBy('P.created_at', 'desc')
+            ->get();
+            return response()->json([
+                'status'=> 'success',
+                'data'=> $publications
+            ],200);
+        }
 
 	}
 

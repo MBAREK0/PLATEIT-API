@@ -23,7 +23,7 @@ for ($i = 0; $i < 5; $i++) {
 
     DB::table('users')->insert([
         'fullName' => $faker->word . ' ' . $faker->city . ' Restaurant',
-        'email' => $faker->unique()->safeEmail,
+        'email' => 'collaboration' . $i . '@gmail.com',
         'email_verified_at' => $faker->dateTime,
         'password' => bcrypt('password'),
         'Points' => $faker->randomDigit,
@@ -33,7 +33,7 @@ for ($i = 0; $i < 5; $i++) {
 
     ]);
 
-   
+
 }
     }
 }

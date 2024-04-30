@@ -14,11 +14,10 @@
                     <p class="text-xl     translate-x-0 duration-75 cursor-pointer  inter">Explore</p>
                 </div>
                 <div class=" flex gap-4 md:gap-2 sm:gap-1 items-center  relative " v-else>
-                    <span class="material-icons lg:text-2xl xl:text-2xl absolute  2xl:text-2xl cursor-pointer transition " :class="{ 'left-2': !store.searching, 'right-2': store.searching }">search</span>
-                    <input class="text-sm py-2    text-white  inter w-full  bg-gray-400   bg-opacity-50 rounded-lg   outline-none border-none pl-9 pr-15" placeholder="Explore" v-model="amine" />
+                    <span class="material-icons lg:text-2xl xl:text-2xl absolute  2xl:text-2xl cursor-pointer transition " :class="{ 'left-2': !store.searching, 'right-2': store.searching }" @click="searchposts">search</span>
+                    <input class="text-sm py-2    text-white  inter w-full  bg-gray-400   bg-opacity-50 rounded-lg   outline-none border-none pl-9 pr-15" placeholder="Explore" v-model="search"  />
                 </div>
                 <!-- ------------------- -->
-
                 <router-link :to="{ name: 'home'}" @click="store.searching=false">
                     <div class=" flex gap-4 md:gap-2 sm:gap-1 items-center  px-2 hover:bg-gray-400 hover:bg-opacity-50 rounded-lg" :class="{ 'px-2 bg-gray-400 bg-opacity-50 rounded-lg': $route.name === 'home' && store.searching==false }">
                             <span class="material-icons lg:text-2xl xl:text-2xl 2xl:text-2xl cursor-pointer">home</span>
@@ -38,7 +37,7 @@
                         <path d="M22.5 45C34.9264 45 45 34.9264 45 22.5C45 10.0736 34.9264 0 22.5 0C10.0736 0 0 10.0736 0 22.5C0 34.9264 10.0736 45 22.5 45Z" fill="#1A5DB4"/>
                         <path d="M33.75 21.8841C33.75 28.1039 28.9322 30.2189 24.8766 30.2189V31.8403H28.0055V34.0369H24.878V36.5625H19.9842V34.0369H16.9931V31.8403H19.9786V30.1978C18.6806 30.1978 11.25 29.8898 11.25 21.4327V11.25H16.1086V21.8222C16.1086 26.2364 19.9983 26.1956 19.9983 26.1956V11.25H24.878V26.1956C24.878 26.1956 28.8914 26.4206 28.8914 21.7617V11.25H33.75V21.8841Z" fill="white"/>
                     </svg>
-                    <p class="text-xl   translate-x-0 duration-75 cursor-pointer roboto">1250</p>              
+                    <p class="text-xl   translate-x-0 duration-75 cursor-pointer roboto" v-text="store.user.Points"></p>              
                 </div>
                 </router-link>
                 <!-- ------------------- -->
@@ -52,7 +51,7 @@
                 </router-link>
                 <!-- ------------------- -->
                 <router-link :to="{ name: 'profile',query: { user_id:store.user.id  }}" @click="store.searching=false">
-                <div class=" flex gap-4 md:gap-2 sm:gap-1 items-center  px-2 hover:bg-gray-400 hover:bg-opacity-50 rounded-lg" :class="{ 'px-2 bg-gray-400 bg-opacity-50 rounded-lg': $route.name === 'profile' && store.searching==false }">
+                <div class=" flex gap-4 md:gap-2 sm:gap-1 items-center  px-2 hover:bg-gray-400 hover:bg-opacity-50 rounded-lg" :class="{'px-2 bg-gray-400 bg-opacity-50 rounded-lg':isProfilePage()}">
                     <span class="material-icons lg:text-2xl xl:text-2xl 2xl:text-2xl p-0 m-0 cursor-pointer">person</span>
                     <p class="text-xl   translate-x-0 duration-75 cursor-pointer inter">Profile</p>
                 </div>
@@ -71,14 +70,16 @@
                 </div>
                 <!-- ------------------- -->
                 <div class="flex justify-center w-full">
-                <button class="bg-btn_primary_color hover:bg-btn_submit_hover  lg:h-10 md:h-8 rounded-lg text-lg  w-10/12 ">Post</button>
+                <button class="bg-btn_primary_color hover:bg-btn_submit_hover  lg:h-10 md:h-8 rounded-lg text-lg  w-10/12 " @click="togglePostModle()">Post</button>
 
                 </div>
             </div>
             <div class=" flex justify-between items-center  ">
                 <div class="acc w-full mb-3 justify-self-end flex items-center gap-2 md:gap-1">
                     <div >
-                        <img src="../../assets/images/auth.jpg" class="profile-pic" alt="profile">
+                        <router-link :to="{ name: 'profile',query: { user_id:store.user.id  }}" >
+                        <img :src="'http://localhost:8000' + store.user.ProfileImage" class="profile-pic" alt="profile">
+                    </router-link>
                     </div>
                     <div class="lg:text-sm xl:text-md md:text-sm sm:text-xs text-start  inter">
                         <p v-text="store.user.fullName ? store.user.fullName.toUpperCase() : '' "></p> 
@@ -89,30 +90,55 @@
                 </div>
             </div>  
         </div>
-       <SidSmallModel v-if="store.SidemoreIsActive" class="corsur-pointer" style="z-index: 9999 !important;"/>
+       <SidSmallModel v-if="store.SidemoreIsActive" class="corsur-pointer" style="z-index: 999 !important;"/>
        <div class="Hiddenbackdrop" @click="store.toggleAllSmallModels()"  v-if="store.Hiddenbackdrop"></div>
     </div>
 
 </template>
 
-<script>
-  import { MainStore } from "../../stores/MainStore";
-  import SidSmallModel from './SidSmallModel.vue'
-  export default {
-    data() {
-        return {
-            amine:''
-        }
-    },
-    components: {
-        SidSmallModel
-    },
-    setup() {
-      const store = MainStore();
-      return {store}
-    }
-  };
+<script setup>
+import { MainStore } from "../../stores/MainStore";
+import { PostStore } from "../../stores/PostStore";
+import {  watch } from 'vue';
+import SidSmallModel from './SidSmallModel.vue';
+import { getCurrentInstance, onMounted } from 'vue';
+import { useRoute , useRouter } from 'vue-router';
+import { ref } from "vue";
+
+const route = useRoute();
+const store = MainStore();
+const P_store = PostStore();
+const search = ref('');
+const router = useRouter();
+const isProfilePage = () => {
+
+
+  return route.name === 'profile' &&
+  store.searching==false
+    && route.query.user_id == store.user.id;
+};
+
+const togglePostModle = () => {
+    if(route.name !== 'home'){
+    
+    router.push({ name: 'home' });
+ }
+    store.togglePostModel()
+}
+
+
+
+
+const searchposts = () => {
+ if(route.name !== 'home'){
+    
+    router.push({ name: 'home' });
+ }
+    P_store.GetPosts(search.value);
+}
+
 </script>
+
 <style scoped>
 @media (min-width: 1024px){
 .points-icon {

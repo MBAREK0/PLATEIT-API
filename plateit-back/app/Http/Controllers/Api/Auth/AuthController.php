@@ -138,6 +138,7 @@ class AuthController extends Controller
      * to the 'auth/resend_email_verification_link' endpoint using a POST form.
      */
      public function resendEmailVerificationLink(ResendEmailVerificationLinkRequest $request){
+        
         return $this->service->resendLink($request->email);
      }
 

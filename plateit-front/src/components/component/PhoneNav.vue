@@ -28,8 +28,8 @@
             <span class="material-icons text-4xl text-sidebar_color dark:text-sidebar_text_color" @click="store.toggleSidebar()">menu</span>
           <smallNav/>
             <div class="relative w-1/3" v-if="this.$route.name === 'home'">
-                <input type="text" class="border border-black-300 focus:border-black-300 outline-none rounded-lg py-1 px-3 w-full" placeholder="Search...">
-                <span class="material-icons absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-400 cursor-pointer">search</span>
+                <input type="text" class="border border-black-300 focus:border-black-300 outline-none rounded-lg py-1 px-3 w-full" v-model="search" placeholder="Search...">
+                <span class="material-icons absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-400 cursor-pointer"  @click="searchposts">search</span>
             </div>
         </nav>
         <transition name="sidebar-slide" class=" sidebar left-0  bg-sidebar_color dark:bg-sidebar_color_dark   fixed sm:top-20 top-10 bottom-0  w-1/2  text-sidebar_text_color " style="z-index: 9999 !important;" > <LeftSidebar  v-if="store.showSidebar" class="border-t border-white border-opacity-50" /></transition>
@@ -39,21 +39,21 @@
 
 </template>
 
-<script>
+<script setup>
   import LeftSidebar from './LeftSide.vue'
+  import { onMounted, ref } from 'vue';
   import smallNav from './smallNav.vue'
   import { MainStore } from "../../stores/MainStore";
+  import { PostStore } from "../../stores/PostStore";
 
-  export default {
-    components: {
-      LeftSidebar,
-      smallNav
-    },
-    setup() {
-      const store = MainStore();
-      return {store}
-    }
-  };
+  const store = MainStore();
+  const P_store = PostStore();
+  const search = ref('');
+
+const searchposts = () => {
+    P_store.GetPosts(search.value);
+}
+  
 </script>
 <style>
 .sidebar-slide-enter-active, .sidebar-slide-leave-active {

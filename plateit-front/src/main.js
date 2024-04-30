@@ -22,7 +22,7 @@ app.component('v-select', vSelect);
 const MainStoreInstance = MainStore()
 
 if(localStorage.getItem('access_token')){
-    console.log('access token found <==main.js/=>',localStorage.getItem('access_token'))
+   
     SatAuthHeader(localStorage.getItem('access_token'))
 
     

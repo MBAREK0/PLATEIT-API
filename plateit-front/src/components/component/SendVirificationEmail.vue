@@ -20,7 +20,7 @@ import 'vue-toast-notification/dist/theme-sugar.css';
 const route = useRoute();
 var sending =ref(false);
 const store = MainStore();
-const email = 'elll@bbbdccom';
+const email =  store.$state.user.email;
 const $toast = useToast();
 
   

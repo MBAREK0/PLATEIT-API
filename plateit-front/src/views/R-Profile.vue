@@ -43,7 +43,7 @@
                                                     <p class="text-sm">Edit Mon Profile</p>
                                                 </div>
                                                 <hr>
-                                                <div class="flex gap-2 items-center px-2 py-1 text-sidebar_text_color bg-red-600 hover:bg-main_color_dark cursor-pointer" @click="handleDeleteSubmit(plate.id)"  v-if="store.user.role === 'restaurant'">
+                                                <div class="flex gap-2 items-center px-2 py-1 text-sidebar_text_color bg-red-600 hover:bg-main_color_dark cursor-pointer" @click="delete_all_menu"  v-if="store.user.role === 'restaurant'">
                                                     <span class="material-icons">delete</span>
                                                     <p class="text-sm" >Delete All menu</p>
                                                 </div>
@@ -56,7 +56,7 @@
                             <!-- adress of restaurant -->
                             <div class="w-full ">
                                 <div class=" w-full text-start break-words">
-                                    <p class="text-SM mt-2 " v-if="category"  v-text="u_store.profileData.details.category ? u_store.profileData.details.category.toUpperCase() : ''"></P>
+                                    <p class="text-SM mt-2 " v-if="u_store.profileData.details.category"  v-text="u_store.profileData.details.category ? u_store.profileData.details.category.toUpperCase() : ''"></P>
                                 </div>
                             </div>
                         </div>
@@ -77,12 +77,12 @@
                         <div class="w-full ">
                             <div class=" w-full text-start break-words">
                                 <div class="flex items-center justify-start gap-2 mt-3">
-                                    <p class="text-xs"  v-if="address"> <span class="font-bold" >Address : </span>: {{  u_store.profileData.details.address ?  u_store.profileData.details.address : '' }}</p>
-                                    <p class="text-xs" v-if="phone_numbre"> <span class="font-bold"  >Phone Numbre : </span>: {{ u_store.profileData.details.phone_numbre ? u_store.profileData.details.phone_numbre : '' }}</p>
+                                    <p class="text-xs"  v-if="u_store.profileData.details.address"> <span class="font-bold" >Address : </span>: {{  u_store.profileData.details.address ?  u_store.profileData.details.address : '' }}</p>
+                                    <p class="text-xs" v-if="u_store.profileData.details.phone_numbre"> <span class="font-bold"  >Phone Numbre : </span>: {{ u_store.profileData.details.phone_numbre ? u_store.profileData.details.phone_numbre : '' }}</p>
                                     
                                     
                                    </div>
-                                <small class="text-xs   "v-text="u_store.profileData.info.bio "></small>
+                                <small class="text-xs   "v-text="u_store.profileData.info.bio"></small>
                             </div>
                         </div>
                     </div>
@@ -123,8 +123,8 @@
 
 
                         <div class="backdrop" @click="store.toggleAllModels()"  v-if="store.backdrop"></div>
-                        <div class="w-full justify-center flex "v-for="index in 6" :key="index">
-                            <post/>
+                        <div class="w-full justify-center flex "v-for="post in ProfilePosts" :key="post.id">
+                            <post :post="post"/>
                         </div>
                     </div>
                 </div>
@@ -144,6 +144,7 @@ import PlateForm from "../components/component/forms/PlateForm.vue";
 import EditeProfileForm from "../components/component/forms/EditeProfileForm.vue";
 import { MainStore } from "../stores/MainStore";
 import { UserStore } from "../stores/UserStore";
+import { PostStore } from "../stores/PostStore";
 import Menu  from "../components/component/Menu.vue";
 import  post  from "../components/component/Post.vue";
 import { useRoute , useRouter } from 'vue-router';
@@ -151,11 +152,9 @@ import axios from "axios";
 
 const page = ref('Profile');
 const route = useRoute();
-const router = useRouter();
-const toggleEditInfo = ref(false);
 const store = MainStore();
 const u_store = UserStore();
-const  userId = route.query.user_id;
+const  userId = ref(route.query.user_id);
 const fullName = ref(null);
 const email_verified_at = ref(null);
 const Points = ref(null);
@@ -167,21 +166,20 @@ const address = ref(null);
 const phone_numbre = ref(null);
 const web_site = ref(null);
 const category = ref(null);
+const ProfilePosts = ref([]);
 
 
-   
 
 
-
-const params = {
-    user_id: userId
-};
-
-const GetUserData = () => {
+const GetUserData = (uid) => {
     store.setDataPreloading(true);
-   axios.get(store.laravelApi + 'auth/user', {params})
+   axios.get(store.laravelApi + 'auth/user', {
+    params :{
+        user_id: uid
+    }
+   })
    .then((response) => {
-     if(response.status === 200){
+     if(response && response.status === 200){
      const user = response.data.user;
      fullName.value = user.fullName;
      email_verified_at.value = user.email_verified_at;
@@ -191,10 +189,15 @@ const GetUserData = () => {
      bio.value = user.bio;
      store.setDataPreloading(false);
      u_store.profileData.info = user;
+     if(user.role === 'restaurant'){
+         
+        GetRestaurantData(user.id);
+        u_store.GetRestaurantMenu(user.id); 
+     }
      }
    })
    .catch((error) => {
-   if(error.response.status === 404){
+   if(error.response && error.response.status === 404){
     
        console.error('Error:', 'User not found');
    }
@@ -203,15 +206,16 @@ const GetUserData = () => {
 
    
  };
- const GetRestaurantData = () => {
+ const GetRestaurantData = (uid) => {
     
    axios.get(store.laravelApi + 'restaurant/get_details', {
     params :{
-        restaurant_id: userId
+        restaurant_id: uid
     }
 })
    .then((response) => {
-     if(response.status === 200){
+   
+     if(response && response.status === 200){
 
      const details = response.data.restaurant_details;
      address.value = details.address;
@@ -219,36 +223,87 @@ const GetUserData = () => {
      web_site.value = details.web_site;
      category.value = details.category;
      u_store.profileData.details = details;
+     
 
      store.categories = response.data.categories;
-     }
+    }
    })
    .catch((error) => {
-       console.error('Error:', error.message);
-   });
-  
- };
-
-onMounted(() => {
-    u_store.GetRestaurantMenu(userId); 
-    GetUserData();
-    if (store.user.role === 'restaurant') {
-        GetRestaurantData();
-       
-    }else{
-     u_store.profileData.details = {
+    store.categories =  error.response.data.categories;
+    u_store.profileData.details = {
         address: null,
         phone_numbre: null,
         web_site: null,
         category: null
      };
-    }
-    
+      console.error('Error:', error.message);
+   });
+  
+ };
 
+ 
+  const GetProfilePosts = (uid) => {
+         axios.get(store.laravelApi + 'profile_posts', {
+            params: {
+                profile_id: uid,  
+            }
+        })
+            .then(response => {
+                const Posts = response.data.data;
+                ProfilePosts.value = Posts;
+            })
+            .catch(error => {
+               
+                console.error(error);
+            });
+}
+
+
+
+watch(() => route.query.user_id, async (newValue, oldValue) => {
+
+    u_store.profileData.details = {
+        address: null,
+        phone_numbre: null,
+        web_site: null,
+        category: null
+     };
+     userId.value = newValue;
+     await GetUserData(newValue); 
+     await GetProfilePosts(newValue);
+ 
+    });
+  
+
+onMounted(async () => {
+    u_store.profileData.details = {
+        address: null,
+        phone_numbre: null,
+        web_site: null,
+        category: null
+     };
+
+     await GetUserData(userId.value);
+     await GetProfilePosts(userId.value);
+  
     
 });
 
-    
+    const delete_all_menu = () => {
+        axios.delete(store.laravelApi + 'restaurant/delete_menu')
+        .then((response) => {
+            if(response && response.status === 200){
+                u_store.$state.menu = [];
+            store.showSuccesToast(response.data.message)
+
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error.message);
+            store.displayValidationErrors('error occured while deleting the menu, please try again later');
+
+        });
+    }
 
   
 

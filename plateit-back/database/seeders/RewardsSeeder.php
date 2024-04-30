@@ -36,7 +36,7 @@ class RewardsSeeder extends Seeder
             ],
             [
                 'type' => 'AddPostPoints',
-                'value' => 5,
+                'value' => 2,
             ],
             [
                 'type' => 'GetupvotePoints',

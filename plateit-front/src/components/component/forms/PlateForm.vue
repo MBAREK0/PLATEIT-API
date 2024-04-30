@@ -46,7 +46,7 @@
                 </div>
                 <div class=" flex justify-between gap-5">
                     <button class="bg-secondary_color border border-sidebar_color_dark hover:bg-btn_submit_hover hover:text-white text-main_text_color  lg:h-8 md:h-8 rounded-lg text-lg  w-24 " @click="store.toggleMenuModel()">cansel</button>
-                <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  lg:h-8 md:h-8 rounded-lg text-lg  w-24 " @click="handleSubmit()" >Add Plate</button>
+                <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  lg:h-8 md:h-8 rounded-lg text-xs  w-24 " @click="handleSubmit()" >Add Plate</button>
 
                 </div>
             </div>
@@ -85,7 +85,7 @@ const handleFileChange = (event) => {
 
 const handleSubmit = () => {
     const formData = new FormData();
-    console.log('Selected form file:', file.value);
+   
 
     formData.append('name', plateName.value);
     formData.append('price', price.value);
@@ -97,7 +97,7 @@ const handleSubmit = () => {
         .then(response => {
             store.showSuccesToast(response.data.message)
             u_store.$state.menu.push(response.data.plate)
-            console.log('Plate added successfully:', response.data);
+        
         })
         .catch(error => {
         if (error.response && error.response.status === 422) {

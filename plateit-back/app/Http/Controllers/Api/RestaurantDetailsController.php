@@ -9,12 +9,25 @@ use App\Models\Category;
 use App\Models\Restaurant_details;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use Mockery\Undefined;
+use Illuminate\Support\Facades\Validator;
 
 class RestaurantDetailsController extends Controller
 {
 
-    public function insert_details(RestaurantDetailsRequest  $Request){
+    public function insert_details(Request  $Request){
 
+        $validator = Validator::make($Request->all(), [
+            'address'=> ['string'],
+            'phone_numbre'=> ['string'],
+            'web_site'=> ['string'],
+            'bio'=> ['string','max:250'],
+
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
 
              $ProfileImagePath = null;
             if ($Request->hasFile('ProfileImage')) {
@@ -42,12 +55,11 @@ class RestaurantDetailsController extends Controller
             $user->save();
 
             if($user->role  == 'restaurant'){
-
                 $category_id =  $Request->category_id;
-                if( !$category_id){
+                if($Request->category_id === "undefined"){
+
                     $category_id = 1;
                 }
-
                 Restaurant_details::updateOrCreate(['restaurant_id' => $Request->restaurant_id], [
                     'category_id' => $category_id,
                     'address'=> $Request->address,
@@ -87,14 +99,15 @@ class RestaurantDetailsController extends Controller
         public function get_details(Request $Request){
 
            $restaurant_id = $Request->restaurant_id;
-
+           $categories = Category::all();
            $restaurant_details = Restaurant_details::where('restaurant_id', $restaurant_id)->first();
            if( !$restaurant_details ){
             return response()->json([
                 'status'=> 'failed',
                 'error' => 'Details Not Found',
-                'restaurant_id'=>$restaurant_id
-            ],401);
+                'restaurant_id'=>$restaurant_id,
+                'categories'=> $categories,
+            ],403);
            }
            $category_id = $restaurant_details->category_id;
            $category = Category::find( $category_id )->name;

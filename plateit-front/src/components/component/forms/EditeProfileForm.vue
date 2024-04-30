@@ -51,7 +51,7 @@
                     <v-select
                     v-model="selectedItem"
                     :options="categories"
-                    placeholder="Select an item"
+                    placeholder="Select a category"
                     label="name"
                     class="w-full bg-white rounded-md  text-main_text_color  p-0 m-0"
                     ></v-select>                
@@ -62,7 +62,7 @@
             <div class="mt-4 flex flex-row gap-1 space-x-2 text-start" v-if="store.user.role === 'restaurant'">
                 <div class="flex-1">
                 <label class="text-main_text_color  " for="emotions"> Resturant address</label>
-                <input v-if="address" v-model="address" placeholder="Resturant Name" class="w-full bg-white rounded-md border-gray-300 text-main_text_color   px-2 py-1" id="emotions"  type="text">
+                <input  v-model="address" placeholder="Resturant Name" class="w-full bg-white rounded-md border-gray-300 text-main_text_color   px-2 py-1" id="emotions"  type="text">
                 </div>
 
                 <div class="flex-1 text-start">
@@ -75,6 +75,9 @@
             <div class="flex-1 text-start">
                 <label class="text-main_text_color  " for="symbols">bio</label>
                 <textarea v-model="bio" placeholder="$ 0.00" class="w-full bg-white rounded-md border-gray-300 text-main_text_color   px-2 py-1" id="symbols" type="text"></textarea>
+                <div class="flex justify-end items-center">
+                    <p class="text-main_text_color" v-if="bio">{{ bio.length }}/250</p>
+                </div>
             </div>
 
             <div class="mt-4 flex justify-end  ">
@@ -153,7 +156,7 @@ defineComponent({
 
     const handleSubmit = () => {
         const formData = new FormData();
-        // console.log('Selected form file:', file.value);
+    
 
         formData.append('image_cover', image_cover.value);
         formData.append('ProfileImage', ProfileImage.value);
@@ -166,9 +169,8 @@ defineComponent({
         formData.append('phone_numbre', phone_numbre.value);
         formData.append('category_id', selected_category.value.id);
         // Send form data to the backend using Axios or other HTTP client
-        axios.post(store.laravelApi + 'auth/insert_details', formData)
+        axios.post(store.laravelApi + 'insert_details', formData)
             .then(response => {
-                store.showSuccesToast(response.data.message)
                 if (response.status === 200) {
                     // Modify the properties here
                     u_store.profileData.details.category_id = response.data.category_id;
@@ -181,14 +183,15 @@ defineComponent({
                     u_store.profileData.details.phone_numbre = response.data.phone_numbre;
                     u_store.profileData.details.web_site = response.data.web_site;
                 }
-                console.log('profile Updated successfully:', response.data);
+                store.showSuccesToast(response.data.message)
             })
             .catch(error => {
             if (error.response && error.response.status === 422) {
                 
                 store.displayValidationErrors(error.response.data.errors);
-                } else {
-                    store.displayValidationErrors('error occured while updating profile, please try again later');
+                
+            } else {
+                store.displayValidationErrors('error occured while updating profile, please try again later');
                 }
             
             });

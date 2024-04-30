@@ -15,7 +15,6 @@ const setAuthHeader = (token) => {
             Authorization : `Bearer ${token}`
          }
          u_store.setUserData()
-         console.log('user set successfyly <==main.js/=>',u_store.user) 
 
     }else{
         delete axios.defaults.headers.Authorization ;

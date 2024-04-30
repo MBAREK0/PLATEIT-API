@@ -19,6 +19,7 @@ class EmailVerificationService
      */
 
      public function sendVerificationLink($user){
+
         Notification::send($user, new EmailVerificationNotification($this->generateVerificationLink($user->email)));
      }
 
@@ -60,6 +61,7 @@ class EmailVerificationService
 
        public function verifyEmail(string $email ,string $token){
         $user = User::where('email', $email)->first();
+   
         if(!$user){
             response()->json([
                 'status' => 'failed',

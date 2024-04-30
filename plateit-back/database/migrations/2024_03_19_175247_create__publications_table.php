@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('description')->nullable();
             $table->string('restaurant_link')->nullable();
+            $table->string('restaurant_id')->nullable();
             $table->foreignId('user_id')->constrained('users')->onDelete('CASCADE')->onUpdate('CASCADE');
 
             $table->timestamps();

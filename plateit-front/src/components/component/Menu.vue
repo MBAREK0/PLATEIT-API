@@ -255,7 +255,6 @@ setup() {
 };
     const handleUpdateSubmit = () => {
         const formData = new FormData();
-        // console.log('Selected form file:', file.value);
 
         formData.append('id', plate_id.value);
         formData.append('name', plateName.value);
@@ -274,7 +273,7 @@ setup() {
         let foundIndex = u_store.$state.menu.findIndex(obj => obj.id === updatedPlate.id); // Find object index by id
         if (foundIndex !== -1) {
             u_store.$state.menu[foundIndex] = updatedPlate;
-            console.log('Plate updated successfully:', updatedPlate);
+         
         } else {
             console.error('Plate with ID', updatedPlate.id, 'not found in the menu array.');
         }

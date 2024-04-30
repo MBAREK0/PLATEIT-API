@@ -31,7 +31,8 @@ export const UserStore = defineStore('UserStore', {
         }
       })
       .catch((error) => {
-          console.error('Error:', error.message);
+        this.menu = [];
+          // console.error('Error:', error.message);
           this.store.setMiniDataPreloading(false)
       });
     },  

@@ -16,6 +16,7 @@ class publications extends Model
         "description",
         "restaurant_link",
         "user_id",
+        'restaurant_id'
 
 
     ] ;
