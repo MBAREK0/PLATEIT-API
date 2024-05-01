@@ -68,6 +68,8 @@ watch(search, (newValue, oldValue) => {
     get_saved_posts(newValue);
 });
 onMounted( async () => {
+  P_store.postLoading = true;
+
   await P_store.get_saved_posts_ids();
   get_saved_posts();
 });

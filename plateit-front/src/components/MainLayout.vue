@@ -38,6 +38,7 @@
   import PreLoading from './component/PreLoading.vue';
   import RightSide from './component/RightSide.vue';
   import { MainStore } from "../stores/MainStore";
+  
 
   const store = MainStore();
 

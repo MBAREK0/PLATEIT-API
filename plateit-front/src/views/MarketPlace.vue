@@ -84,7 +84,7 @@ const claim_gift = async (gift) => {
             
         })
         .then(response => {
-            console.log( '========>',response.data.messge);
+          
           store.showSuccesToast(response.data.messge)
 
         })

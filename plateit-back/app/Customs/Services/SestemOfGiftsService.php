@@ -23,7 +23,7 @@ class SestemOfGiftsService
                 return response()->json([
                     'status' => 'failed',
                     'error' => 'Your accumulated points are less than the required points for this gift.'
-                ]);
+                ], 401);
 
             }
         }

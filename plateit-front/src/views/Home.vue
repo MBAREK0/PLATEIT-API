@@ -4,7 +4,7 @@
 
         <section  >
             
-            <div class="w-full mt-3 flex lg:justify-center justify-center md:justify-end" v-if="!isVerified" >
+            <div class="w-full mt-3 flex lg:justify-center justify-center md:justify-end" v-if="!store.$state.user.email_verified_at" >
                 <div class=" lg:w-3/5 md:w-4/5 w-full flex justify-center lg:px-10 md:px-5 px-5" >
                    
                 <SendVirificationEmail/> 
@@ -46,10 +46,12 @@ import  post  from "../components/component/Post.vue";
 import { MainStore } from "../stores/MainStore";
 import { PostStore } from "../stores/PostStore";
 import SendVirificationEmail from '../components/component/SendVirificationEmail.vue';
+import { UserStore } from '@/stores/UserStore';
 
 const store = MainStore();
 const P_store = PostStore();
-const isVerified = ref(localStorage.getItem('isVerified'));
+const u_store = UserStore();
+
 const posts = ref([]);
 onMounted(async () => {
     await P_store.get_saved_posts_ids();

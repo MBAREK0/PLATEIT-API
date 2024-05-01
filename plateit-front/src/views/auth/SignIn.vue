@@ -81,7 +81,6 @@
      const token = response.data.access_token;
      localStorage.setItem('access_token', token);
      localStorage.setItem('IsLogin', true);
-     localStorage.setItem('isVerified', response.data.user.email_verified_at);
      localStorage.setItem('user_id', JSON.stringify(response.data.user.id));
      store.setUserData()
      SatAuthHeader(token)

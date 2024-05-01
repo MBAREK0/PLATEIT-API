@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class=" ">
-                <span class="material-icons cursor-pointer" v-if="$route.name === 'profile'" @click="togleMore()">more_vert</span>
+                <span class="material-icons cursor-pointer" v-if="$route.name === 'profile' && userId == store.$state.user.id" @click="togleMore()">more_vert</span>
   
             </div>
         </div>
@@ -109,6 +109,10 @@ import { ref } from 'vue';
         type: Array,
         required: true,
         default: () => ([]) 
+      },
+      userId:{
+        type: Number,
+        required: true
       }
     });
 

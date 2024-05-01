@@ -6,7 +6,7 @@ use App\Customs\Services\JwtTokenService;
 use App\Models\publications;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Jobs\DailyRewardsJob;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -17,6 +17,11 @@ class HomeController extends Controller
     }
 
     public function index(){
+
+        $token = request()->header('Authorization');
+        $user = (int) $this->JwtService->get_user($token)->id;
+        dispatch(new DailyRewardsJob($user));
+        
         $key = request("key");
         $type = request("type") ?? 'all';
 
@@ -45,8 +50,6 @@ class HomeController extends Controller
 
         }else if($type == 'follow'){
 
-            $token = request()->header('Authorization');
-            $user = (int) $this->JwtService->get_user($token)->id;
 
         $publications = DB::table('publications as P')
             ->join('users as U', 'P.user_id', '=', 'U.id')

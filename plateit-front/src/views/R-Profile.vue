@@ -123,8 +123,8 @@
 
 
                         <div class="backdrop" @click="store.toggleAllModels()"  v-if="store.backdrop"></div>
-                        <div class="w-full justify-center flex "v-for="post in ProfilePosts" :key="post.id">
-                            <post :post="post" :saveds=" p_store.saved_posts_ids"/>
+                        <div class="w-full justify-center flex mb-10 "v-for="post in ProfilePosts" :key="post.id">
+                            <post :post="post" :saveds=" p_store.saved_posts_ids" :userId="userId"/>
                         </div>
                     </div>
                 </div>
@@ -285,6 +285,7 @@ watch(() => route.query.user_id, async (newValue, oldValue) => {
   
 
 onMounted(async () => {
+    store.dataPreloading = true;
     my_followers();
    await p_store.get_saved_posts_ids();
     u_store.profileData.details = {

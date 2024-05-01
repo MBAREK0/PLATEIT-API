@@ -6,6 +6,7 @@ import { MainStore } from './MainStore.js'
 export const UserStore = defineStore('UserStore', {
   state: () => ({
     user:[],
+    isVerified:false,
     store : MainStore(),
     menu:[],
     profileData:[],
