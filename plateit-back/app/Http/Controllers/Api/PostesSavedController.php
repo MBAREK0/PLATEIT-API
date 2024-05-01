@@ -45,27 +45,50 @@ class PostesSavedController extends Controller
 			}
 		}
         public function delete(){
-            $id = request('id') ;
-            $Postes_saved = Postes_saved::findOrFail($id);
+            $id = request('publication_id') ;
+            $Postes_saved = Postes_saved::where('publication_id', $id)->first();
+       
             if($Postes_saved->delete()){
                 return response()->json(['status' => 'success', 'message' => 'Postes_saved deleted successfully!' ]);
             }
         }
 
         public function get_saved_posts(){
+            $token = request()->header('Authorization');
+            $user = $this->JwtService->get_user($token)->id;
+
             $key = request("key");
-            $publications =  DB::table('publications as P')
+            $publications = DB::table('publications as P')
             ->join('users as U', 'P.user_id', '=', 'U.id')
             ->join('postes_saved as PS', 'P.id', '=', 'PS.publication_id')
-            ->where('U.fullName', 'like', '%' . $key . '%')
-            ->orWhere('P.plate_name', 'like', '%' . $key . '%')
-            ->orWhere('P.restaurant_Name', 'like', '%' . $key . '%')
-            ->select('P.*', 'U.fullName as author', 'U.Points as author_points', 'U.id as author_id','U.ProfileImage','U.Points as author_points')
+            ->where('PS.user_id', $user)
+            ->where(function($query) use ($key) {
+                $query->where('U.fullName', 'like', '%' . $key . '%')
+                      ->orWhere('P.plate_name', 'like', '%' . $key . '%')
+                      ->orWhere('P.restaurant_Name', 'like', '%' . $key . '%');
+            })
+            ->select('P.*', 'U.fullName as author', 'U.Points as author_points', 'U.id as author_id', 'U.ProfileImage', 'U.Points as author_points')
             ->orderBy('P.created_at', 'desc')
             ->get();
+
             return response()->json([
                 'status'=> 'success',
                 'data'=> $publications
+            ],200);
+        }
+        public function get_saved_posts_ids(){
+            $token = request()->header('Authorization');
+            $user = $this->JwtService->get_user($token)->id;
+
+            $saveds = DB::table('publications as P')
+            ->join('users as U', 'P.user_id', '=', 'U.id')
+            ->join('postes_saved as PS', 'P.id', '=', 'PS.publication_id')
+            ->where('PS.user_id', $user)
+            ->pluck('P.id');
+
+            return response()->json([
+                'status'=> 'success',
+                'data'=> $saveds
             ],200);
         }
 

@@ -111,6 +111,7 @@ Route::middleware(['check.token'])->group(function () {
     Route::post('follow', [FollowsController::class,'follow']);
     Route::delete('unfollow', [FollowsController::class,'unfollow']);
     Route::get('count_followers', [FollowsController::class,'count_followers']); // restaurant_id
+    Route::get('my_followers', [FollowsController::class,'my_followers']);
 
     //-------------------------------- System Points Routes -------------
     Route::post('visite_rewards_from_profile', [PointsOfVisitsController::class,'index']); # restaurant_id | publication_id with null
@@ -120,6 +121,7 @@ Route::middleware(['check.token'])->group(function () {
     Route::get('trand_restaurants', [RightSidebarController::class,'trand_restaurants']);
     Route::get('collaboration_restaurants', [RightSidebarController::class,'collaboration_restaurants']);
     Route::get('get_saved_posts', [PostesSavedController::class,'get_saved_posts']);
+    Route::get('get_saved_posts_ids', [PostesSavedController::class,'get_saved_posts_ids']);
     Route::get('get_all_restaurants', [PublicationsController::class,'get_all_restaurants']);
 
     Route::get('all_posts', [HomeController::class,'index']);

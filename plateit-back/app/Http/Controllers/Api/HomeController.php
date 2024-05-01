@@ -52,6 +52,7 @@ class HomeController extends Controller
             ->join('users as U', 'P.user_id', '=', 'U.id')
             ->join('follows as F', 'F.restaurant_id', '=', 'P.user_id')
             ->where('U.role', 'restaurant')
+            ->where('F.user_id', $user)
             ->where(function ($query) use ($key) {
                 $query->where('U.fullName', 'like', '%' . $key . '%')
                       ->orWhere('P.plate_name', 'like', '%' . $key . '%')

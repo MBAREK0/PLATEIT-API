@@ -49,6 +49,7 @@ class FollowsController extends Controller
             $token = request()->header('Authorization');
             $user = $this->JwtService->get_user($token)->id;
             $restaurant_id = request('restaurant_id') ;
+           
 
             $Follows = Follows::where('user_id', $user)->where('restaurant_id',$restaurant_id);
             if($Follows->delete()){
@@ -56,11 +57,21 @@ class FollowsController extends Controller
                 dispatch(new SystemOfPointsJob($restaurant_id,'FollowerRestaurantPoints'))->remove_points();
                 return response()->json(['status' => 'success', 'message' => 'Follows deleted successfully!' ]);
             }
+            else{
+                return response()->json(['status' => 'failed', 'error' => 'Follows not deleted!' ]);
+            }
         }
 
         public function count_followers (){
             $id =  request()->get('id');
             $followers = Follows::where('restaurant_id', $id)->count();
+            return response()->json(['status'=> 'success','followers'=> $followers ]);
+        }
+
+        public function my_followers(){
+            $token = request()->header('Authorization');
+            $user = $this->JwtService->get_user($token)->id;
+            $followers = Follows::where('user_id', $user)->pluck('restaurant_id');
             return response()->json(['status'=> 'success','followers'=> $followers ]);
         }
 }

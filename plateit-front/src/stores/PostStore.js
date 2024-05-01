@@ -11,7 +11,8 @@ export const PostStore = defineStore('PostStore', {
         store: MainStore(),
         u_store: UserStore(),
         postLoading : false,
-        posts_type: 'all'
+        posts_type: 'all',
+        saved_posts_ids: []
 
 
     }),
@@ -41,7 +42,19 @@ export const PostStore = defineStore('PostStore', {
                 });
                 this.postLoading = false;
     },
- 
+   async get_saved_posts_ids(){
+       await axios.get(this.store.laravelApi + 'get_saved_posts_ids')
+        .then((response) => {
+            if(response && response.status === 200){
+                console.log('saved posts ids',response.data.data);
+                    this.saved_posts_ids = response.data.data  
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error.message);
+            
+        });
+    } 
 }
 
 })

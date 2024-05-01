@@ -74,7 +74,7 @@
 
             <div class="flex-1 text-start">
                 <label class="text-main_text_color  " for="symbols">bio</label>
-                <textarea v-model="bio" placeholder="$ 0.00" class="w-full bg-white rounded-md border-gray-300 text-main_text_color   px-2 py-1" id="symbols" type="text"></textarea>
+                <textarea v-model="bio"  class="w-full bg-white rounded-md border-gray-300 text-main_text_color   px-2 py-1" id="symbols" type="text"></textarea>
                 <div class="flex justify-end items-center">
                     <p class="text-main_text_color" v-if="bio">{{ bio.length }}/250</p>
                 </div>

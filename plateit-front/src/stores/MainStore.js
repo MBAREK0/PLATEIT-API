@@ -19,6 +19,7 @@ export const MainStore = defineStore('MainStore', {
     EditInfo:false,
     PostModel:false,
     searching:false,
+    SidemoreIsActivebackdrop:false,
     ProfileInfoModel:false,
     SidemoreIsActive:false,
     SidebarHiddenbackdrop:false,
@@ -73,7 +74,7 @@ export const MainStore = defineStore('MainStore', {
        });
     },
     toggleSidemoreIsActive(){
-      this.Hiddenbackdrop = !this.Hiddenbackdrop;
+      this.SidemoreIsActivebackdrop = !this.SidemoreIsActivebackdrop;
       this.SidemoreIsActive = !this.SidemoreIsActive;
     },
     toggleAllModels(){
@@ -83,6 +84,7 @@ export const MainStore = defineStore('MainStore', {
       this.ProfileInfoModel = false;
     },
     toggleAllSmallModels(){
+      this.SidemoreIsActivebackdrop = false;
       this.Hiddenbackdrop = false;
       this.SidemoreIsActive = false;
       this.EditInfo = false;

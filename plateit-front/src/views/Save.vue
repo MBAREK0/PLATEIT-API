@@ -12,7 +12,7 @@
                             <div class="loader"></div>
                     </section>
                     <div class="w-full justify-center flex " v-for="post in posts_saved" :key="post.id" v-else-if="posts_saved && posts_saved.length>0">
-                        <post :post="post" class="lg:hidden xl:block"/>
+                        <post :post="post" :saveds=" P_store.saved_posts_ids" class="lg:hidden xl:block"/>
                        
                     </div>
                     <div class=" w-full h-screen items-center justify-center flex " v-else>
@@ -67,7 +67,8 @@ import { PostStore } from "@/stores/PostStore";
 watch(search, (newValue, oldValue) => {
     get_saved_posts(newValue);
 });
-onMounted(() => {
+onMounted( async () => {
+  await P_store.get_saved_posts_ids();
   get_saved_posts();
 });
 

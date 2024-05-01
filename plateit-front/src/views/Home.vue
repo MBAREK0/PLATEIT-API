@@ -21,7 +21,7 @@
                             <div class="loader"></div>
                         </section>
                         <div class="w-full justify-center flex "v-for="post in posts" :key="post.id" v-else-if="posts && posts.length>0">
-                            <post :post="post"/>
+                            <post :post="post" :saveds=" P_store.saved_posts_ids"/>
                         </div>
                         <div class=" w-full justify-center flex " v-else>
                             <p class="text-center dark:text-white text-main_text_color">No post available</p>
@@ -51,7 +51,8 @@ const store = MainStore();
 const P_store = PostStore();
 const isVerified = ref(localStorage.getItem('isVerified'));
 const posts = ref([]);
-onMounted( () => {
+onMounted(async () => {
+    await P_store.get_saved_posts_ids();
     P_store.GetPosts();
     posts.value = P_store.posts;
 

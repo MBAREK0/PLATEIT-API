@@ -2,12 +2,16 @@
     <article class="  w-full mt-10  xl:w-10/12 flex flex-col relative  shadow-lg  ">
         <div class="flex justify-between  items-center ">
             <div class="flex justify-start gap-3 items-center">
+                <router-link :to="{ name: 'profile',query: { user_id:props.post.author_id }}" >
                 <div>
                     <img :src="'http://localhost:8000' + props.post.ProfileImage" class="profile-pic" alt="profile">
                 </div>
+               </router-link>
                 <div class="flex flex-col  " style="line-height: 1.2">
                     <div class="flex justify-start gap-3  items-center">
-                        <p class="font-bold">{{props.post.author}}</p>
+                        <router-link :to="{ name: 'profile',query: { user_id:props.post.author_id }}" >
+                          <p class="font-bold">{{props.post.author}}</p>
+                        </router-link>  
                         <div class=" flex gap-1 items-center cursor-pointer">
                             <p class="text-sm roboto">{{props.post.author_points}}</p>
                             <img src="../../assets/icons/points.svg" class=" w-3 h-3   " alt="points">
@@ -44,19 +48,19 @@
             <div class=" w-full relative flex gap-3 justify-start items-start ">
                 <div class="flex justify-center gap-1 items-center">
                 <img src="../../assets/icons/post-comment.svg"   class="w-5 h-5 cursor-pointer" alt="comment">
-                <p class="roboto text-sm">7273</p>
+                <p class="roboto text-sm">23</p>
                 </div>
                 <div class="flex justify-center gap-1 items-center">
                 <!--  <img src="../../assets/icons/post-arrow-top-nofill.svg"  class="w-5 h-5 cursor-pointer" alt="arrow-top-nofill">-->
                     <img src="../../assets/icons/post-arrow-top-fill.svg"  class="w-5 h-5 cursor-pointer" alt="arrow-top-fill">
-                    <p class="roboto text-sm">7273273</p>
+                    <p class="roboto text-sm">73</p>
                     <img src="../../assets/icons/post-arrow-bottom-nofill.svg" class="w-5 h-5 cursor-pointer" alt="arrow-bottom-nofill">
                 <!-- <img src="../../assets/icons/post-arrow-bottom-fill.svg"  class="w-5 h-5 cursor-pointer" alt="arrow-bottom-fill">-->
                 <p class="roboto text-sm">13</p>
                 </div>
                 <div class="flex  justify-center items-center ">
-                    <img src="../../assets/icons/post-save.svg" class="w-8 h-7 cursor-pointer" alt="post-save">
-                <!--<img src="../../assets/icons/post-save-full.svg" class="w-5 h-5 cursor-pointer" alt="post-save-fill">--> 
+                    <img v-if="props.saveds.includes(props.post.id)" @click="unsave" src="../../assets/icons/post-save-full.svg" class="w-8 h-7 cursor-pointer" alt="post-save-fill"> 
+                    <img v-else @click="save"  src="../../assets/icons/post-save.svg" class="w-8 h-7 cursor-pointer" alt="post-save">
                 </div>
                 
             </div>
@@ -86,19 +90,62 @@
     </article>
 </template>
 <script setup>
- import { ref } from 'vue';
+ import { UserStore } from '@/stores/UserStore';
+    import axios from 'axios';
+    import { MainStore } from '@/stores/MainStore';
+
+import { ref } from 'vue';
 
  const showModal = ref(false);
+ const p_store = UserStore();
+ const store = MainStore();
  const props = defineProps({
       post: {
         type: Object,
         required: true,
-        default: () => ({}) // Default value is an empty object
+        default: () => ({}) 
+      },
+      saveds: {
+        type: Array,
+        required: true,
+        default: () => ([]) 
       }
     });
+
     
    function togleMore(){
     showModal.value = !showModal.value;
    }
+
+
+   const save =   () => {
+     axios.post(store.laravelApi + 'publication/saved_post', {
+        publication_id: props.post.id
+    })
+    .then((response) => {
+        if(response && response.status === 200){
+            props.saveds.push(props.post.id);
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error.message);
+        
+    });
+}
+
+const unsave = () => {
+    axios.delete(store.laravelApi + 'publication/delete_saved_post', {
+       params: { publication_id: props.post.id }
+    })
+    .then((response) => {
+        if(response && response.status === 200){
+            props.saveds.splice(props.saveds.indexOf(props.post.id), 1);
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error.message);
+        
+    });
+}
 
 </script>

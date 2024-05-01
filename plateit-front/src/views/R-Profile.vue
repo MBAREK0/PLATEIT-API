@@ -31,8 +31,8 @@
                                 <h1 class="font-bold" v-text="u_store.profileData.info.fullName ? u_store.profileData.info.fullName.toUpperCase() : ''"></h1>
                                 <span class="material-icons dark:text-white text-btn_primary_color text-sm" v-if="email_verified_at" >verified</span>
                             </div>
-                            <button  v-if="haveFollow()" class="bg-btn_primary_color hover:bg-btn_submit_hover  rounded-xl text-sm font-bold pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1 ">follow</button>
-                            <!-- <button v-if="haveFollow()" class="bg-secondary_color dark:bg-secondary_color_dark hover:bg-btn_submit_hover text-main_text_color dark:text-white hover:text-white rounded-xl text-sm font-bold  pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1 ">unfollow</button> -->
+                            <button  @click="folow"  v-if="haveFollow() && !mon_followers.includes(parseInt(u_store.profileData.info.id))" class="bg-btn_primary_color hover:bg-btn_submit_hover  dark:text-white text-white rounded-xl text-sm font-bold  pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1 ">follow</button>
+                            <button @click="unfollow" v-if="haveFollow() && mon_followers.includes(parseInt(u_store.profileData.info.id))" class="bg-secondary_color dark:bg-secondary_color_dark hover:bg-btn_submit_hover text-main_text_color dark:text-white hover:text-white rounded-xl text-sm font-bold  pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1 ">unfollow</button>
                                 <a :href="u_store.profileData.details.web_site" target="_blank" v-if="u_store.profileData.info.role === 'restaurant' && web_site " class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  rounded-xl text-sm font-bold   pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1">visit</a>
                                 <div v-if="userId == store.$state.user.id">
                                     <span class="material-icons text-gray-400 cursor-pointer" @click="store.toggleEditInfo()" style="z-index: 200 !important;">more_vert</span>
@@ -69,9 +69,9 @@
                                      <path d="M14.9827 11.1555V6.75H16.25V11.2126C16.25 12.5169 15.7537 13.3389 15.0859 13.8488C14.3977 14.3742 13.4794 14.6028 12.6097 14.6028H12.1097V15.1028V15.8588V16.3588H12.6097H13.5692V16.3839H12.6097H12.1097V16.8839V17.5625H10.826V16.8839V16.3839H10.326H9.43012V16.3588H10.3233H10.8233V15.8588V15.0923V14.5923H10.3233C10.0475 14.5923 9.13378 14.5569 8.30435 14.0911C7.89735 13.8625 7.51506 13.5329 7.23221 13.0522C6.94948 12.5717 6.75 11.9129 6.75 11.0013V6.75H8.01734V11.1837C8.01734 11.7741 8.14816 12.2498 8.37054 12.6261C8.59279 13.0021 8.89022 13.2512 9.18165 13.4135C9.46994 13.574 9.75323 13.6505 9.96097 13.6876C10.0659 13.7064 10.1546 13.7156 10.2193 13.7202C10.2518 13.7225 10.2785 13.7236 10.2985 13.7241L10.3234 13.7246L10.332 13.7246L10.3352 13.7246L10.3366 13.7246L10.3372 13.7246C10.3375 13.7246 10.3378 13.7246 10.3325 13.2246L10.3378 13.7246L10.8325 13.7194V13.2246V6.75H12.1097V13.2246V13.6974L12.5817 13.7238L12.6097 13.2246C12.5817 13.7238 12.582 13.7239 12.5823 13.7239L12.583 13.7239L12.5843 13.724L12.5877 13.7241L12.5964 13.7245L12.6221 13.7252C12.6426 13.7256 12.6701 13.7256 12.7036 13.7247C12.7704 13.7229 12.862 13.7173 12.9704 13.7024C13.185 13.6729 13.4789 13.6052 13.7784 13.4482C14.0818 13.2891 14.3903 13.0383 14.62 12.6512C14.8493 12.2648 14.9827 11.7721 14.9827 11.1555ZM0.5 11.5C0.5 17.5754 5.42458 22.5 11.5 22.5C17.5754 22.5 22.5 17.5754 22.5 11.5C22.5 5.42458 17.5754 0.5 11.5 0.5C5.42458 0.5 0.5 5.42458 0.5 11.5Z" fill="white" stroke="black"/>
                                     </svg>
                                 </div>
-                            <div v-if="store.user.role === 'restaurant'">
+                            <!-- <div v-if="store.user.role === 'restaurant'">
                                 <button class="bg-btn_primary_color hover:bg-btn_submit_hover  text-white rounded-xl text-sm font-bold  pl-2 pr-2 md:pl-5 md:pr-5 pt-1 pb-1">menu</button>   
-                            </div>
+                            </div> -->
                         </div>
                         <!-- bio of restaurant -->
                         <div class="w-full ">
@@ -114,7 +114,7 @@
                 <div class=" w-full ">
                     <div class=" w-full h-36">
                        <div>
-                        <p class="text-start text-xs md:text-sm mb-1 "><span>10</span> posts </p>
+                        <p class="text-start text-xs md:text-sm mb-2 ">posts </p>
                         <hr class="border-t-1 border-main_text_color dark:border-white">
                        </div>
                        <PlateForm class="model" v-if="store.MenuModel && store.user.role === 'restaurant'"/>
@@ -124,7 +124,7 @@
 
                         <div class="backdrop" @click="store.toggleAllModels()"  v-if="store.backdrop"></div>
                         <div class="w-full justify-center flex "v-for="post in ProfilePosts" :key="post.id">
-                            <post :post="post"/>
+                            <post :post="post" :saveds=" p_store.saved_posts_ids"/>
                         </div>
                     </div>
                 </div>
@@ -154,6 +154,7 @@ const page = ref('Profile');
 const route = useRoute();
 const store = MainStore();
 const u_store = UserStore();
+const p_store = PostStore();
 const  userId = ref(route.query.user_id);
 const fullName = ref(null);
 const email_verified_at = ref(null);
@@ -167,6 +168,7 @@ const phone_numbre = ref(null);
 const web_site = ref(null);
 const category = ref(null);
 const ProfilePosts = ref([]);
+const mon_followers = ref([]);
 
 
 
@@ -283,6 +285,8 @@ watch(() => route.query.user_id, async (newValue, oldValue) => {
   
 
 onMounted(async () => {
+    my_followers();
+   await p_store.get_saved_posts_ids();
     u_store.profileData.details = {
         address: null,
         phone_numbre: null,
@@ -296,23 +300,71 @@ onMounted(async () => {
     
 });
 
-    const delete_all_menu = () => {
-        axios.delete(store.laravelApi + 'restaurant/delete_menu')
-        .then((response) => {
-            if(response && response.status === 200){
-                u_store.$state.menu = [];
-            store.showSuccesToast(response.data.message)
+const delete_all_menu = () => {
+    axios.delete(store.laravelApi + 'restaurant/delete_menu')
+    .then((response) => {
+        if(response && response.status === 200){
+            u_store.$state.menu = [];
+        store.showSuccesToast(response.data.message)
 
-            }
-        })
-        .catch((error) => {
-            console.error('Error:', error.message);
-            store.displayValidationErrors('error occured while deleting the menu, please try again later');
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error.message);
+        store.displayValidationErrors('error occured while deleting the menu, please try again later');
 
-        });
-    }
+    });
+}
 
-  
+const folow = () => {
+    axios.post(store.laravelApi + 'follow', {
+        restaurant_id: userId.value
+    })
+    .then((response) => {
+        if(response && response.status === 200){
+            my_followers();
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error.message);
+        
+    });
+}
+
+const unfollow = () => {
+    axios.delete(store.laravelApi + 'unfollow', {
+        params: {
+            restaurant_id: userId.value
+        }
+    })
+    .then((response) => {
+        if(response && response.status === 200){
+            my_followers();
+         
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error.message);
+      
+
+    });
+}
+
+const my_followers = () => {
+    axios.get(store.laravelApi + 'my_followers')
+    .then((response) => {
+        if(response && response.status === 200){
+            mon_followers.value = response.data.followers;
+            
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error.message);
+
+
+    });
+}
+
 
 
 </script>

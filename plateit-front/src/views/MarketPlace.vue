@@ -22,17 +22,18 @@
                 <section class="w-full h-screen  flex  items-center justify-center"  v-if="P_store.postLoading">
                             <div class="loader"></div>
                 </section>
-                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 mt-6" v-else-if="gifts && gifts.length>0">
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-10 mt-6" v-else-if="gifts && gifts.length>0">
                    
                     <div class="flex flex-col gap-2" v-for="gift in gifts" :key="gift.id">
                       <gift :gift="gift" /> 
-                        <div class="flex justify-between items-center">
-                            <div class="flex gap-2 roboto items-center">
-                                <span>{{gift.PointsCost}}</span>
-                            <img src="../assets/icons/points.svg" class="w-5 h-5" alt="points icon">
-                            </div>
-                            <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  rounded-md text-xs font-bold  px-3 py-1"  @click="claim_gift(gift.id)">GET</button>
-                        </div>
+                      <div class="flex justify-between items-center">
+                        <div class="flex gap-2 text-xs roboto items-center">
+                          <span>{{gift.PointsCost}}</span>
+                            <img src="../assets/icons/points.svg" class="w-3 h-3" alt="points icon">
+                          </div>
+                            <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  rounded-md text-xs font-bold  px-1 py-1"  @click="claim_gift(gift.id)">GET</button>
+                          </div>
+                          <p class="text-xs roboto ">{{gift.description}}</p>
                     </div>
                 </div>
                 <div class=" w-full h-screen items-center justify-center flex " v-else>
