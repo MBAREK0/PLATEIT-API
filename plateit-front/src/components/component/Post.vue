@@ -67,7 +67,7 @@
             <div class="w-20 lg:w-28 xs:w-16" v-if="props.post.restaurant_link">
                 <a target="_blank" :href="props.post.restaurant_link">
 
-                    <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  lg:h-10 md:h-8 rounded-lg text-xs  w-10/12 ">GET</button>
+                    <button @click="p_store.visite_rewards_from_profile(props.post.author_id) "class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  lg:h-10 md:h-8 rounded-lg text-xs  w-10/12 ">GET</button>
                 </a>
             </div>
         </div>
@@ -95,9 +95,10 @@
     import { MainStore } from '@/stores/MainStore';
 
 import { ref } from 'vue';
+import { PostStore } from '@/stores/PostStore';
 
  const showModal = ref(false);
- const p_store = UserStore();
+ const p_store = PostStore();
  const store = MainStore();
  const props = defineProps({
       post: {

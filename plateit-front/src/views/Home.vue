@@ -54,6 +54,7 @@ const u_store = UserStore();
 
 const posts = ref([]);
 onMounted(async () => {
+    P_store.postLoading = true;
     await P_store.get_saved_posts_ids();
     P_store.GetPosts();
     posts.value = P_store.posts;

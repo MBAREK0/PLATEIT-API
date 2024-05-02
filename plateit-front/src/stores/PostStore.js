@@ -55,6 +55,27 @@ export const PostStore = defineStore('PostStore', {
             
         });
     } 
+    ,
+    async visite_rewards_from_profile(id){
+        await axios.post(this.store.laravelApi + 'visite_rewards_from_profile',
+    {
+        restaurant_id:id
+    }
+    )
+         .then((response) => {
+             if(response && response.status === 200){
+                 console.log('visite_rewards_from_profile',response.data.data);
+              
+                   
+             }
+         })
+         .catch((error) => {
+             console.error('Error:', error.message);
+          
+
+             
+         });
+     } 
 }
 
 })

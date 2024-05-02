@@ -84,7 +84,7 @@
                
                 <div class=" flex justify-between  gap-5">
                     <button class="bg-secondary_color border border-sidebar_color_dark hover:bg-btn_submit_hover hover:text-white text-main_text_color  lg:h-8 md:h-8 rounded-lg text-xs  w-24 " @click="store.toggleEditProfileModel()">cansel</button>
-                    <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  lg:h-8 md:h-8 rounded-lg text-xs  w-24 py-2 " @click="handleSubmit" >Post</button>
+                    <button class="bg-btn_primary_color hover:bg-btn_submit_hover text-white  lg:h-8 md:h-8 rounded-lg text-xs  w-24 py-2 " @click="handleSubmit" >save</button>
                 </div>
             </div>
         </div>
